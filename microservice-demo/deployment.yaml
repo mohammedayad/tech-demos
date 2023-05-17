@@ -1,0 +1,43 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: microservice-demo
+  name: microservice-demo
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: microservice-demo
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: microservice-demo
+    spec:
+      containers:
+      - image: app/myspring:v1
+        name: myspring
+        resources: {}
+status: {}
+--- 
+apiVersion: v1
+kind: Service
+metadata:
+  creationTimestamp: null
+  labels:
+    app: microservice-demo
+  name: microservice-demo
+spec:
+  ports:
+  - name: 8080-8080
+    port: 8080
+    protocol: TCP
+    targetPort: 8080
+  selector:
+    app: microservice-demo
+  type: ClusterIP
+status:
+  loadBalancer: {}
