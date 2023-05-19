@@ -1,0 +1,54 @@
+--creat zookeeper
+docker run -d --name zookeeper -p 2181:2181 jplock/zookeeper
+
+--creat kafka
+docker run -d --name kafka -p 7203:7203 -p 9092:9092 -e KAFKA_ADVERTISED_HOST_NAME=10.0.75.1 -e ZOOKEEPER_IP=10.0.75.1 ches/kafka
+
+--creat topic
+docker run --rm ches/kafka kafka-topics.sh --create --topic inputTopic --replication-factor 1 --partitions 1 --zookeeper 10.0.75.1:2181
+
+--creat producer
+docker run --rm --interactive ches/kafka kafka-console-producer.sh --topic inputTopic --broker-list 10.0.75.1:9092
+
+---------------------------------------------------------------------------------
+--list the avilabe images
+docker images
+--ist only the repository and tag of the images without the additional details
+docker images --format "{{.Repository}}:{{.Tag}}"
+
+--running images
+docker ps -a 
+
+
+
+--stop all images
+docker container stop $(docker container ls -aq)
+
+--remove all images
+docker container rm $(docker container ls -aq)
+
+---------------------------------------------
+--elasticsearch
+docker pull docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+
+--start a single-node Elasticsearch cluster for development or testing
+
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:7.6.0
+
+-----------------------------------
+docker build -t mohammedayad/elasticsearchservice .
+
+docker run -p 8080:8080 mohammedayad/elasticsearchservice
+
+
+curl localhost:8080/actuator/health
+
+docker push mohammedayad/elasticsearchservice
+
+
+kubectl create deployment elasticsearchservice --image=mohammedayad/elasticsearchservice --dry-run -o=yaml > deployment.yaml
+kubectl create service clusterip demo --tcp=8080:8080 --dry-run -o=yaml >> deployment.yaml
+
+kubectl create deployment elasticsearchservice --image=mohammedayad/elasticsearchservice --dry-run -o=yaml > deployment.yaml
+$ echo --- >> deployment.yaml
+$ kubectl create service clusterip elasticsearchservice --tcp=8080:8080 --dry-run -o=yaml >> deployment.yaml

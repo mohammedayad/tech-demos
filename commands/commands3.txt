@@ -1,0 +1,562 @@
+    1  curl -X POST "http://localhost:8080/api/digital/transcript/command/v1/tenants/1/engagements/1/dialogs/1/transcripts:save" -H  "accept: application/json" -H  "Content-Type: application/json" -d "{}"
+    2  curl -X POST "http://localhost:8080/api/digital/transcript/command/v1/tenants/1/engagements/1/dialogs/1/transcripts:save" -H  "accept: application/json" -H  "Content-Type: application/json" -d
+    3  kubectl.exe
+    4  kubectl.exe get pods
+    5  kubectl.exe get pods | grep pop
+    6  helm version
+    7  which kubectl
+    8  helm version
+    9  helm list
+   10  kubectl.exe get pods | grep pop
+   11  kubectl.exe get pods | grep query
+   12  kubectl.exe get pods | grep query
+   13  kubectl.exe get staefulset
+   14  kubectl.exe get statefulset
+   15  kubectl exec -it transcript-elasticsearch-0 bash
+   16  kubectl.exe get pods | grep query
+   17  kubectl.exe get pods | grep transcript
+   18  kubectl.exe get pods -A | grep kafka
+   19  kubectl.exe get pods | grep pop3
+   20  kubectl.exe edit StatefulSet/eventing-kafka-cp-kafka -n avaya-kafka
+   21  kubectl.exe edit development/msg-transcript-command-service
+   22  kubectl.exe edit deployment/msg-transcript-command-service
+   23  kubectl.exe get deployments
+   24  kubectl.exe edit deployment/custom-channel-msg-transcript-command-service
+   25  kubectl.exe edit deployment/custom-channel-msg-transcript-query-service
+   26  kubectl.exe edit deployment/digital-email-pop3-connector
+   27  kubectl.exe edit deployment/digital-email-pop3-connector
+   28  kubectl.exe edit deployment/digital-email-pop3-connector
+   29  kubectl.exe get pods
+   30  kubectl.exe get pods | grep istio
+   31  kubectl.exe get pods -A | grep istio
+   32  kubectl.exe describe pod istio-pilot-68b88766bf-cglxz
+   34  kubectl.exe describe pod -n istio-system istio-pilot-68b88766bf-cglxz
+   35  kubectl.exe describe pod -n istio-system istio-pilot-68b88766bf-dktvl
+   36* kubectl.exe log pods -A | grep istio
+   37  kubectl.exe log pod -n istio-system istio-pilot-68b88766bf-cglxz
+   38  kubectl.exe logs pod -n istio-system istio-pilot-68b88766bf-cglxz
+   39  kubectl.exe logs -n istio-system istio-pilot-68b88766bf-cglxz
+   40  kubectl.exe logs istio-pilot-68b88766bf-cglxz
+   41  kubectl.exe logs istio-pilot-68b88766bf-cglxz -n istio-system
+   42  kubectl exec -it transcript-elasticsearch-0 bash
+   43  kubectl.exe logs -n istio-system istio-pilot-68b88766bf-cglxz
+   44  kubectl exec -it transcript-elasticsearch-0 bash
+   45  kubectl.exe get pods -A | grep istio
+   46  kubectl.exe get pods | grep pop3
+   47  kubectl.exe get pods | grep trans
+   48  kubectl.exe get pods -A | grep kafka
+   49  kubectl.exe edit StatefulSet/eventing-kafka-cp-kafka -n avaya-kafka
+   50  kubectl exec -it transcript-elasticsearch-0 bash
+   51  kubectl.exe get pods | grep pop3
+   52  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-cttt6  --tail=50
+   53  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-cttt6
+   54  kubectl.exe get pods | grep query
+   55  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-kxgkm --tail=60
+   56  kubectl.exe describe pod custom-channel-msg-transcript-query-service-5988d9fb5f-kxgkm
+   57  kubectl.exe edit StatefulSet/eventing-kafka-cp-kafka -n avaya-kafka
+   58  kubectl.exe get pods | grep query
+   59  kubectl.exe get pods | grep pop3
+   60  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-wm6xz
+   61  kubectl.exe get pods -A | grep kafka
+   62  kubectl.exe get pods -A | grep kafka
+   63  kubectl.exe get pods | grep pop3
+   64  kubectl.exe get pods | grep trans
+   65  kubectl.exe get pvc -A
+   66  kubectl.exe get pods | grep trans
+   67  kubectl.exe get pods | grep pop3
+   68  kubectl.exe get pods -A | grep kafka
+   69  kubectl.exe edit StatefulSet/eventing-kafka-cp-kafka -n avaya-kafka
+   70  kubectl.exe get pods -A | grep kafka
+   71  kubectl.exe get pods | grep pop3
+   72  kubectl.exe get pods | grep trans
+   73  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-kxgkm
+   74  kubectl exec -it transcript-elasticsearch-0 bash
+   75  kubectl exec -it transcript-elasticsearch-0 bash
+   76  kubectl.exe get pods -A | grep kafka
+   77  kubectl.exe get pods -A | grep kafka
+   78  kubectl.exe get pods | grep trans
+   79  kubectl.exe edit StatefulSet/eventing-kafka-cp-kafka -n avaya-kafka
+   80  kubectl exec -it transcript-elasticsearch-0 bash
+   81  kubectl.exe get pods -A | grep kafka
+   82  kubectl.exe get pods -A | grep kafka
+   83  kubectl exec -it transcript-elasticsearch-0 bash
+   86  kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+   rm -rf /opt/kafka/data-0/logs/*
+   87  kubectl.exe exec -it eventing-kafka-cp-kafka-1 -n avaya-kafka -c cp-kafka-broker -- bash
+   88  kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+   89  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+   90  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+   91  kubectl.exe get pods -A | grep kafka
+   92  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-kxgkm
+   93  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-kxgkm | grep error
+   94  kubectl.exe get pods -A | grep kafka
+   95  kubectl.exe get pods | grep pop3|transcript
+   96  kubectl.exe get pods | grep pop3 | grep transcript
+   97  kubectl.exe get pods | grep pop3
+   98  kubectl.exe get pods | grep transc
+   99  kubectl exec -it transcript-elasticsearch-0 bash
+  100  kubectl.exe get pods | grep pop3
+  101  kubectl.exe get pods | grep transc
+  102  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-kxgkm -tail=50
+  103  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-kxgkm --tail=50
+  104  kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  105  kubectl.exe exec -it eventing-kafka-cp-kafka-1 -n avaya-kafka -c cp-kafka-broker -- bash
+  106  kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+  107  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  108  kubectl.exe get pods | grep pop3
+  109  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-4hlwf --tail=50
+  110  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-4hlwf --tail=100
+  111  kubectl.exe get pods | grep pop3
+  112  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-kvwmr --tail=100
+  113  kubectl.exe get pods | grep pop3
+  114  kubectl.exe get pods | grep trans
+  115  kubectl.exe delete pod custom-channel-msg-transcript-query-service-5988d9fb5f-kxgkm
+  116  kubectl.exe delete pod custom-channel-msg-transcript-query-service-5988d9fb5f-wnprl
+  117  kubectl.exe delete pod custom-channel-msg-transcript-query-service-5988d9fb5f-zqj9d
+  118  kubectl.exe get pods | grep trans
+  119  kubectl.exe get pods | grep trans
+  120  kubectl.exe get pods watch | grep trans
+  121  kubectl.exe get pods -watch | grep trans
+  122  kubectl.exe get pods --watch | grep trans
+  123  kubectl.exe get pods -A | grep kafka
+  124  kubectl.exe delete pod eventing-kafka-cp-kafka-0
+  125  kubectl.exe delete pod -n avaya-kafka eventing-kafka-cp-kafka-0
+  126  kubectl.exe delete pod -n avaya-kafka eventing-kafka-cp-kafka-1
+  127  kubectl.exe delete pod -n avaya-kafka eventing-kafka-cp-kafka-2
+  128* kubectl.exe get pods -A | grep kafka
+  129  kubectl.exe get pods  --watch -A | grep kafka
+  130  kubectl.exe get pods  --watch -A | grep kafka
+  131  kubectl exec -it transcript-elasticsearch-0 bash
+  132  kubectl.exe get pods | grep trans
+  133  kubectl.exe logs custom-channel-msg-transcript-command-service-7cf754fd6b-fl5zw --tail=100
+  134  kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+  135  kubectl.exe exec -it eventing-kafka-cp-kafka-1 -n avaya-kafka -c cp-kafka-broker -- bash
+  136  kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  137  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  138  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  139  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  140  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  141  kubectl.exe get pods -A | grep kafka
+  142  kubectl.exe delete pod -n eventing-kafka-topic-operator-6cbf89d478-dxx6n
+  143  kubectl.exe delete pod -n avaya-kafka eventing-kafka-topic-operator-6cbf89d478-dxx6n
+  144  kubectl.exe get pods -A | grep kafka
+  145  kubectl.exe get pods --watch -A | grep kafka
+  146  kubectl.exe get pods --watch -A | grep kafka
+  147  kubectl.exe get pods --watch -A | grep kafka
+  148  kubectl.exe get pods --watch -A | grep kafka
+  149  kubectl.exe delete pod -n avaya-kafka eventing-kafka-cp-kafka-2
+  150  kubectl.exe get pods --watch -A | grep kafka
+  151  kubectl.exe get pods --watch -A | grep kafka
+  152  kubectl.exe logs custom-channel-msg-transcript-command-service-7cf754fd6b-fl5zw --tail=100
+  153  kubectl.exe get pods | grep trans
+  154  kubectl.exe delete pod -n avaya-kafka eventing-kafka-cp-kafka-2
+  155  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-fl5zw
+  156  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-sttkq
+  157  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-zwp2k
+  158* kubectl.exe get pods | grep pop3sta
+  159  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-4hlwf
+  160  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-8khgj
+  161  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-kvwmr
+  162  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  163  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  164  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  165  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  166  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  167  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  168  kubectl.exe get pods | grep pop3
+  169  kubectl.exe get pods | grep transc
+  170  kubectl.exe get pods --watch -A | grep kafka
+  171  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-bk64t --tail=100
+  172  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-hpvfz --tail=100
+  173  kubectl.exe get pods | grep pop
+  174  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-ttg6p --tail=150
+  175  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-ttg6p
+  176  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-ttg6p | grep "ERROR"
+  179  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-ttg6p | grep error
+  180  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-ttg6p | grep info
+  181  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-ttg6p | grep INFO
+  182  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-ttg6p | grep ERROR
+  183  kubectl.exe get staefulset
+  184  kubectl.exe edit StatefulSet/eventing-kafka-cp-kafka -n avaya-kafka
+  185* kubectl.exe exec -it  -- bash
+  186  kubectl.exe get deployments
+  187  kubectl.exe get pods | grep pop
+  188  kubectl.exe describe pod digital-email-pop3-connector-6f56cf977b-bk64t
+  189  kubectl.exe get events
+  190  kubectl.exe exec -it eventing-kafka-cp-kafka-1 -n avaya-kafka -c cp-kafka-broker -- bash
+  191  kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+  192  kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  193  kubectl exec -it transcript-elasticsearch-0 bash
+  194  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  195  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  196  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  197  kubectl exec -it transcript-elasticsearch-0 bash
+  198  kubectl.exe get pods | grep transc
+  199  kubectl.exe logs custom-channel-msg-transcript-command-service-7cf754fd6b-4z2wt | grep ERROR
+  200  kubectl exec -it transcript-elasticsearch-0 bash
+  201  kubectl.exe get pods | grep pop
+  202  kubectl.exe get pods | grep transc
+  203  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-bk64t
+  204  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-hpvfz
+  205  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-ttg6p
+  206  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-4z2wt
+  207  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-c6vgz
+  208  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-dvlwh
+  209  kubectl.exe get pods | grep transc
+  210  kubectl.exe get pods | grep pop3
+  211  kubectl.exe get pods -A | grep kafka
+  212  kubectl exec -it transcript-elasticsearch-0 bash
+  
+  
+  213  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599519186" -o jsonpath="{.items[0].metadata.name}")
+  214  kubectl.exe  get pods ---namespace default -l "app=kibana,release=kibana-1598460419" -o  jsonpath="{.items[0].metadata.name}"
+  215  kubectl.exe  get pods |grep kibana
+  
+  216  kubectl port-forward --namespace default kibana-1598525324-6bc9d8b79b-qjbzm 5601:5601
+  217  kubectl port-forward --namespace default kibana-1598525324-6bc9d8b79b-qjbzm 5601:5601
+  218  kubectl exec -it transcript-elasticsearch-0 bash
+  219  kubectl.exe get deployments | grep pop
+  220  kubectl.exe edit deployment digital-email-pop3-connector
+  221  kubectl.exe get pods | grep pop
+  222  kubectl.exe edit StatefulSet/eventing-kafka-cp-kafka -n avaya-kafka
+  223  kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  224  kubectl.exe exec -it eventing-kafka-cp-kafka-1 -n avaya-kafka -c cp-kafka-broker -- bash
+  225  kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+  226  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  227  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  228  kubectl exec -it transcript-elasticsearch-0 bash
+  229  kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+  230  kubectl.exe exec -it eventing-kafka-cp-kafka-1 -n avaya-kafka -c cp-kafka-broker -- bash
+  231  kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  232  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  233  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  234  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  235  kubectl.exe get pods | grep command
+  236  $ kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  237  $ kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  238  kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  239  kubectl.exe exec -it eventing-kafka-cp-kafka-1 -n avaya-kafka -c cp-kafka-broker -- bash
+  240  kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+  241  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  242  kubectl exec -it transcript-elasticsearch-0 bash
+  243  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  244  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-9qnfv
+  245  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-mw9mh
+  246  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-xcvvr
+  247  kubectl.exe get pods | grep ppo
+  248  kubectl.exe get pods | grep pop
+  249  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-fgpxp
+  250  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-gcxqr
+  251  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-lzwwh
+  252  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-nkrxx
+  253  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-qgptm
+  254  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  255  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  256  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  257  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  258  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  259  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  260  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  261  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  262  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  263  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  264  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  265  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  266  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-v9fdv | grep ERROR
+  267  kubectl get pods |grep pop
+  268  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-8clwj | grep ERROR
+  269  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-h7nlp | grep ERROR
+  270  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-vvrcq | grep ERROR
+  271  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-zm4j9 | grep ERROR
+  272  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-zm4j9
+  273  kubectl.exe get pods | grep quer
+  274  kubectl exec -it custom-channel-msg-transcript-query-service-5988d9fb5f-qs5nr bash
+  275  kubectl exec -it transcript-elasticsearch-0 bash
+  276  kubectl exec -it transcript-elasticsearch-0 bash
+  277  kubectl.exe exec -it eventing-kafka-cp-kafka-2 -n avaya-kafka -c cp-kafka-broker -- bash
+  278  kubectl.exe exec -it eventing-kafka-cp-kafka-1 -n avaya-kafka -c cp-kafka-broker -- bash
+  279  kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+  280  kubectl.exe get pods | grep tran
+  281  kubectl.exe get evenets
+  282  kubectl.exe get events
+  283  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-4lflx,custom-channel-msg-transcript-command-service-7cf754fd6b-79djv
+  284  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-4lflx/custom-channel-msg-transcript-command-service-7cf754fd6b-79djv
+  285  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-4lflx
+  286  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-79djv
+  287  kubectl.exe delete pod custom-channel-msg-transcript-command-service-7cf754fd6b-z77rv
+  288  kubectl.exe delete pod custom-channel-msg-transcript-query-service-5988d9fb5f-ln786
+  289  kubectl.exe delete pod custom-channel-msg-transcript-query-service-5988d9fb5f-qs5nr
+  290  kubectl.exe delete pod custom-channel-msg-transcript-query-service-5988d9fb5f-vqqfw
+  291  kubectl.exe get pods -A | grep kafka
+  292  kubectl.exe get pods | grep pop
+  293  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-8clwj
+  294  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-h7nlp
+  295  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-v9fdv
+  296  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-vvrcq
+  297  kubectl.exe delete pod digital-email-pop3-connector-6f56cf977b-zm4j9
+  298  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  299  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  300  kubectl get pods --all-namespaces | egrep -v "1/1|2/2|3/3|4/4|Completed"
+  301  kubectl.exe get pods | grep trans
+  302  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-9c7ft
+  303  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-9c7ft | grep ERROR
+  304  kubectl.exe get pods | grep trans
+  305  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-ctrdf | grep ERROR
+  306  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-dxvsk | grep ERROR
+  307  kubectl.exe logs custom-channel-msg-transcript-query-service-5988d9fb5f-dxvsk
+  308  kubectl.exe get pods | grep trans
+  309  kubectl.exe logs custom-channel-msg-transcript-command-service-7cf754fd6b-hqbjt | grep ERROR
+  310  kubectl.exe logs custom-channel-msg-transcript-command-service-7cf754fd6b-nznkr  | grep ERROR
+  311  kubectl.exe logs custom-channel-msg-transcript-command-service-7cf754fd6b-q5sxd  | grep ERROR
+  312  kubectl.exe get pods | grep pop
+  313  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-5wvnp  | grep ERROR
+  314  kubectl.exe logs digital-email-pop3-connector-6f56cf977b-7xv26  | grep ERROR
+  315  kubectl exec -it custom-channel-msg-transcript-query-service-5988d9fb5f-qs5nr bash
+  316  kubectl exec -it custom-channel-msg-transcript-query-service-5988d9fb5f-9c7ft bash
+  317  kubectl exec -it custom-channel-msg-transcript-query-service-5988d9fb5f-ctrdf bash
+  318  kubectl.exe get pods | grep kibana
+  321  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599049844" -o jsonpath="{.items[0].metadata.name}")
+  
+  
+  322  kubectl port-forward --namespace default $POD_NAME 5601:5601
+    3  kubectl.exe
+    4  kubectl.exe get pods
+    5  kubectl.exe get pods | grep pop
+    6  helm version
+    7  which kubectl
+    8  helm version
+    9  helm list
+   10  kubectl.exe get pods | grep pop
+   11  kubectl.exe get pods | grep query
+   12  kubectl.exe  get pods | grep command
+   13  kubectl.exe  get deployments
+   14  kubectl.exe  edit deployment custom-channel-msg-transcript-command-service
+   15  kubectl.exe  edit deployment custom-channel-msg-transcript-command-service
+   16  kubectl.exe  get pods | grep co
+   17  kubectl.exe  get pods | grep command
+   18  kubectl.exe  get pods | grep command
+   19  kubectl.exe  edit deployment custom-channel-msg-transcript-command-service
+   20  kubectl.exe  get pods | grep command
+   21  kubectl.exe  get pods | grep command
+   22  kubectl.exe  get pods --watch | grep command
+   23  kubectl.exe  get pods | grep command
+   24  kubectl.exe  get pods --watch | grep command
+   25  kubectl.exe  get pods --watch | grep command
+   26  kubectl.exe  get pods | grep command
+   27  kubectl.exe  edit deployment custom-channel-msg-transcript-command-service
+   44  kubectl exec -it statefulset/transcript-elastic-search  /bin/bash
+   45  kubectl.exe  get pods | grep transc
+   46  kubectl exec -it transcript-elasticsearch-0  /bin/bash
+   54  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599049844" -o jsonpath="{.items[0].metadata.name}")
+   55  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   60  kubectl.exe  get deployments
+   61  kubectl.exe  get Statefulset
+   62  kubectl.exe  edit statefulset transcript-elasticsearch
+   64  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   65  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599049844" -o jsonpath="{.items[0].metadata.name}")
+   66  kubectl.exe get pods | grep kibana
+   67  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   68  export POD_NAME=$(kubectl get pods --namespace default  -o jsonpath="{.items[0].metadata.name}")
+   69  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   70  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599049844" -o jsonpath="{.items[0].metadata.name}")
+   71  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   72  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599049844" -o jsonpath="{.items[0].metadata.name}")
+   73  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   74  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   75  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599049844" -o jsonpath="{.items[0].metadata.name}")
+   76  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   77  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   78  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   79  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599049844" -o jsonpath="{.items[0].metadata.name}")
+   80  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599049844" -o jsonpath="{.items[0].metadata.name}")
+   81  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   82  helm list -A | grep kibana
+   83  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599474717" -o jsonpath="{.items[0].metadata.name}")
+   84  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   85  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   86  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599474717" -o jsonpath="{.items[0].metadata.name}")
+   87  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   88  helm list -A | grep kibana
+   89  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599474717" -o jsonpath="{.items[0].metadata.name}")
+   90  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   91  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599474717" -o jsonpath="{.items[0].metadata.name}")
+   92  kubectl port-forward --namespace default $POD_NAME 5601:5601
+   93  helm list -A | grep kibana
+   94  kubectl.exe get pods | grep kibana
+   95  kubectl port-forward --namespace default $POD_NAME 5601:5602
+   96  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599474717" -o jsonpath="{.items[0].metadata.name}")
+   97  helm list -A | grep kibana
+   98  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599484025" -o jsonpath="{.items[0].metadata.name}")
+   99  kubectl port-forward --namespace default $POD_NAME 5601:5602
+  100  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  101  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  102  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599484025" -o jsonpath="{.items[0].metadata.name}")
+  103  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  104  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599484025" -o jsonpath="{.items[0].metadata.name}")
+  105  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  106  helm list -A | grep kibana
+  107  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  108  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  109  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  110  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  111  helm list -A | grep kibana
+  112  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599484025" -o jsonpath="{.items[0].metadata.name}")
+  113  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  114  kubectl port-forward --namespace default $POD_NAME 5601:5601
+  115  export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599484025" -o jsonpath="{.items[0].metadata.name}")
+  116  kubectl.exe  get deployments | grep kibana
+  117  az logout
+  118  az login --tenant ixccdev.onmicrosoft.com
+  119  az account list --output table
+  120  az account set --subscription ixcc-dev-ci_cd
+  121  az aks get-credentials --name ixcc-perf-3-aks --resource-group ixcc-perf-3-rg --overwrite-existing --file ~/.kube/azure/ixcc/perf-3/config
+  123  export KUBECONFIG=~/.kube/azure/ixcc/perf-3/config
+  124  kubectl.exe  cluster-info
+  125  az logout
+  126  az login --tenant ixccdev.onmicrosoft.com
+  128  az account list --output table
+  130  az account set --subscription ixcc-dev-ci_cd
+  132  az aks get-credentials --name ixcc-perf-3-aks --resource-group ixcc-perf-3-rg --overwrite-existing --file ~/.kube/azure/ixcc/perf-3/config
+  134  export KUBECONFIG=~/.kube/azure/ixcc/perf-3/config
+  135  kubectl.exe cluster-info
+       helm list -A
+	   helm delete admin ix-deskconn journey-elastic-search journey-kafka-connect universal-widget-framework users workspaces umr
+  137  kubectl.exe  edit statefulset transcript-elasticsearch
+  138  kubectl.exe  scale statefulset transcript-elasticsearch --replicas=0
+  139  kubectl.exe  scale statefulset transcript-elasticsearch --replicas=3
+  140  kubectl.exe get pods -A | grep kafka
+  
+  
+  
+  
+  141  kubectl.exe edit deployment custom-channel-msg-transcript-command-service
+  142  kubectl.exe scale deployment custom-channel-msg-transcript-command-service --replicas=0
+  143  kubectl.exe scale deployment custom-channel-msg-transcript-command-service --replicas=3
+  144  kubectl.exe edit deployment custom-channel-msg-transcript-query-service
+  145  kubectl.exe scale deployment custom-channel-msg-transcript-query-service --replicas=0
+  146  kubectl.exe scale deployment custom-channel-msg-transcript-query-service --replicas=3
+  147  kubectl.exe sakubectl.exe edit deployment/digital-email-pop3-connector
+  148  kubectl.exe scale deployment/digital-email-pop3-connector --replicas=0
+  149  kubectl.exe scale deployment/digital-email-pop3-connector --replicas=5
+	   kubectl.exe scale deployment/ix-digital-provisioning-mgr --replicas=0
+	   
+	   
+	       "value":"${__RandomString(${__Random(500,750)},abcedefghijklmnopqrwxyzABCDEFGHIJKLMNOPQRWXYZ1234567890)}",
+	   
+	   
+kubectl.exe exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+rm -rf /opt/kafka/data-0/logs/*
+  
+	
+-----------------------------------------------------------
+bash Elastic =>  kubectl exec -it transcript-elasticsearch-0 bash
+-----------------------------------------------------------
+curl -XDELETE 'http://localhost:9200/09-2020_*'
+curl -XDELETE 'http://localhost:9200/10-2020_*'
+curl -XPUT 'http://localhost:9200/_template/default' -H 'Content-Type: application/json' -d '{"index_patterns": ["*"],"order": -1,"settings": {"number_of_shards": "3","number_of_replicas": "1"}}'
+
+curl -X POST "localhost:9200/_all/_delete_by_query?pretty" -H "Content-Type: application/json" -d "{\"query\": { \"range\" : { \"createdOn\" : { \"lt\" : \"2020-10-21T18:30:00\" } } } }"
+
+
+curl -X POST "localhost:9200/_all/_delete_by_query?pretty&conflicts=proceed" -H "Content-Type: application/json" -d "{\"query\": { \"range\" : { \"createdOn\" : { \"lt\" : \"2020-10-21T16:30:00\" } } } }"
+
+
+
+curl -XPOST 'localhost:9200/my_index/my_type/_update_by_query?conflicts=proceed&refresh=wait_for
+
+
+
+curl -X GET "localhost:9200/_all/_count" -H "Content-Type: application/json" -d "{\"query\": { \"range\" : { \"createdOn\" : { \"lt\" : \"2020-10-21T18:30:00\" } } } }"
+
+
+curl -X GET "localhost:9200/_all/_count" -H "Content-Type: application/json" -d "{\"query\": { \"range\" : { \"createdOn\" : { \"lt\" : \"2020-10-23T10:30:00\" } } } }"
+
+
+kubectl.exe edit kafkatopic -n avaya-kafka digital-media
+
+
+
+curl -X POST https://common-services-auth-http:8080/auth/realms/system/protocol/openid-connect/token -H "Content-Type: application/x-www-form-urlencoded" -d "grant_type=password&client_id=msg-transcript-query-service&client_secret=msg-transcript-query-service&scope=openid&username=admin&password=admin" --insecure
+
+
+curl -X POST \
+https://dev-2.ixcc-sandbox.avayacloud.com/auth/realms/system/protocol/openid-connect/token \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-H 'Postman-Token: 27f86b0f-6121-4173-8713-53667d7bb834' \
+-H 'cache-control: no-cache' \
+-d 'grant_type=password&client_id=msg-transcript-query-service&client_secret=msg-transcript-query-service&scope=openid&username=admin&password=admin&undefined=' --insecure
+
+
+
+
+curl https://localhost:9200/10-2020_VRAFHY_search -K	
+
+
+SSL is required to authenticate. Remote address 51.136.125.25 is secure: false, SSL required for: EXTERNAL .
+
+
+
+$ kubectl get kafkaTopic -A | grep digital-engagement
+ kubectl edit kafkaTopic digital-engagement -n avaya-kafka
+kubectl get configmap -A | grep -i kafka
+
+busy hour call compulation
+
+8:15
+
+5:55
+
+8:30
+
+last one--->11 pm
+
+{"settings":{"index":{"codec":"best_compression","number_of_shards":"1","auto_expand_replicas":"0-1","provided_name":".monitoring-es-7-2020.09.24","format":"7","creation_date":"1600905601287","number_of_replicas":"1","uuid":"lMlyUMlPRgyT6xTazMZRxA","version":{"created":"7060299"}}}},".monitoring-kibana-7-2020.09.23":{"settings":{"index":{"codec":"best_compression","number_of_shards":"1","auto_expand_replicas":"0-1","provided_name":".monitoring-kibana-7-2020.09.23","format":"7","creation_date":"1600819203490","number_of_replicas":"1","uuid":"AYqgouScREqhg6CdEKNGZw","version":{"created":"7060299"}}}},".monitoring-kibana-7-2020.09.22":{"settings":{"index":{"codec":"best_compression","number_of_shards":"1","auto_expand_replicas":"0-1","provided_name":".monitoring-kibana-7-2020.09.22","format":"7","creation_date":"1600732806833","number_of_replicas":"1","uuid":"SBt0xh77SAyS31go8PsODg","version":{"created":"7060299"}}}},".monitoring-es-7-2020.09.22":{"settings":{"index":{"codec":"best_compression","number_of_shards":"1","auto_expand_replicas":"0-1","provided_name":".monitoring-es-7-2020.09.22","format":"7","creation_date":"1600732801836","number_of_replicas":"1","uuid":"kqmU8OG6Q2S879SmcxMfcA","version":{"created":"7060299"}}}},".monitoring-es-7-2020.09.21":{"settings":{"index":{"codec":"best_compression","number_of_shards":"1","auto_expand_replicas":"0-1","provided_name":".monitoring-es-7-2020.09.21","format":"7","creation_date":"1600697149430","number_of_replicas":"1","uuid":"7LpJ1S1ETJSoYY_Z_WfoXA","version":{"created":"7060299"}}}},".monitoring-es-7-2020.09.23":{"settings":{"index":{"codec":"best_compression","number_of_shards":"1","auto_expand_replicas":"0-1","provided_name":".monitoring-es-7-2020.09.23","format":"7","creation_date":"1600819203229","number_of_replicas":"1","uuid":"ZX0uYhARREiufoeZaOE9Cw","version":{"created":"7060299"}}}},".monitoring-kibana-7-2020.09.21":{"settings":{"index":{"codec":"best_compression","number_of_shards":"1","auto_expand_replicas":"0-1","provided_name":".monitoring-kibana-7-2020.09.21","format":"7","creation_date":"1600697143748","number_of_replicas":"1","uuid":"XagWc3uHQcqRkLWaOKBXjg","version":{"created":"7060299"}}}},".monitoring-kibana-7-2020.09.24":{"settings":{"index":{"codec":"best_compression","number_of_shards":"1","auto_expand_replicas":"0-1","provided_name":".monitoring-kibana-7-2020.09.24","format":"7","creation_date":"1600905609041","number_of_replicas":"1","uuid":"s7Ee6VIPTquBFT1--r2swQ","version":{"created":"7060299"}}}},".kibana":{"settings":{"index":{"creation_date":"1600617338479","number_of_shards":"1","number_of_replicas":"1","uuid":"YHhpfeI8SRyrryCUUuuqPQ","version":{"created":"7060299"},"provided_name":".kibana"}}}}[root@transcript-elasticsearch-0 /]
+
+
+
+
+
+
+
+
+export POD_NAME=$(kubectl get pods --namespace default -l "app=kibana,release=kibana-1599519186" -o jsonpath="{.items[0].metadata.name}")
+
+
+
+
+
+
+
+[9/1 9:40 PM] Nada Alaskari
+    http://digital-email-pop3-connector:80/api/pop3connector/v1/email/accounts
+        http://digital-email-imap-connector:80/v1/email/accounts 
+       
+        http://digital-email-smtp-connector:80/v1/email/accounts
+​[9/1 9:45 PM] Nada Alaskari
+    https://digital-kubekeepalive-147219.galwaylab.avaya.com/services/UnifiedAgentController/workspaces/#/
+​[9/1 9:45 PM] Nada Alaskari
+    
+https://digital-kubekeepalive-147219.galwaylab.avaya.com/services/ApplicationCenter/AdminPortal#/
+
+
+
+performance----reduce the hit on elsticsearch
+1-divide logic of command api on kafka consume to let check on duplicated message only in api
+2-don't get all indices for tenant, make aparametr the defin how many months yo need to get indeces from and build method for this
+
+
+
+
+
+
+
+
+Set-ExecutionPolicy Bypass -Scope Process -Force; [System.Net.ServicePointManager]::SecurityProtocol = [System.Net.ServicePointManager]::SecurityProtocol -bor 3072; iex ((New-Object System.Net.WebClient).DownloadString('https://chocolatey.org/install.ps1'))
+
+
+choco install kubernetes-helm
+
+
+
+
+

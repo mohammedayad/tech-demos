@@ -1,0 +1,43 @@
+Maven commands
+---------------------------------------------------------------------------------
+mvn clean install -Dmaven.test.skip=true
+
+---------------------------------------------------------------------------------
+Docker Commands
+---------------------------------------------------------------------------------
+--list the avilabe images
+docker images
+
+--list only the repository and tag of the images without the additional details
+docker images --format "{{.Repository}}:{{.Tag}}"
+
+--to run your image (repoNmae:tagNmae)
+docker run -it -p 8080:8080 app/myspring:v1
+
+--running images
+docker ps -a 
+
+
+
+--stop all images
+docker container stop $(docker container ls -aq)
+
+--remove all images
+docker container rm $(docker container ls -aq)
+
+---------------------------------------------
+
+kubernetes Commands
+---------------------------------------------------------------------------------
+kubectl cluster-info 
+kubectl get namespace
+kubectl get pods
+kubectl exec -it microservice-demo-5489d878cc-mmzkg bash
+--The below commands retrieves the deployment name for the specified pod using the jsonpath output format. Similarly, you can use jsonpath to extract other details such as container names:
+kubectl get pod microservice-demo-5489d878cc-mmzkg -o jsonpath='{.metadata.labels.deployment}'
+kubectl get pod microservice-demo-5489d878cc-mmzkg -o jsonpath='{.spec.containers[*].name}'
+--rollout the image update00change the image
+kubectl set image deployment/myapp-deployment myapp-container=new-image:tag 
+kubectl set image deployment/microservice-demo myspring=app/myspring:v2 
+kubectl rollout history deployment microservice-demo --history of specific deployment
+kubectl rollout undo deployment microservice-demo --rollback to the previouse version of specific deployment

@@ -1,0 +1,392 @@
+-javaagent:D:\LinkDev\programs\spring STS\sts-4.3.2.RELEASE\lombok.jar
+########################################################
+DOR:
+
+Assumptions: 
+Dependencies:
+Constraints : NA
+Trade-offs : NA
+Acceptance Criteria :
+service basic classes created.
+Exception to Acceptance:
+DOD:
+
+Objectives :
+service basic classes created.
+Output / Artifacts: 
+Unit testing : NA
+BDD testing : NA
+PR Reviewed, and comments implemented:
+Jira should have PR linked:
+Demo accepted:
+################################################
+spring.datasource.url = jdbc:postgresql://localhost:5432/postgres
+spring.datasource.username = postgres
+spring.datasource.password = mysecretpassword
+spring.datasource.driverClassName=org.postgresql.Driver
+
+# The SQL dialect makes Hibernate generate better SQL for the chosen database
+spring.jpa.properties.hibernate.dialect = org.hibernate.dialect.PostgreSQLDialect
+# Hibernate ddl auto (create, create-drop, validate, update)
+spring.jpa.hibernate.ddl-auto = create
+spring.jpa.database=POSTGRESQL
+spring.datasource.platform=postgres
+spring.jpa.generate-ddl=true
+spring.jpa.show-sql = true
+spring.jpa.properties.hibernate.temp.use_jdbc_metadata_defaults=false
+###############################################################
+http://10.134.39.119:31380/custom-channel-transcript-pr-18-init/_aliases?pretty=true
+
+http://10.134.39.119:31380/msg-transcript-query-service/swagger-ui.html#/Transcript_API
+
+http://10.134.147.219/msg-transcript-query-service/swagger-ui.html#/Transcript_API
+
+http://10.134.39.116:31380/msg-transcript-query-service/api/v1/digital/transcript/tenant/100/gdpr
+
+http://10.134.39.116:31380/custom-channel-transcript-pr-18-init/10-03-2020_100/transcript/
+
+http://10.134.39.116:31380/msg-transcript-query-service/actuator/ready
+
+http://localhost:9200/10-03-2020_100/transcript/_search
+
+http://digital-kubekeepalive-147219.galwaylab.avaya.com/app/kibana#/discover?_g=(filters:!(),refreshInterval:(pause:!t,value:5000),time:(from:now-15m,to:now))&_a=(columns:!(kubernetes.container_name,message),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'7d7c8bf0-6853-11ea-a5b9-01a475c4afdb',key:kubernetes.labels.app_kubernetes_io%2Fname,negate:!f,params:(query:msg-transcript-query-service),type:phrase,value:msg-transcript-query-service),query:(match:(kubernetes.labels.app_kubernetes_io%2Fname:(query:msg-transcript-query-service,type:phrase)))),('$state':(store:appState),exists:(field:kubernetes.container_name),meta:(alias:!n,disabled:!f,index:'7d7c8bf0-6853-11ea-a5b9-01a475c4afdb',key:kubernetes.container_name,negate:!f,type:exists,value:exists))),index:'7d7c8bf0-6853-11ea-a5b9-01a475c4afdb',interval:auto,query:(language:kuery,query:'kubernetes.container_name:%22msg-transcript-query%22'),sort:!(!('@timestamp',desc)))
+
+
+
+
+http://10.134.147.234/app/kibana#/discover?_g=(filters:!(),refreshInterval:(pause:!t,value:5000),time:(from:now-15m,to:now))&_a=(columns:!(kubernetes.container_name,message,logger_name),filters:!(('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'81c597c0-79a0-11ea-817e-7f03ade21571',key:MESSAGE,negate:!f,params:(query:'passed%20Transcript%20Query'),type:phrase,value:'passed%20Transcript%20Query'),query:(match:(MESSAGE:(query:'passed%20Transcript%20Query',type:phrase)))),('$state':(store:appState),meta:(alias:!n,disabled:!f,index:'81c597c0-79a0-11ea-817e-7f03ade21571',key:MESSAGE.keyword,negate:!f,params:(query:debug),type:phrase,value:debug),query:(match:(MESSAGE.keyword:(query:debug,type:phrase))))),index:'81c597c0-79a0-11ea-817e-7f03ade21571',interval:auto,query:(language:kuery,query:'kubernetes.container_name:%22msg-transcript-query%22'),sort:!(!('@timestamp',desc)))
+
+
+http://127.0.0.1:65084/browser/#   -->postgre
+
+http://digital-kubekeepalive-147219.galwaylab.avaya.com/msg-transcript-query-service/api/v1/digital/transcript/tenant/100/gdpr
+
+
+http://10.134.147.234/msg-transcript-query-service/swagger-ui.html#/Transcript_Query
+##########################################################################
+--kibana
+10.134.147.219/app/kibana#/discover?_g=(filters:!(),refreshInterval:(pause:!t,value:0),time:(from:now-15m,to:now))&_a=(columns:!(_source),index:d65cc4b0-a4f8-11ea-ba6f-e34d4a63eeeb,interval:auto,query:(language:kuery,query:'logger_name:com.avaya.digital.email.*'),sort:!(!('@timestamp',desc)))
+--karafana
+http://localhost:3000/dashboard/new?panelId=2&edit&fullscreen&orgId=1
+http://10.134.147.242/dashboards
+---promethuse
+http://localhost:8080/actuator/prometheus
+http://localhost:9090/graph?g0.range_input=1h&g0.expr=email_pop3_service_getExistingUnreadEmails_total&g0.tab=1
+---workspace
+https://digital3-kubekeepalive-147242.galwaylab.avaya.com/services/ApplicationCenter/AdminPortal#/editEl/digitalprovider/updated%20POP3
+###########################################################################
+curl -X POST \
+https://dev-2.ixcc-sandbox.avayacloud.com/auth/realms/QBWWLM/protocol/openid-connect/token \
+-H 'Content-Type: application/x-www-form-urlencoded' \
+-H 'Postman-Token: 27f86b0f-6121-4173-8713-53667d7bb834' \
+-H 'cache-control: no-cache' \
+-d 'grant_type=password&client_id=msg-transcript-query-service&client_secret=msg-transcript-query-service&scope=openid&username=admin&password=admin&undefined=' --insecure
+
+curl -X POST https://dev-2.ixcc-sandbox.avayacloud.com/auth/realms/QBWWLM/protocol/openid-connect/token -d "grant_type=client_credentials&client_id=msg-agent-controller&client_secret=msg-agent-controller" --insecure
+
+curl --location --request POST 'https://dev-2.ixcc-sandbox.avayacloud.com/msg-transcript-query-service/api/digital/transcript/v1/accounts/QBWWLM/messages:search' \
+--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJ3QTNWdHRsc012R0MweW5XOEZOXzJMZ1BxNEFVYzdMeHVld05ja0UtbzE0In0.eyJleHAiOjE2MDM4OTk0MDEsImlhdCI6MTYwMzg5ODUwMSwianRpIjoiZGMwMmM1OGUtMGU0ZS00ZjNhLWEyY2UtMWE4OGRiM2U1MzkyIiwiaXNzIjoiaHR0cHM6Ly9kZXYtMi5peGNjLXNhbmRib3guYXZheWFjbG91ZC5jb20vYXV0aC9yZWFsbXMvUUJXV0xNIiwiYXVkIjpbImFjY291bnQiLCJtc2ctdHJhbnNjcmlwdC1xdWVyeS1zZX
+#######################################################################   
+https://confluence.forge.avaya.com/display/AOEC/How+to+Access+Azure+PostgreSQL+Database+Servers 
+kubectl run ixcc-tools --image=ixccmetam.azurecr.io/ixcc-docker/ixcc-tools:0.1 --env "STUNNEL_REDIS_CONNECT=ixcc-sbx-4-redis.redis.cache.windows.net:6380" --image-pull-policy Always
+kubectl exec -it ixcc-tools sh
+kubectl exec -it primary-administration-database-service-0 bash
+===============================
+  postgres-prerouting-configr-password: YVpCeDlxUFFxd3JrdXZZb2tlZFpFMnpXSE50V3VUNTQ=
+  postgres-prerouting-configr-user: cHJlcm91dGluZy1jb25maWctcmVhZEBpeGNjLXBlcmYtOS1wb3N0Z3Jlcw==
+  postgres-prerouting-configw-password: NEgzVUUzUUtnOUMyeTcwRFQ2V2dFbFA2NmNOdk8zSUI=
+  postgres-prerouting-configw-user: cHJlcm91dGluZy1jb25maWdAaXhjYy1wZXJmLTktcG9zdGdyZXM=
+  
+  
+  psql "host=postgres.perf-9.onecloud.avayacloud.local port=5432 dbname=pre-routing-config-db user=prerouting-config@ixcc-perf-9-postgres password=4H3UE3QKg9C2y70DT6WgElP66cNvO3IB sslmode=require"
+  
+  
+  
+  ====================================dev-19
+   postgres-imap-state-storer-password: R3RQczNKRHVFYjhVNVgxeWEwdzVmR2czcXR5R2ZxWFY=
+  postgres-imap-state-storer-user: aW1hcC1zdGF0ZS1zdG9yZS1yZWFkQGl4Y2MtZGV2LTE5LXBvc3RncmVz
+  postgres-imap-state-storew-password: T3VXMWg2VkJwaGF1SzZtZWp5VUNXUkhVMU05Y1Rvblo=
+  postgres-imap-state-storew-user: aW1hcC1zdGF0ZS1zdG9yZUBpeGNjLWRldi0xOS1wb3N0Z3Jlcw==
+  
+  
+  psql "host=postgres.dev-19.onecloud.avayacloud.local port=5432 dbname=imap_state_store_db user=imap-state-store@ixcc-dev-19-postgres password=OuW1h6VBphauK6mejyUCWRHU1M9cTonZ sslmode=require"
+
+====================================
+
+user-name
+password
+ imap-state-store@ixcc-sbx-27-postgres
+  ZcV4LFV0iICAQCLEPltu1cp8553ffNzu
+​
+psql "host=postgres.sbx-19.onecloud.avayacloud.local port=5432 dbname=email_templates_db user=pgsqladmin@ixcc-sbx-19-postgres password=Avaya123$ sslmode=require"
+psql "host=postgres.sbx-21.onecloud.avayacloud.local port=5432 dbname=imap_state_store_db user=pgsqladmin@ixcc-sbx-21-postgres password=Avaya123$ sslmode=require"
+psql "host=postgres.sbx-21.onecloud.avayacloud.local port=5432 dbname=pop3connector user=pgsqladmin@ixcc-sbx-21-postgres password=Avaya123$ sslmode=require"
+psql "host=postgres.perf-2.onecloud.avayacloud.local port=5432 dbname=email_templates_db user=pgsqladmin@ixcc-perf-2-postgres password=Avaya123$ sslmode=require"
+psql "host=postgres.perf-2.onecloud.avayacloud.local port=5432 dbname=smtp_state_store_db user=pgsqladmin@ixcc-perf-2-postgres password=Avaya123$ sslmode=require"
+select * from integration_state_store;----imap
+
+UPDATE integration_state_store SET creationDate ='' where emailAddress=''; 
+imap_state_store_db=> select * from bounce_state_store;---bounc IMAP
+select * from email_tracking;----pop3
+bounce_state_store---bounc pop3
+select * from smtp_state_store_db;----smtp
+smtp_email----smtp
+bounce----smtp
+select datname,state, count(*)  from  pg_stat_activity where  application_name = 'PostgreSQL JDBC Driver' group by datname, state;
+select datname,state, count(*)  from  pg_stat_activity where  application_name = 'PostgreSQL JDBC Driver' and datname = 'smtp_state_store_db' or datname='perf_test_mock_db' group by datname ,state;
+postgres.qa.onecloud.avayacloud.local
+
+--------------------------------------------------
+digital_provisioning_db
+ postgres-digital-provisioningr-password: TnVDdU1aWmVJSnRHakZBY29OTEwzYk52eU9EUTE3UjU=
+  postgres-digital-provisioningr-user: ZGlnaXRhbC1wcm92aXNpb25pbmctcmVhZEBpeGNjLXBlcmYtOS1wb3N0Z3Jlcw==
+  postgres-digital-provisioningw-password: RExqMzM4YVROZHpSMnhJTDFFcFFRamgxZGpuT0h4d3I=
+  postgres-digital-provisioningw-user: ZGlnaXRhbC1wcm92aXNpb25pbmdAaXhjYy1wZXJmLTktcG9zdGdyZXM=
+  
+  psql "host=postgres.perf-9.onecloud.avayacloud.local port=5432 dbname=digital_provisioning_db user=digital-provisioning@ixcc-perf-9-postgres password=DLj338aTNdzR2xIL1EpQQjh1djnOHxwr sslmode=require"
+====================================================================  
+  
+
+
+psql "host=postgres.qa.onecloud.avayacloud.local port=5432 dbname=imap_state_store_db user=imap-state-store@ixcc-qa-postgres password=v3AwaDln4rAQ7ZHI5u1rzwOFMRHXYOGK sslmode=require"
+
+
+
+  postgres-imap-state-storer-password: aUNKSGdZRFdLcDI0Tm12WGhRTXpVc0dRT3cyU3I5Sks=
+  postgres-imap-state-storer-user: aW1hcC1zdGF0ZS1zdG9yZS1yZWFkQGl4Y2MtcWEtcG9zdGdyZXM=
+  postgres-imap-state-storew-password: djNBd2FEbG40ckFRN1pISTV1MXJ6d09GTVJIWFlPR0s=
+  postgres-imap-state-storew-user: aW1hcC1zdGF0ZS1zdG9yZUBpeGNjLXFhLXBvc3RncmVz
+  
+  
+  
+  
+  sbx-19
+  
+    postgres-imap-state-storer-password: Um42emxoeGthTE1pRndkeVJNbzZ1RHpsS0lBSDBlTnU=
+  postgres-imap-state-storer-user: aW1hcC1zdGF0ZS1zdG9yZS1yZWFkQGl4Y2Mtc2J4LTE5LXBvc3RncmVz
+  postgres-imap-state-storew-password: M2Q1TmJ0ZTR6NGtVM01aeEU4QkVyTnM1UWhPeHlBZkc=
+  postgres-imap-state-storew-user: aW1hcC1zdGF0ZS1zdG9yZUBpeGNjLXNieC0xOS1wb3N0Z3Jlcw==
+  
+  
+  user-----imap-state-store@ixcc-sbx-19-postgres
+  password--------------3d5Nbte4z4kU3MZxE8BErNs5QhOxyAfG
+  
+  
+  psql "host=postgres.sbx-19.onecloud.avayacloud.local port=5432 dbname=imap_state_store_db user=imap-state-store@ixcc-sbx-19-postgres password=3d5Nbte4z4kU3MZxE8BErNs5QhOxyAfG sslmode=require"
+  
+  
+    psql "host=postgres.sbx-27.onecloud.avayacloud.local port=5432 dbname=imap_state_store_db user=imap-state-store@ixcc-sbx-27-postgres password=meuWxD5vLWJse0rHpAOlNLOxa4isH3i7 sslmode=require"
+
+
+SBX-27
+
+  postgres-imap-state-storer-password: bVJkT3VWa0MwN3psOGd2NXA5bnlBTTVCUU1aTzBmYW8=
+  postgres-imap-state-storer-user: aW1hcC1zdGF0ZS1zdG9yZS1yZWFkQGl4Y2Mtc2J4LTI3LXBvc3RncmVz
+  postgres-imap-state-storew-password: bWV1V3hENXZMV0pzZTBySHBBT2xOTE94YTRpc0gzaTc=
+  postgres-imap-state-storew-user: aW1hcC1zdGF0ZS1zdG9yZUBpeGNjLXNieC0yNy1wb3N0Z3Jlcw==
+  
+  
+  
+  SBX-7
+  
+    postgres-pop3connectorr-password: YkREYXNWOEtud1VSdjNMS1FLSTZBZDkwRXdWaEZ5eDk=
+  postgres-pop3connectorr-user: cG9wM2Nvbm5lY3Rvci1yZWFkQGl4Y2MtZGV2LTctcG9zdGdyZXM=
+  postgres-pop3connectorw-password: M2xpMWY3T1VxUTNrZ2dON0o3NHRtZFk1WmFWYllUY2g=
+  postgres-pop3connectorw-user: cG9wM2Nvbm5lY3RvckBpeGNjLWRldi03LXBvc3RncmVz
+  
+  
+  stage:
+   postgres-imap-state-storer-password: S09pa0VlZ0gxcmQ4c00zc3dsa1Q0RUZlYzZmTm03RHY=
+  postgres-imap-state-storer-user: aW1hcC1zdGF0ZS1zdG9yZS1yZWFkQGl4Y2Mtc3RhZ2UtcG9zdGdyZXM=
+  postgres-imap-state-storew-password: V2RiUXZQaDJlNWI1Q041ZndTdVh4SkFHeDhucUYyZk4=
+  postgres-imap-state-storew-user: aW1hcC1zdGF0ZS1zdG9yZUBpeGNjLXN0YWdlLXBvc3RncmVz
+  
+  psql "host=postgres.stage.onecloud.avayacloud.local port=5432 dbname=imap_state_store_db user=imap-state-store@ixcc-stage-postgres password=WdbQvPh2e5b5CN5fwSuXxJAGx8nqF2fN sslmode=require"
+  
+  select datname,state, count(*) from pg_stat_activity where application_name = 'PostgreSQL JDBC Driver' group by datname, state;
+  
+  SELECT pg_terminate_backend(pid) FROM pg_stat_activity WHERE pid <> pg_backend_pid() AND datname = 'imap_state_store_db';
+  
+  SELECT *FROM   pg_settings
+WHERE  name = 'max_connections
+  
+  
+psql "host=postgres.dev-7.onecloud.avayacloud.local port=5432 dbname=pop3connector user=pop3connector@ixcc-dev-7-postgres password=3li1f7OUqQ3kggN7J74tmdY5ZaVbYTch sslmode=require"
+
+
+
+
+ postgres-imap-state-storer-password: TVk5QjVocTRmUUdaYXVid2FTd0puUHNiMEpQQ0VZWXQ=
+  postgres-imap-state-storer-user: aW1hcC1zdGF0ZS1zdG9yZS1yZWFkQGl4Y2MtZGV2LTctcG9zdGdyZXM=
+  postgres-imap-state-storew-password: aEdWNFQwZTlFQllxVmw2cmhMakxLMTZ0a0Y0UE9DNlI=
+  postgres-imap-state-storew-user: aW1hcC1zdGF0ZS1zdG9yZUBpeGNjLWRldi03LXBvc3RncmVz
+  
+  
+  
+  
+  psql "host=postgres.dev-7.onecloud.avayacloud.local port=5432 dbname=imap_state_store_db user=imap-state-store@ixcc-dev-7-postgres password=hGV4T0e9EBYqVl6rhLjLK16tkF4POC6R sslmode=require"
+  
+  -------------------------------------------------
+  {"contextParameters":null,"channelProviderId":"EmailChannelProvider_1","providerMessageId":null,
+ 
+"attachments":[],
+ 
+"recipientParticipants":[{"participantId":"5b8b4b2f-8ad0-44a7-a61b-5d417035d133","participantAddress":"5b8b4b2f-8ad0-44a7-a61b-5d417035d133",
+"displayName":"5b8b4b2f-8ad0-44a7-a61b-5d417035d133","participantType":"AGENT","connectionId":"ef45c9ad-5eb8-4317-95ba-23e13f3d1d0b"},
+{"participantId":"avayaccaas@dragelund.dk","participantAddress":"avayaccaas@dragelund.dk","displayName":"Customer",
+"participantType":"CUSTOMER","connectionId":"01400956-157e-4c40-a46a-f285f4613c56"}],"customData":null,
+"dialogId":"8364ab6a-8732-48a5-9f47-8b15a6968920",
+ 
+"body":{"elementText":{"text":"<p>abood reply</p><hr /><p>Disclaimer&nbsp;</p><hr><strong>From: </strong>avayaccaas@dragelund.dk<br/><strong>To </strong> :ayadm@avaya.com<br/>Subject: </strong>abood 4 inline<br/><br/><div dir=\"ltr\"><br></div>"
+,
+"textFormat":"HTML"}
+ 
+,"payload":null,"elementType":"Text"},
+"senderName":"5b8b4b2f-8ad0-44a7-a61b-5d417035d133","messageIndex":2,"parentMessageId":null,
+"correlationId":"abe7943c-a16b-4c98-8950-2d8abc9ff6c3","fallbackText":null,"channelId":"Email","lastUpdatedTimestamp":1614680533262,
+"receivedTimestamp":1614680533135,"messageId":"5ea6f7f4-944d-447f-91e4-ab0ccd6b0c27","eventType":"MESSAGES","sessionId":null,
+"providerDialogId":"16128c50-541e-45f1-812d-8b33ebf72c10","providerParentMessageId":null,"tenantId":"ZWCSPG","businessAccountName":null,
+"providerSenderId":null,"header":{"cc":[],"messageSourceServerTag":null,"bcc":[],"clientDeviceTag":null,
+"subject":"RE: abood for inline","priority":null,"encoding":"HTML","providerTimestamp":null,"replyTo":"ayadm@avaya.com",
+"from":"qa3.ixcc.automation.multichannel@avaya.com","additionalHeaders":{},"sensitivity":"PUBLIC","to":["ayadm@avaya.com"]},
+"senderType":"AGENT","engagementId":"1fe2b071-0768-4c5c-bcd8-36c350f2ec30","status":"DELIVERED"}
+
+
+
+
+https://sbx-19.ixcc-sandbox.avayacloud.com/smtp-connector/v1/email/callback
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+curl -i --location --request POST 'https://localhost:80/v1beta/email/callback' \
+--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI0LTA0ZFJqZ2RPZUd1Q2cyc3J1bEpRRUM0d0tvaU85c3VXcDk0am9weWQwIn0.eyJleHAiOjE2MzUzODA1MDUsImlhdCI6MTYzNTM3OTYwNSwiYXV0aF90aW1lIjoxNjM1Mzc5NjA1LCJqdGkiOiIzMjE2YWM4OS00MzBhLTQ1OWEtYWZmMS05OTg0M2Q5NmFiMzUiLCJpc3MiOiJodHRwczovL2Rldi03Lml4Y2Mtc2FuZGJveC5hdmF5YWNsb3VkLmNvbS9hdXRoL3JlYWxtcy9QSU9RTFoiLCJhdWQiOlsiYWNjb3VudCIsInV3ZiJdLCJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsInR5cCI6IkJlYXJlciIsImF6cCI6InV3ZiIsInNlc3Npb25fc3RhdGUiOiIyMTIwZjc5NC1iNGIyLTQzMTAtOWM4NS0zZWU4ODUwYzFkMTIiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbIldvcmtzcGFjZXMgQWRtaW4gV2lkZ2V0cyBBZG1pbmlzdHJhdG9yIiwiQWRtaW5pc3RyYXRvciIsIm9mZmxpbmVfYWNjZXNzIiwidW1hX2F1dGhvcml6YXRpb24iLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgb2ZmbGluZV9hY2Nlc3MgcHJvZmlsZSBlbWFpbCIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpZHAiOiJmbGV4IiwibmFtZSI6ImFkbWluIG9uZSIsInRlbmFudElkIjoiUElPUUxaIiwiZ3JvdXBzIjpbIi9QSU9RTFoiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW5AdGVzdC5jb20iLCJ1c2VyVVVJRCI6IjZhYTI0YTRhLTkwNmMtNDU4ZS1hZTVhLTY5YWI5M2M1YmFiNyIsImdpdmVuX25hbWUiOiJhZG1pbiIsImZhbWlseV9uYW1lIjoib25lIn0.n2J63rJ3uXzVaLn3OJWDfMz1_h1idYCRhg0Vk4gF4UjlRC_KYYWzpIvgZGzWkSveuuwLk58wEGDPUuiLHlv0MZr2tb0chrkbzSbKkmZU0p8lB6G6NQfiiZIIhg0STQnRL6HUhLLd-Y3WOpbIBTUM6FdYP57KoRhvxWdysF9IgavKu3cJ80j2HlckYbhHTHjchBJ1TNakKf-_x5XlDLwB37KD5sF_eGADGqm_7WXwgPGstBJFQmkOaK3utnMBzNyrldi4TQyUjv4aH0QxUoriAA_cHgtyCbCfcK8wRi94F3l40wIMgElGf4zbJiQsNQ21PWPOGvGaCNIE-nj73hEqiQ' \
+--header 'Content-Type: application/json' \
+-d '{"contextParameters":null,"channelProviderId":"EmailChannelProvider_1","providerMessageId":null,
+ 
+"attachments":[],
+ 
+"recipientParticipants":[{"participantId":"5b8b4b2f-8ad0-44a7-a61b-5d417035d133","participantAddress":"5b8b4b2f-8ad0-44a7-a61b-5d417035d133",
+"displayName":"5b8b4b2f-8ad0-44a7-a61b-5d417035d133","participantType":"AGENT","connectionId":"ef45c9ad-5eb8-4317-95ba-23e13f3d1d0b"},
+{"participantId":"avayaccaas@dragelund.dk","participantAddress":"avayaccaas@dragelund.dk","displayName":"Customer",
+"participantType":"CUSTOMER","connectionId":"01400956-157e-4c40-a46a-f285f4613c56"}],"customData":null,
+"dialogId":"8364ab6a-8732-48a5-9f47-8b15a6968920",
+ 
+"body":{"elementText":{"text":"<p>abood reply</p><hr /><p>Disclaimer&nbsp;</p><hr><strong>From: </strong>avayaccaas@dragelund.dk<br/><strong>To </strong> :aramanna@avaya.com<br/>Subject: </strong>abood 4 inline<br/><br/><div dir=\"ltr\"><br></div>"
+,
+"textFormat":"HTML"}
+ 
+,"payload":null,"elementType":"Text"},
+"senderName":"5b8b4b2f-8ad0-44a7-a61b-5d417035d133","messageIndex":2,"parentMessageId":null,
+"correlationId":"abe7943c-a16b-4c98-8950-2d8abc9ff6c3","fallbackText":null,"channelId":"Email","lastUpdatedTimestamp":1614680533262,
+"receivedTimestamp":1614680533135,"messageId":"5ea6f7f4-944d-447f-91e4-ab0ccd6b0c27","eventType":"MESSAGES","sessionId":null,"senderParticipantType":"AGENT",
+"providerDialogId":"16128c50-541e-45f1-812d-8b33ebf72c10","providerParentMessageId":null,"tenantId":"ZWCSPG","businessAccountName":null,
+"providerSenderId":null,"headers":{"cc":["ayadm@avaya.com"],"messageSourceServerTag":null,"bcc":[],"clientDeviceTag":null,
+"subject":"RE: abood for inline","priority":null,"encoding":"HTML","providerTimestamp":null,"replyTo":"aramanna@avaya.com",
+"from":"avayaccaas@dragelund.dk","additionalHeaders":{},"sensitivity":"PUBLIC","to":["aramanna@avaya.com"]},
+"senderType":"AGENT","engagementId":"1fe2b071-0768-4c5c-bcd8-36c350f2ec30","status":"DELIVERED"}' --insecure
+
+
+
+
+
+--------------------imap
+
+
+curl -i --location --request POST 'https://localhost:80/v1/email/accounts' \
+--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJIQTFVcTg4WjY4OVlWMllJa3dSNTFDdUxFMXB0UDIxYUNZa2FLZzZpVEpVIn0.eyJleHAiOjE2MjYxMTE4OTgsImlhdCI6MTYyNjExMDk5OCwiYXV0aF90aW1lIjoxNjI2MTA3NzY5LCJqdGkiOiIxZDYzMjNmYy01YjcxLTQ3MjYtOTliZC00NmFiNmEyOGM0ZmEiLCJpc3MiOiJodHRwczovL3BlcmYtNi5peGNjLXNhbmRib3guYXZheWFjbG91ZC5jb20vYXV0aC9yZWFsbXMvUk5MWVlOIiwiYXVkIjpbImFjY291bnQiLCJ1d2YiXSwic3ViIjoiYWRtaW4iLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ1d2YiLCJzZXNzaW9uX3N0YXRlIjoiOTYzMzZjYWQtNmYxMS00NjA0LWFmMjEtMmM0N2FhZDNiM2ZhIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwidXNlciIsIlN5c3RlbSBBZG1pbmlzdHJhdG9yIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgb2ZmbGluZV9hY2Nlc3MgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpZHAiOiJmbGV4IiwidGVuYW50SWQiOiJSTkxZWU4iLCJncm91cHMiOltdLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.ikgCYTU8CTaT-ZuusfxgkWTgvSqPsxpWpdjGK97TZk6B7xwgeOV_qZL0BCusqHcfQkYmOr6CBXVuGpsVyf3THBXctPR6W4LAOLiieXqR3R9OsvQRB0jySt8VqHVJwW7G2i7aup6R9Yk5CJUTlNCCj0tS2QpvVhEAdaviaXqjaivsMPcwqd21Icbi6OKdgCaccqNMYl2Sqtdv3Y4HNfm_oKCbHsrORRTKDEsCulS8LamkTKbi0PyPXZIVbr76llQeT83BJXU8UGooTBgqeaDEKdqh9I1mDIMCDLE2pLfur6WdddjiqpBHmdCj4aoIclT-ZygF8BgqVMvFsX0NtWWKfQ' \
+--header 'Content-Type: application/json' \
+-d '{
+"eventType":"DELETE",
+"payload": {
+"authenticationType": "PLAIN",
+"tlsType": "NONE",
+"acctname": "spanishuser",
+"emailAddress": "spanishuser@silperf.avaya.com",
+"password": "Avaya123!",
+"emailServer": "172.16.5.18",
+"port": 143,
+"connectionTimeout": 100,
+"accountFolder": "Inbox",
+"maxEmailSize": 10,
+"accountId": "XCMNWL",
+"saveOriginalEmail": "false",
+"deleteEmailFromServer": "true",
+"imapProtocol":"imap",
+"accountStatus":"INACTIVE",
+"channelProviderId":"EmailChannelProvider_1"
+}
+}' --insecure
+
+
+------------------------------------------------------------------------------------------
+curl -i --location --request POST 'https://localhost:80/v1/email/accounts' \
+--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJIQTFVcTg4WjY4OVlWMllJa3dSNTFDdUxFMXB0UDIxYUNZa2FLZzZpVEpVIn0.eyJleHAiOjE2MjYxMTE4OTgsImlhdCI6MTYyNjExMDk5OCwiYXV0aF90aW1lIjoxNjI2MTA3NzY5LCJqdGkiOiIxZDYzMjNmYy01YjcxLTQ3MjYtOTliZC00NmFiNmEyOGM0ZmEiLCJpc3MiOiJodHRwczovL3BlcmYtNi5peGNjLXNhbmRib3guYXZheWFjbG91ZC5jb20vYXV0aC9yZWFsbXMvUk5MWVlOIiwiYXVkIjpbImFjY291bnQiLCJ1d2YiXSwic3ViIjoiYWRtaW4iLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ1d2YiLCJzZXNzaW9uX3N0YXRlIjoiOTYzMzZjYWQtNmYxMS00NjA0LWFmMjEtMmM0N2FhZDNiM2ZhIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJvZmZsaW5lX2FjY2VzcyIsInVtYV9hdXRob3JpemF0aW9uIiwidXNlciIsIlN5c3RlbSBBZG1pbmlzdHJhdG9yIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgb2ZmbGluZV9hY2Nlc3MgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpZHAiOiJmbGV4IiwidGVuYW50SWQiOiJSTkxZWU4iLCJncm91cHMiOltdLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbiJ9.ikgCYTU8CTaT-ZuusfxgkWTgvSqPsxpWpdjGK97TZk6B7xwgeOV_qZL0BCusqHcfQkYmOr6CBXVuGpsVyf3THBXctPR6W4LAOLiieXqR3R9OsvQRB0jySt8VqHVJwW7G2i7aup6R9Yk5CJUTlNCCj0tS2QpvVhEAdaviaXqjaivsMPcwqd21Icbi6OKdgCaccqNMYl2Sqtdv3Y4HNfm_oKCbHsrORRTKDEsCulS8LamkTKbi0PyPXZIVbr76llQeT83BJXU8UGooTBgqeaDEKdqh9I1mDIMCDLE2pLfur6WdddjiqpBHmdCj4aoIclT-ZygF8BgqVMvFsX0NtWWKfQ' \
+--header 'Content-Type: application/json' \
+-d '{
+"eventType":"DELETE",
+"payload": {
+"authenticationType": "PLAIN",
+"tlsType": "NONE",
+"acctname": "spanishuser",
+"emailAddress": "spanishuser@silperf.avaya.com",
+"password": "Avaya123!",
+"emailServer": "172.16.5.18",
+"port": 143,
+"connectionTimeout": 100,
+"accountFolder": "Inbox",
+"maxEmailSize": 10,
+"accountId": "XCMNWL",
+"saveOriginalEmail": "false",
+"deleteEmailFromServer": "true",
+"imapProtocol":"imap",
+"accountStatus":"INACTIVE",
+"channelProviderId":"EmailChannelProvider_1"
+}
+}' --insecure
+
+
+------------------------------imap cash
+curl -i --location --request GET 'https://localhost:80/v1alpha/email/accounts' \
+--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICJDQmpScWtQZEROTmdTMkVuRGJVRGxaRFA2WDY2cDdVbkVjTjZlQkdUQjU0In0.eyJleHAiOjE2NDYxNDUzNjcsImlhdCI6MTY0NjE0NDQ2NywiYXV0aF90aW1lIjoxNjQ2MTM5OTk5LCJqdGkiOiIyZDU1OGVhNi1mMzliLTQ2MDEtYmFlZC1hMGViMGE3NWEyNzIiLCJpc3MiOiJodHRwczovL2NpLml4Y2Mtc2FuZGJveC5hdmF5YWNsb3VkLmNvbS9hdXRoL3JlYWxtcy9IVkxDRUwiLCJhdWQiOlsiYWNjb3VudCIsInV3ZiJdLCJzdWIiOiJhZG1pbkBjaWF1dG9tdWx0aWNoYW5uZWxuZXd3cy5jb20iLCJ0eXAiOiJCZWFyZXIiLCJhenAiOiJ1d2YiLCJzZXNzaW9uX3N0YXRlIjoiNGYwZjg4MTYtNjdlZi00MjAyLTk0MmMtODc1YTZmYWI3N2ZhIiwiYWNyIjoiMSIsInJlYWxtX2FjY2VzcyI6eyJyb2xlcyI6WyJXb3Jrc3BhY2VzIEFkbWluIFdpZGdldHMgQWRtaW5pc3RyYXRvciIsImRlZmF1bHQtcm9sZXMtaHZsY2VsIiwiQWRtaW5pc3RyYXRvciIsIkhpc3RvcmljYWwgUmVwb3J0aW5nX0FkdmFuY2VkIiwiUmVwb3J0aW5nX1N1cGVydmlzb3IiLCJvZmZsaW5lX2FjY2VzcyIsIlJlcG9ydGluZ19BZG1pbmlzdHJhdG9yIiwidW1hX2F1dGhvcml6YXRpb24iLCJSZXBvcnRpbmciLCJ1c2VyIl19LCJyZXNvdXJjZV9hY2Nlc3MiOnsiYWNjb3VudCI6eyJyb2xlcyI6WyJtYW5hZ2UtYWNjb3VudCIsIm1hbmFnZS1hY2NvdW50LWxpbmtzIiwidmlldy1wcm9maWxlIl19fSwic2NvcGUiOiJvcGVuaWQgZW1haWwgb2ZmbGluZV9hY2Nlc3MgcHJvZmlsZSIsImVtYWlsX3ZlcmlmaWVkIjp0cnVlLCJpZHAiOiJmbGV4IiwibmFtZSI6IlRBIEZpcnN0TmFtZSBUQSBMYXN0TmFtZSIsInRlbmFudElkIjoiSFZMQ0VMIiwiZ3JvdXBzIjpbIi9IVkxDRUwiXSwicHJlZmVycmVkX3VzZXJuYW1lIjoiYWRtaW5AY2lhdXRvbXVsdGljaGFubmVsbmV3d3MuY29tIiwidXNlclVVSUQiOiI5MjUwNzQ4NC05NjMyLTRlNDgtOTQ0My1jNGMzMTJjMDFiMjEiLCJnaXZlbl9uYW1lIjoiVEEgRmlyc3ROYW1lIiwiZmFtaWx5X25hbWUiOiJUQSBMYXN0TmFtZSJ9.R6kPoOlpW7EKSTKa0n04B_F2cQPX7osMfvsXg-7z5rAAEnCezFB0Agu44NJM-rPDIJRzA-NoU6Uhn9Dyc_p9fd3zcIJx2elHpuIAhy-da41f3IwX9dUn8lsFnfT5yOzbFENfhRlVhEe0MxF5JaqpbRY7jFYLXrhU2tQPvHF_O3A00NNF9SiXnWSdIwHwhNYCCxyZdnsm_HqkTs0tjgw_BXpoxGgcUw2yj8qI63V7_YbfojBF7OB3ymSoTaxku0bzj0EOYFtfvTFHD85HdOpH2K1iGFTCG0knjVVZUP8c_pYtKFsfgUo3VekYtzZt0kc4I2G9X3F6FZTl03aq7KT3iQ' --insecure
+
+
+
+
+
+
+
+curl -i --location --request GET 'https://localhost:80/v1alpha/email/accounts/cache' \
+--header 'Authorization: Bearer eyJhbGciOiJSUzI1NiIsInR5cCIgOiAiSldUIiwia2lkIiA6ICI0NFZVSzVLRTJkbnhtM2ZSdV91dV9hWjlpX2RGeGVSaF8weEdOM2pDT1JZIn0.eyJleHAiOjE2NDI1NTI4NDgsImlhdCI6MTY0MjU1MTk0OCwiYXV0aF90aW1lIjoxNjQyNTQ2MzA4LCJqdGkiOiJlZDBkOTg0Zi1mODYxLTQ5YmMtYmFmOS05NWZhYjk5YzU3YzYiLCJpc3MiOiJodHRwczovL2Rldi03Lml4Y2Mtc2FuZGJveC5hdmF5YWNsb3VkLmNvbS9hdXRoL3JlYWxtcy9TWExaVVEiLCJhdWQiOlsiYWNjb3VudCIsInV3ZiJdLCJzdWIiOiJhZG1pbkB0ZXN0LmNvbSIsInR5cCI6IkJlYXJlciIsImF6cCI6InV3ZiIsInNlc3Npb25fc3RhdGUiOiJjZmI5MTBjYy0zMzIyLTRkYzEtOWI0MC00OTA0OWFhNGU3MjEiLCJhY3IiOiIxIiwicmVhbG1fYWNjZXNzIjp7InJvbGVzIjpbImRlZmF1bHQtcm9sZXMtc3hsenVxIiwiV29ya3NwYWNlcyBBZG1pbiBXaWRnZXRzIEFkbWluaXN0cmF0b3IiLCJBZG1pbmlzdHJhdG9yIiwib2ZmbGluZV9hY2Nlc3MiLCJ1bWFfYXV0aG9yaXphdGlvbiIsInVzZXIiXX0sInJlc291cmNlX2FjY2VzcyI6eyJhY2NvdW50Ijp7InJvbGVzIjpbIm1hbmFnZS1hY2NvdW50IiwibWFuYWdlLWFjY291bnQtbGlua3MiLCJ2aWV3LXByb2ZpbGUiXX19LCJzY29wZSI6Im9wZW5pZCBvZmZsaW5lX2FjY2VzcyBlbWFpbCBwcm9maWxlIiwiZW1haWxfdmVyaWZpZWQiOnRydWUsImlkcCI6ImZsZXgiLCJuYW1lIjoiYWRtaW4gb25lIiwidGVuYW50SWQiOiJTWExaVVEiLCJncm91cHMiOlsiL1NYTFpVUSJdLCJwcmVmZXJyZWRfdXNlcm5hbWUiOiJhZG1pbkB0ZXN0LmNvbSIsInVzZXJVVUlEIjoiYjZiZjgxYzItODQxYS00ZDgyLTkzMjctZjVkMzY0MzRiYzI4IiwiZ2l2ZW5fbmFtZSI6ImFkbWluIiwiZmFtaWx5X25hbWUiOiJvbmUifQ.GBIq8bzI_EfS_dcsYLFMV9bNMjAttxdidyFu3geaNMiJlkmjCnMrQjzGrRQaiblGIRz30yx4696NSmEHvr9YzfScY_pSsdnzlhdzFEiZoTFNtTXdhP_dYx503LYKfeCRobAdHvlScka30g7AJwNmOn24sNNRVpw1XXlSw488Ed4WKw9dnJrLztE8Lo5IgY-PaCgU3bVZB3_Pj72YRXOj2PoR8qjRyz6071yFh2btV54H1kqdc-y01lx33rht4DgjWbL60R6HrDvWgWsdGL_MugWBpQVXt83UesD6LPtePl_jYKica4GTvtJS8B0L5ZErLVvZqzaELWWkZFPJTPNnng' --insecure
+--------------------------------
+get new token for system relem:
+
+curl --request POST \
+--url https://localhost:80/auth/realms/system/protocol/openid-connect/token \
+--header 'Content-Type: application/x-www-form-urlencoded' \
+--data grant_type=client_credentials \
+--data client_id=bdd \
+--data client_secret=bdd_client_secret
+
+
+digital-email-pop3-accounts

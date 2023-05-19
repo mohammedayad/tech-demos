@@ -1,0 +1,346 @@
+keytool -import -alias CorpProxy -keystore C:/Program Files/Java/jdk1.8.0_65/jre/lib/security/cacerts -file -springio.crt
+keytool -import -trustcacerts -keystore "C:/Program Files/Java/jdk1.8.0_65/jre/lib/security/cacerts" -storepass changeit -alias Root -import -file -springio.crt
+C:/Program Files/Java/jdk1.8.0_65/bin/
+C:/Program Files/Java/jdk-11.0.2/lib/security
+keytool -import -trustcacerts -keystore "C:/Program Files/Java/jdk-11.0.2/lib/security/cacerts" -storepass changeit -alias Root -import -file C:\Users\mohammed.ahmed\Desktop\certificate\self\your_certificatedomain_com.crt
+##########################################################################################################
+keytool -import -alias wildcard.forge.avaya.com -file "D:\LinkDev\New folder\wildcard.forge.avaya.com.crt" -keystore "C:\Program Files\Java\jdk-11.0.2\lib\security\cacerts"
+keytool -import -alias AvayaITrootCA2 -file "D:\LinkDev\New folder\AvayaITrootCA2.crt" -keystore "C:\Program Files\Java\jdk-11.0.2\lib\security\cacerts"
+keytool -import -alias AvayaITserverCA2 -file "D:\LinkDev\New folder\nexus_forge_avaya_com.crt" -keystore "C:\Program Files\Java\jdk-11.0.2\lib\security\cacerts"
+keytool -import -alias nexus_forge_avaya_com -file "D:\LinkDev\New folder\wildcard.forge.avaya.com.crt" -keystore "C:\Program Files\Java\jdk-11.0.2\lib\security\cacerts"
+keytool -import -alias Zscaler -file "D:\LinkDev\New folder\Zscaler.crt" -keystore "C:\Program Files\Java\jdk-11.0.2\lib\security\cacerts"
+##########################################################################################################
+http://localhost:8080/swagger-ui-custom.html
+http://localhost:8080/api-docs/
+http://localhost:8080/swagger-ui.html
+http://localhost:8080/v3/api-docs/
+##########################################################################################################
+git clone -b <branch> <remote_repo>
+git clone -b pr/CCNXT-26839 https://bitbucket.forge.avaya.com/scm/metam/msg-transcript-query-service.git
+git rebase master
+git clone -b pr/CCNXT-26834 https://bitbucket.forge.avaya.com/scm/metam/msg-transcript-query-service.git
+git clone -b pr/CCNXT-26839-CCNXT-27170 https://bitbucket.forge.avaya.com/scm/metam/msg-transcript-query-service.git
+git clone -b CCNXT-26838/CCNXT-26834/CCNXT-26839/CCNXT-26833/CCNXT-26840 https://bitbucket.forge.avaya.com/scm/metam/msg-transcript-query-service.git
+git clone -b CCNXT-26829/CCNXT-26831/CCNXT-26833/CCNXT-26840/CCNXT-26832 https://bitbucket.forge.avaya.com/scm/metam/msg-transcript-command-service.git
+git clone -b POP3_CONNECTOR_POC https://bitbucket.forge.avaya.com/scm/metam/msg-email-poc.git
+git clone -b pr/CCNXT-35461 https://bitbucket.forge.avaya.com/scm/metam/msg-transcript-query-service.git
+git clone -b pr/CCNXT-52461 https://bitbucket.forge.avaya.com/scm/metam/product-custom-channel.git
+git clone -b feature/CCNXT-64015-smtp-connector-expose-kafka-properties-as-helm-variables https://bitbucket.forge.avaya.com/scm/digchans/smtp-connector.git
+##########################################################################################################
+--creat zookeeper
+docker run -d --name zookeeper -p 2181:2181 jplock/zookeeper
+--creat kafka
+docker run -d --name kafka -p 7203:7203 -p 9092:9092 -e KAFKA_ADVERTISED_HOST_NAME=10.2.70.81 -e ZOOKEEPER_IP=10.2.70.81 ches/kafka
+--creat topic
+docker run --rm ches/kafka kafka-topics.sh --create --topic pm1 --replication-factor 1 --partitions 1 --zookeeper 10.2.70.81:2181
+##########################################################################################################
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties   --kafka zookeeper
+bin\windows\kafka-server-start.bat config\server.properties          --kafka broker
+bin\windows\kafka-topics.bat --create --topic my_topic --zookeeper localhost:2181 --replication-factor 1 --partitions 1   --create topic
+bin\windows\kafka-topics.bat --list --zookeeper localhost:2181  --list topics
+bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic my_topic   --producer
+bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic my_topic --from-beginning   --consumer
+##########################################################################################################
+---maven---
+mvn clean install -Dmaven.test.skip=true
+mvn --settings C:\Users\mohammed.ahmed\.m2\settings-avaya.xml clean install -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
+	
+mvn --settings "D:\Avaya\maven\settings-avaya" clean install -Dmaven.wagon.http.ssl.insecure=true -Dmaven.wagon.http.ssl.allowall=true
+	
+mvn clean install -Dmaven.test.skip=true --settings  "C:\Users\mohammed.ahmed\.m2\settings-avaya.xml"
+##########################################################################################################
+datadog:
+
+https://app.datadoghq.com/dashboard/rre-s7v-uaa/kubernetes-pods-overview-cloned?from_ts=1603364202962&live=true&to_ts=1603364502962&tpl_var_cluster=ixcc-perf-3-aks&tpl_var_deployment=digital-email-pop3-connector
+
+https://app.datadoghq.com/dashboard/rre-s7v-uaa/kubernetes-pods-overview-cloned?from_ts=1602443700000&live=false&to_ts=1602536400000&tpl_var_cluster=ixcc-perf-3-aks&tpl_var_statefulset=eventing-kafka-cp-kafka
+
+https://app.datadoghq.com/screen/integration/30340/kubernetes-nodes-overview?from_ts=1602701100000&live=false&to_ts=1602792000000&tpl_var_cluster=ixcc-perf-3-aks
+
+https://app.datadoghq.com/dashboard/rre-s7v-uaa/kubernetes-pods-overview-cloned?from_ts=1603209300000&live=false&to_ts=1603211460000&tpl_var_cluster=ixcc-perf-3-aks&tpl_var_deployment=custom-channel-msg-transcript-command-service&tpl_var_statefulset=%2A
+
+https://app.datadoghq.com/apm/traces?end=1603545660000&graphType=flamegraph&paused=true&query=env%3Aixcc-perf-5-aks%20service%3Amsg-transcript-query-service%20resource_name%3A%22POST%20%2Fapi%2Fdigital%2Ftranscript%2Fv1%2Faccounts%2F%7BaccountId%7D%2Fmessages%3Asearch%22%20%40http.status_code%3A404&start=1603372860000&streamTraces=true
+
+https://app.datadoghq.com/logs?cols=core_host%2Ccore_service&event&from_ts=1603372860000&index=&live=false&messageDisplay=inline&query=service%3Amsg-transcript-command-service+-status%3A%28error+OR+warn%29+env%3Aixcc-perf-5-aks&stream_sort=desc&to_ts=1603545660000
+
+https://app.datadoghq.com/logs?cols=host%2Cservice%2Ccontainer_name&from_ts=1603540800000&index=&live=false&messageDisplay=inline&query=host%3A%2Aperf4%2A+service%3Amsg-transcript-command-service+-status%3Awarn&stream_sort=time%2Casc&to_ts=1603576800000
+\
+
+https://app.datadoghq.com/apm/trace/3923951044174154538?env=ixcc-perf-4-aks&graphType=flamegraph&shouldShowLegend=true&spanID=2285169226722207336
+
+https://app.datadoghq.com/logs?cols=host%2Cservice%2Ccontainer_name&event&from_ts=1603540800000&index=&live=false&messageDisplay=inline&query=host%3A%2Aperf4%2A+status%3Aerror+service%3Amsg-transcript-query-service&stream_sort=time%2Casc&to_ts=1603576800000
+
+https://app.datadoghq.com/logs?cols=host%2Cstatus%2Cservice&context_event=AQAAAXVazEeJVjbJVQAAAABBWFZhekZMZ2l2WHc5SlBQRW9BQw&event=AQAAAXVazEeJVjbJVQAAAABBWFZhekZMZ2l2WHc5SlBQRW9BQw&from_ts=1603539967217&index=&live=false&messageDisplay=inline&query=host%3Aaks-perf4-37034254-vmss000004+service%3Amsg-transcript-query-service+container_id%3A606c52138d4360f008a3a1d7de2678296c80a45e6eba0cfbf6ac274e78b2989a+filename%3A0.log&saved_view&stream_sort=desc&to_ts=1603553421733
+
+https://app.datadoghq.com/apm/trace/3923951044174154538?env=ixcc-perf-4-aks&graphType=flamegraph&shouldShowLegend=true&spanID=2285169226722207336
+
+https://confluence.forge.avaya.com/display/AOEC/S102+10K+24h?src=contextnavpagetreemode
+
+http://perf-3-ixcc.westeurope.cloudapp.azure.com/
+##########################################################################################################
+helm upgrade -f ./overrides/all/custom-channel.yaml --namespace default --install --version 0.1.853 custom-channel chartmuseum/custom-channel
+helm upgrade -f ./overrides/all/custom-channel.yaml --set msg-transcript-command-service.image.tag="0.0.0-PR-97-4" --namespace default --install --version 0.1.932 custom-channel chartmuseum/custom-channel
+##########################################################################################################
+---install on CCM lab------
+wget --no-check-certificate https://charts.kaizen.avaya.com/charts/custom-channel-0.0.0-PR-209-8.tgz #Download package number
+ccm unstage custom-channel-0.0.0-PR-209-8 #uninstall if exists
+tar -xvzf custom-channel-0.0.0-PR-209-8.tgz #Unzip the package without tgz
+vi path/to/file # update files
+tar -cvzf custom-channel-0.0.0-PR-209-8.tgz custom-channel/  #Zip the package
+rm -rf custom-channel #Remove unziped folder just for safity
+sudo  kubectl get pod -n image-registry  # Check registry pod is running
+ccm stage custom-channel-0.0.0-PR-209-8.tgz #stage the package without tgz
+ccm install custom-channel-0.0.0-PR-209-8 --name custom-channel --skip-eula #Install the package
+
+
+
+ccm delete custom-channel --yes
+​ccm unstage custom-channel-0.0.0-PR-209-8
+​sudo kubectl scale deployment registry -n image-registry --replicas=0
+​sudo kubectl scale deployment registry -n image-registry --replicas=1
+​tar -xvzf custom-channel-0.0.0-PR-209-8.tgz
+​tar -cvzf custom-channel-0.0.0-PR-209-8.tgz custom-channel/
+ccm stage custom-channel-0.0.0-PR-209-8.tgz
+​ccm install custom-channel-0.0.0-PR-209-8 --name custom-channel --skip-eula
+##########################################################################################################
+    wget --no-check-certificate https://charts.kaizen.avaya.com/charts/custom-channel-0.0.0-PR-209-8.tgz
+    sudo kubectl scale deployment registry -n image-registry --replicas=0
+    sudo kubectl scale deployment registry -n image-registry --replicas=1
+	
+	
+	curl https://localhost:9200/_cluster/settings?include_defaults=true --insecure
+
+	
+	sudo kubectl exec -it shell-demo -- /bin/bash
+	
+	sudo kubectl exec -it shell-demo -- psql
+	\l -----show databases
+	\d+ ----- show tables
+	
+	
+	curl -H "Content-Type: application/json" -X POST -d '{"user":"bob","pass":"123"}' http://URL/
+		
+	
+	
+	
+	
+	http://localhost:9200/_aliases?pretty=true  ---index
+	http://localhost:9200/12-07-2020_bzmxya/_search  --search
+	
+	curl -X DELETE http://localhost:9200/_all  --delete
+	
+	kubectl get pods -n avaya-kafka
+##########################################################################################################
+---avro schema-----
+http://10.134.147.234/schema-registry/subjects/com.avaya.digital.avro.ProcessedMessage/versions
+http://10.134.147.242/schema-registry/subjects/com.avaya.digital.avro.email.EmailPOP3AccountInfo/versions
+
+sudo kubectl exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- /bin/bash -c "kafka-topics.sh --list --zookeeper eventing-kafka-cp-zookeeper-headless:21810"
+
+curl -X DELETE http://eventing-kafka-cp-schema-registry.avaya-kafka:32080/subjects/com.avaya.digital.avro.email.EmailPOP3AccountInfo/versions/1
+
+curl -X DELETE http://eventing-kafka-cp-schema-registry.avaya-kafka:32080/subjects/com.avaya.digital.avro.ProcessedMessage/versions/1
+
+curl -X DELETE http://eventing-kafka-cp-schema-registry.avaya-kafka:32080/subjects/com.avaya.digital.imap.avro.EmailAccount/versions/1
+http://10.134.147.234/schema-registry/subjects/com.avaya.digital.avro.EngagementPrerouted/versions/1
+
+curl -X GET http://eventing-kafka-cp-schema-registry.avaya-kafka:32080/subjects/com.avaya.digital.avro.email.EmailPOP3AccountInfo/versions/
+curl -X GET http://eventing-kafka-cp-schema-registry.avaya-kafka:32080/subjects/com.avaya.digital.avro.email.EmailPOP3AccountInfo/versions/2
+
+
+curl -X GET http://eventing-kafka-cp-schema-registry.avaya-kafka:32080/subjects/com.avaya.digital.avro.ProcessedMessage/versions
+
+sudo kubectl exec -it digital-email-pop3-connector-77bdf596d7-dfd9v -- /bin/bash
+
+curl -X GET http://eventing-kafka-cp-schema-registry.avaya-kafka:32080/subjects/com.avaya.digital.avro.email.EmailPOP3AccountInfo/versions/
+curl -X GET http://eventing-kafka-cp-schema-registry.avaya-kafka:32080/subjects/com.avaya.digital.avro.email.EmailPOP3AccountInfo/versions/2
+
+sudo kubectl logs digital-email-pop3-connector-77bdf596d7-dfd9v| grep mapToDTO
+
+-Djavax.net.ssl.trustStore=D:/LinkDev/projects/avaya/Implementation-Tasks/prCCNXT-37377-schemaRegistry-tls/mounted-certs/truststore/server42.jks
+
+static {
+		HttpsURLConnection.setDefaultHostnameVerifier((hostname, session) -> hostname.equals("10.134.147.234"));
+	}
+sudo kubectl describe pod eventing-kafka-cp-schema-registry-7cdc7bf849-8grpn -n avaya-kafka | grep http 
+
+curl -H "Accept: application/json" -H "Content-type: application/json" -X POST -d '{"tenantId":"234","channelType":"SMS","currentDialogId":"1596548349977","value":"hi again"}' http://localhost:8080/save
+
+keytool -import -keystore /usr/zulu11.33.10-sa-jre11.0.4-linux_x64/lib/security/cacerts -alias correct-ca-crt-mgr -file mounted-certs/truststore/root-cert.pem
+##########################################################################################################
+work card:
+https://dev-2-ixcc.westeurope.cloudapp.azure.com/services/UnifiedAgentController/workspaces/#/home --workspaces/#/home
+agent user name-----popsmtpagent@popsmtp.org
+password----avaya1234
+to----popagentazure@gmail.com
+
+-------------------------------------------------------------------------------
+[9/10 1:56 PM] Abdelghany Marzouk
+    az login --tenant ixccdev.onmicrosoft.com
+  128  az account list --output table
+  130  az account set --subscription ixcc-dev-ci_cd
+  132  az aks get-credentials --name ixcc-perf-3-aks --resource-group ixcc-perf-3-rg --overwrite-existing --file ~/.kube/azure/ixcc/perf-3/config
+  134  export KUBECONFIG=~/.kube/azure/ixcc/perf-3/config
+​[9/10 2:04 PM] Abdelghany Marzouk
+    
+
+kubectl exec -it eventing-kafka-cp-kafka-0 -n avaya-kafka -c cp-kafka-broker -- bash
+
+​[9/10 2:20 PM] Abdelghany Marzouk
+       rm -rf /opt/kafka/data-0/logs/*
+curl -H "Content-Type: application/json" -X POST -d '{}' http://localhost:8080/api/digital/transcript/command/v1/tenants/300/engagements/200/dialogs/100/transcripts:save	   
+##########################################################################################################	  
+bin\windows\zookeeper-server-start.bat config\zookeeper.properties   --kafka zookeeper
+
+bin\windows\kafka-server-start.bat config\server.properties          --kafka broker
+
+
+bin\windows\kafka-topics.bat --create --topic my_topic --zookeeper localhost:2181 --replication-factor 1 --partitions 1   --create topic
+
+
+bin\windows\kafka-topics.bat --list --zookeeper localhost:2181  --list topics
+
+
+bin\windows\kafka-console-producer.bat --broker-list localhost:9092 --topic my_topic   --producer
+
+bin\windows\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic my_topic --from-beginning   --consumer
+
+kafka-consumer-groups.sh --broker-list localhost:9092 --consumer.config /usr/share/kafka/config/consumer-sasl-ssl.properties --topic digital-engagement --from-beginning 
+##########################################################################################################	 
+---elasticsearch---  
+http://localhost:9200/_aliases?pretty=true
+http://localhost:9200/12-07-2020_bzmxya/_search
+http://localhost:8084/	 
+  
+curl 'http://localhost:9200/_cluster/settings
+
+{"persistent":{},"transient":{}}[root@transcript-elasticsearch-0 /]# curl https://localhost:9200/10-2020_200/_search --insecure
+{"took":6,"timed_out":false,"_shards":{"total":1,"successful":1,"skipped":0,"failed":0},"hits":{"total":{"value":1,"relation":"eq"},"max_score":1.0,"hits":[{"_index":"10-2020_200","_type":"transcript","_id":"2","_score":1.0,"_routing":"10-2020_200","_source":{"dialogId":"2","accountId":"100","transcriptId":"31dab518-bfab-4ced-99a4-c546b792696b","engagementId":"3","customerIdentifiers":[{"identifierType":"emails","identifierValue":["CustomerEmail1","CustomerEmail2"]}],"channelType":"SMS","createdOn":"2020-10-28T14:32:04.637Z","lastUpdatedOn":"2020-10-28T14:32:04.637Z","tags":[]}}]}}
+
+curl -XPUT 'https://localhost:9200/_cluster/settings' -H 'Content-Type: application/json' -d '{ "transient" : {"script.max_compilations_rate":"75000/1m"}} --insecure
+
+curl -XPUT 'https://localhost:9200/_cluster/settings' -H 'Content-Type: application/json' -d '{ "transient" : {"script.max_compilations_rate":"75000/1m"}}' --insecure
+
+curl -XGET 'http://localhost:9200/_nodes/stats?pretty' |less
+
+curl https://localhost:9200/_cluster/settings?include_defaults=true --insecure
+
+
+data:
+  elasticsearch.yml: "cluster.name: \"flex-es-cluster\"\nnetwork.host: 0.0.0.0\nscript.max_compilations_rate:
+    75000/1m\ncluster.initial_master_nodes:\n- elasticsearch-0\n- elasticsearch-1\n-
+    elasticsearch-2\nxpack.security.enabled: false\nxpack.security.transport.ssl.enabled:
+    false\nsearchguard.ssl_only: true\nsearchguard.ssl.transport.pemcert_filepath:
+    /usr/share/elasticsearch/config/certs/id/cert-chain.pem\nsearchguard.ssl.transport.pemkey_filepath:
+    /usr/share/elasticsearch/config/cert-chain_key-new.pem\nsearchguard.ssl.transport.pemtrustedcas_filepath:
+    /usr/share/elasticsearch/config/certs/ca/root-cert.pem\nsearchguard.ssl.transport.enforce_hostname_verification:
+    false\nsearchguard.ssl.http.enabled: true \nsearchguard.ssl.http.pemcert_filepath:
+    /usr/share/elasticsearch/config/certs/id/cert-chain.pem\nsearchguard.ssl.http.pemkey_filepath:
+    /usr/share/elasticsearch/config/cert-chain_key-new.pem\nsearchguard.ssl.http.pemtrustedcas_filepath:
+    /usr/share/elasticsearch/config/certs/ca/root-cert.pem\n#searchguard.enable_snapshot_restore_privilege:
+    true\n#searchguard.check_snapshot_restore_write_privileges: true\n#searchguard.restapi.roles_enabled:
+    [\"SGS_ALL_ACCESS\"]\n#searchguard.allow_default_init_sgindex: true\nsearchguard.ssl.http.clientauth_mode:
+    NONE\n"
+	
+	
+
+
+ elasticsearch.yml: "cluster.name: \"flex-es-cluster\"\nnetwork.host: 0.0.0.0\ncluster.initial_master_nodes:\n-
+    elasticsearch-0\n- elasticsearch-1\n- elasticsearch-2\nsearchguard.ssl_only: true\nsearchguard.ssl.transport.pemcert_filepath:
+    /usr/share/elasticsearch/config/certs/id/cert-chain.pem\nsearchguard.ssl.transport.pemkey_filepath:
+    /usr/share/elasticsearch/config/cert-chain_key-new.pem\nsearchguard.ssl.transport.pemtrustedcas_filepath:
+    /usr/share/elasticsearch/config/certs/ca/root-cert.pem\nsearchguard.ssl.transport.enforce_hostname_verification:
+    false\nsearchguard.ssl.http.enabled: true \nsearchguard.ssl.http.pemcert_filepath:
+    /usr/share/elasticsearch/config/certs/id/cert-chain.pem\nsearchguard.ssl.http.pemkey_filepath:
+    /usr/share/elasticsearch/config/cert-chain_key-new.pem\nsearchguard.ssl.http.pemtrustedcas_filepath:
+    /usr/share/elasticsearch/config/certs/ca/root-cert.pem\nsearchguard.ssl.http.clientauth_mode:
+    NONE\nscript.max_compilations_rate: 75000/1m\n"
+
+
+
+
+esConfig:
+   elasticsearch.yml: |
+      cluster.name: "flex-es-cluster"
+      network.host: 0.0.0.0
+      cluster.initial_master_nodes:
+      - elasticsearch-0
+      - elasticsearch-1
+      - elasticsearch-2
+      searchguard.disabled: true
+
+sgConfig: 
+   elasticsearch.yml: |
+      cluster.name: "flex-es-cluster"
+      network.host: 0.0.0.0
+      cluster.initial_master_nodes:
+      - elasticsearch-0
+      - elasticsearch-1
+      - elasticsearch-2
+      searchguard.ssl_only: true
+      searchguard.ssl.transport.pemcert_filepath: /usr/share/elasticsearch/config/certs/id/cert-chain.pem
+      searchguard.ssl.transport.pemkey_filepath: /usr/share/elasticsearch/config/cert-chain_key-new.pem
+      searchguard.ssl.transport.pemtrustedcas_filepath: /usr/share/elasticsearch/config/certs/ca/root-cert.pem
+      searchguard.ssl.transport.enforce_hostname_verification: false
+      searchguard.ssl.http.enabled: true 
+      searchguard.ssl.http.pemcert_filepath: /usr/share/elasticsearch/config/certs/id/cert-chain.pem
+      searchguard.ssl.http.pemkey_filepath: /usr/share/elasticsearch/config/cert-chain_key-new.pem
+      searchguard.ssl.http.pemtrustedcas_filepath: /usr/share/elasticsearch/config/certs/ca/root-cert.pem
+      #searchguard.enable_snapshot_restore_privilege: true
+      #searchguard.check_snapshot_restore_write_privileges: true
+      #searchguard.restapi.roles_enabled: ["SGS_ALL_ACCESS"]
+      #searchguard.allow_default_init_sgindex: true
+      searchguard.ssl.http.clientauth_mode: NONE
+	  script.max_compilations_rate: 75000/1m
+	  
+	  
+	  
+	  
+  filebeatConfig:
+    filebeat.yml: |
+      script.max_compilations_rate: 75000/1m
+##########################################################################################################	   
+Hotmail.com (Outlook.com) IMAP Server     imap-mail.outlook.com
+IMAP port    993
+IMAP security    SSL / TLS
+IMAP username    Your full email address
+IMAP password    Your Hotmail.com password
+ 
+Hotmail.com (Outlook.com) SMTP Server     smtp-mail.outlook.com
+SMTP port    587
+SMTP security    STARTTLS
+SMTP username    Your full email address
+SMTP password    Your Hotmail.com password
+-------------------------------------------
+https://eus2-02.integration.ws-nonprod.avayacloud.com/services/ApplicationCenter/?tenantId=MIJJSZ&tenantUrl=dev-7.ixcc-sandbox.avayacloud.com/auth/realms/MIJJSZ
+
+workspace:admin@nourhan.org : Avaya@1234
+admain: admin@nourhan.org   Avaya@1234
+Cou$&terSig03*21
+
+
+---------------------------------
+to enable trace for you service in datadog change traceEnabled value to true in values.helm
+ 
+datadog:
+servicename: msg-email-templates
+traceEnabled: false
+ 
+ 
+to change log level from info to debug or any level please run thin curl from inside pod
+ 
+curl -X "POST" "http://localhost:9090/actuator/loggers/ROOT" -H "Content-Type: application/json; charset=utf-8" -d $'{ "configuredLevel": "DEBUG" }'
+
+
+imap:----->
+curl "https://localhost:80/actuator/loggers/ROOT"
+
+curl -X "POST" "https://localhost:80/actuator/loggers/org.springframework.cloud.kubernetes.leader" -H "Content-Type: application/json; charset=utf-8" -d $'{ "configuredLevel": "DEBUG" }' --insecure
+
+curl -X "POST" "https://localhost:80/actuator/loggers/io.fabric8.kubernetes.client" -H "Content-Type: application/json; charset=utf-8" -d $'{ "configuredLevel": "DEBUG" }' --insecure
+
+
+
+
+Personal access tokens (classic):
+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
