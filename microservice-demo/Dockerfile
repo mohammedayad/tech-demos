@@ -17,4 +17,5 @@ ADD target/$JAVA_APP_JAR /deployments/
 # kubectl apply -f deployment.yaml
 
 #we can use fabric8 plugin instead of using dockerfile to create the image
-#mvn io.fabric8:fabric8-maven-plugin:3.3.5:setup
+#mvn io.fabric8:fabric8-maven-plugin:3.3.5:setup --add the plugin in pom.xml
+#mvn fabric8:deploy  --run the plugin to create image, kubernetes deployment and service for the app
