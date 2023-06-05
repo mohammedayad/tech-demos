@@ -13,6 +13,7 @@
     <description>Demo project for Spring Boot</description>
     <properties>
         <java.version>11</java.version>
+        <netflix.feign.version>8.18.0</netflix.feign.version>
     </properties>
     <dependencies>
         <dependency>
@@ -36,6 +37,26 @@
             <artifactId>spring-boot-starter-test</artifactId>
             <scope>test</scope>
         </dependency>
+
+        <!-- Add Apache HTTP Client (for chaining invocation) -->
+        <!-- https://mvnrepository.com/artifact/org.apache.httpcomponents/httpclient -->
+<!--        <dependency>-->
+<!--            <groupId>org.apache.httpcomponents</groupId>-->
+<!--            <artifactId>httpclient</artifactId>-->
+<!--            <version>4.5.14</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-core</artifactId>
+            <version>${netflix.feign.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.netflix.feign</groupId>
+            <artifactId>feign-hystrix</artifactId>
+            <version>${netflix.feign.version}</version>
+        </dependency>
+
     </dependencies>
 
     <build>
