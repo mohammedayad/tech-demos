@@ -24,6 +24,12 @@ docker container stop $(docker container ls -aq)
 
 --remove all images
 docker container rm $(docker container ls -aq)
+----------
+jenkins
+-----------
+docker pull jenkins/jenkins:alpine-jdk11
+
+docker run -p 8080:8080 -p 50000:50000 --restart=on-failure jenkins/jenkins:alpine-jdk11
 
 ---------------------------------------------
 
