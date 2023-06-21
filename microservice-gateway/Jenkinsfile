@@ -9,18 +9,19 @@ pipeline {
             steps {
                     echo 'Checking out git repository'
                     checkout scm
+                    //git branch: 'main', url: 'https://github.com/myuser/myrepo.git'
                 }
             }
         stage('Build') {
             steps {
                 echo 'Building project'
-                sh 'mvn -B -DskipTests clean package'
+                sh 'cd microservice-gateway && mvn -B -DskipTests clean package'
             }
         }
         stage('Test') {
             steps {
                 echo 'run unit tests'
-                sh 'mvn test'
+                sh 'cd microservice-gateway && mvn test'
             }
         }
     }
