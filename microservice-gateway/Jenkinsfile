@@ -5,6 +5,12 @@ pipeline {
         }
 
     stages {
+        stage ('SCM checkout') {
+            steps {
+                    echo 'Checking out git repository'
+                    checkout scm
+                }
+            }
         stage('Build') {
             steps {
                 echo 'Building project'
