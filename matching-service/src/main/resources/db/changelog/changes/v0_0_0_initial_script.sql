@@ -1,5 +1,5 @@
 --liquibase formatted sql
---changeset ayad:2
+--changeset ayad:1
 /*
      prefixes_matching Table Creation
  */

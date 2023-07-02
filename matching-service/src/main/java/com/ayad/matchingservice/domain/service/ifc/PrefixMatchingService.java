@@ -13,4 +13,15 @@ public interface PrefixMatchingService {
      * @return a list of predefined prefixes
      */
     List<String> getAllPrefixes();
+    /**
+     * Builds the Trie by inserting each prefix from the provided list of prefixes.
+     */
+    void buildTrie(List<String> prefixes);
+
+    /**
+     * Retrieves the longest prefix match for the given input string.
+     *
+     * @return a string that contain the longest prefix
+     */
+    String findLongestPrefix(String input);
 }
