@@ -1,6 +1,11 @@
 # matching-service
 The Prefix Matching Service is a REST API that allows clients to search for the longest prefix that matches a given input string from a list of predefined prefixes. 
-The service is implemented in Java using the Spring Boot framework (H2 in-memory Database to save Prefixes and Trie Algorithm).
+The service is implemented in Java using the Spring Boot framework (H2 in-memory Database to save Prefixes and load the prefixes from sample_prefixes.csv, Liquibase for migration and Trie Algorithm).
+
+# Exception Handling
+The Prefix Matching Service uses exception handling to handle errors that occur during the processing of requests. If an error occurs, the service will return an appropriate HTTP status code and an error message in the response body.
+* MatchingException: Thrown when the input string is invalid or empty or there is not a prefix match the input string. This exception results in an HTTP 400 (Bad Request) response and return error message "No Prefix Matching has been found".
+* Exception: Thrown when any other unhandled exception occurs during the processing of requests. This exception results in an HTTP 500 (Internal Server Error) response, and a generic error message returned in the response body.
 
 # Getting Started
 # Prerequisites
