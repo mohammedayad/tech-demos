@@ -11,7 +11,7 @@ The Prefix Matching Service uses exception handling to handle errors that occur 
 # Prerequisites
 To run the matching-service, you need to have the following software installed on your system:
 
-* Java 8 or later
+* Java 11
 * Maven
 
 # Installing
@@ -52,6 +52,12 @@ On macOS or Linux:
     
 # Running
     mvn spring-boot:run
+    
+# another way to run it using [Docker](https://hub.docker.com/repository/docker/mohammedayad/matching-service/general)
+    Pull the Docker image from Docker Hub: docker pull mohammedayad/matching-service:v1
+    Run the Docker container: docker run -p 8081:8081 mohammedayad/matching-service:v1
+
+   
 
 # The service will be available at:
     http://localhost:8081/api/prefix-matching/v1
@@ -69,6 +75,7 @@ The Prefix Matching Service provides the following REST API endpoints:
 * H2 Database
 * Junit
 * Mockito
+* Docker
 
 # Note
 * I have implemented another approach rather than using Trie Algorithm,

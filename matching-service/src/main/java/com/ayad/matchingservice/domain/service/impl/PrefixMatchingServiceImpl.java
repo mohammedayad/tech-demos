@@ -79,12 +79,17 @@ public class PrefixMatchingServiceImpl implements PrefixMatchingService {
                 log.debug("tree nodes {} ", node);
                 log.debug("input {} char {} length of his children is {} children are {} ", input, c, node.getChildren().size(), node.getChildren());
                 longestPrefix += c;
-
+/*
                 if (node.isEndOfPrefix() && node.getChildren().isEmpty()) {// I have reached to the end of the prefix, no other children exist and all the chars were part of the input string
                     return longestPrefix;
                 }
+
+ */
             } else {// no match for the input next character and it is not the leaf of the prefix
-                log.debug("longestPrefix for {} is {} and the node is {} with children length {}", input, longestPrefix, node, node.getChildren().size());
+                log.debug("input {} latest Match char {} longestPrefix {} and the node is {} with children length {}", input,c, longestPrefix, node, node.getChildren().size());
+                if (node.isEndOfPrefix()) {// I have reached to the end of the  matched prefix, no other children exist and all the chars were part of the input string
+                    return longestPrefix;
+                }
                 throw new MatchingException(HttpStatus.BAD_REQUEST, MatchingUtility.CONSTRAINT_VIOLATIONS,
                         MatchingUtility.NO_PREFIX_MATCHING_FOUND);
             }
