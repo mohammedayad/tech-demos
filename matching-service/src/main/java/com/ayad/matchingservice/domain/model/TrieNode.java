@@ -4,6 +4,7 @@ package com.ayad.matchingservice.domain.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -14,6 +15,7 @@ import java.util.Map;
  */
 @Getter
 @Setter
+@ToString
 public class TrieNode {
     private char value;  // The character value of the node
     private boolean isEndOfPrefix; //  boolean flag indicating if the node represents the end of a prefix
@@ -25,11 +27,4 @@ public class TrieNode {
         this.children = new HashMap<>();
     }
 
-    @Override
-    public String toString() {
-        return
-                "isEndOfPrefix=" + isEndOfPrefix +
-                        ", children=" + children +
-                        '}';
-    }
 }

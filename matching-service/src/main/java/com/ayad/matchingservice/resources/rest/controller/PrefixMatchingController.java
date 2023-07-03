@@ -48,4 +48,17 @@ public class PrefixMatchingController {
         log.debug("find the longest prefix for {}",input);
         return new ResponseEntity<>(prefixMatchingService.findLongestPrefix(input), HttpStatus.OK);
     }
+
+    /**
+     * Retrieves the longest prefix from a list of prefixes that matches the given input string.
+     *
+     * @param input the input string to search for the longest prefix match
+     * @return a {@link ResponseEntity} object containing the longest prefix that matches the input string
+     * @throws MatchingException if no prefix matching the input string is found
+     */
+    @GetMapping("/longestPrefix/DB/{input}")
+    public ResponseEntity<String> findLongestPrefixUsingDB(@PathVariable String input) {
+        log.debug("find the longest prefix for {}",input);
+        return new ResponseEntity<>(prefixMatchingService.findLongestPrefixUsingDB(input), HttpStatus.OK);
+    }
 }

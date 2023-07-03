@@ -6,9 +6,6 @@ package com.ayad.matchingservice.resources.rest.controller;
 
 import com.ayad.matchingservice.common.exception.MatchingException;
 import com.ayad.matchingservice.domain.service.ifc.PrefixMatchingService;
-import lombok.extern.slf4j.Slf4j;
-import org.hamcrest.Matcher;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;

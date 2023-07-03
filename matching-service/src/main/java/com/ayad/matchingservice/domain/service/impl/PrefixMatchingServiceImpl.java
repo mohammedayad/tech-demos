@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 /**
@@ -63,8 +64,9 @@ public class PrefixMatchingServiceImpl implements PrefixMatchingService {
      * Traverses the Trie character by character, comparing each character with the child nodes.
      * If a match is found, it continues traversing.
      * If there is no match, it returns the longest prefix found so far.
-     *
+     *@param input the input string to match against the prefixes of the {@link PrefixEntity} instances.
      * @return a string that contain the longest prefix
+     * @throws MatchingException if no matching prefixes are found.
      */
     public String findLongestPrefix(String input) {
         log.debug("root node {}", root);
@@ -74,10 +76,11 @@ public class PrefixMatchingServiceImpl implements PrefixMatchingService {
         for (char c : input.toCharArray()) {
             if (node.getChildren().containsKey(c)) {
                 node = node.getChildren().get(c);
+                log.debug("tree nodes {} ", node);
                 log.debug("input {} char {} length of his children is {} children are {} ", input, c, node.getChildren().size(), node.getChildren());
                 longestPrefix += c;
 
-                if (node.isEndOfPrefix()) {// I have reached to the end of the prefix and all the chars were part of the input string
+                if (node.isEndOfPrefix() && node.getChildren().isEmpty()) {// I have reached to the end of the prefix, no other children exist and all the chars were part of the input string
                     return longestPrefix;
                 }
             } else {// no match for the input next character and it is not the leaf of the prefix
@@ -87,6 +90,26 @@ public class PrefixMatchingServiceImpl implements PrefixMatchingService {
             }
         }
         return longestPrefix;
+    }
+
+    /**
+     * Finds the longest prefix of the input string that matches a prefix of any {@link PrefixEntity} instance in the database.
+     *
+     * @param input the input string to match against the prefixes of the {@link PrefixEntity} instances.
+     * @return the prefix of the {@link PrefixEntity} instance with the longest matching prefix, or throws a
+     * @throws MatchingException if no matching prefixes are found.
+     */
+    public String findLongestPrefixUsingDB(String input) {
+        Optional<List<PrefixEntity>> prefixEntities = prefixRepository.findByMatchingPrefix(input);
+        if (prefixEntities.isPresent() && !prefixEntities.get().isEmpty()) {
+            List<PrefixEntity> matchedPrefixEntities = prefixEntities.get();
+            // process the prefixEntities list
+            log.debug("the list of matched prefixes are {}", matchedPrefixEntities);
+            return matchedPrefixEntities.get(0).getPrefix();
+        } else {
+            throw new MatchingException(HttpStatus.BAD_REQUEST, MatchingUtility.CONSTRAINT_VIOLATIONS,
+                    MatchingUtility.NO_PREFIX_MATCHING_FOUND);
+        }
     }
 
 }

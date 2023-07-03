@@ -3,6 +3,7 @@ package com.ayad.matchingservice.domain.model;
 
 import lombok.Getter;
 import lombok.Setter;
+import lombok.ToString;
 
 import javax.persistence.*;
 
@@ -14,6 +15,7 @@ import javax.persistence.*;
 @Table(name = "prefixes_matching")
 @Getter
 @Setter
+@ToString
 public class PrefixEntity {
 
     @Id

@@ -24,4 +24,6 @@ public interface PrefixMatchingService {
      * @return a string that contain the longest prefix
      */
     String findLongestPrefix(String input);
+
+    String findLongestPrefixUsingDB(String input);
 }

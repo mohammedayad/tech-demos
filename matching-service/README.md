@@ -70,5 +70,16 @@ The Prefix Matching Service provides the following REST API endpoints:
 * Junit
 * Mockito
 
+# Note
+* I have implemented another approach rather than using Trie Algorithm,
+   I used Database Directly to match the possible matching using Database query and will retrieve the result ordered by the largest length, then I can retrieve the first match.
+   but this approach will depend on the DB performance itself and will need more tuning in large Prefixes Dataset.
+   I was trying to get a simple way to avoid loading the large Data in memory (we can have other solutions for the caching) to use the Trie Algorithm as I was loading the prefixes in the application startup.
+   so you can check the other approach too.
+# using DB approach
+# API Reference
+The Prefix Matching Service by using the DB provides the following REST API endpoints:
+* GET /api/prefix-matching/v1/longestPrefix/DB/{input}: Retrieves the longest prefix from a list of prefixes that matches the given input string.
+
 # Authors
 * Mohammed Ayad
