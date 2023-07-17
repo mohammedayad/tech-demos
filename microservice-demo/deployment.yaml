@@ -18,11 +18,11 @@ spec:
         app: microservice-demo
     spec:
       containers:
-      - image: app/myspring:v1
-        name: myspring
-        resources: {}
+        - image: app/myspring:v1
+          name: myspring
+          resources: {}
 status: {}
---- 
+---
 apiVersion: v1
 kind: Service
 metadata:
@@ -32,10 +32,10 @@ metadata:
   name: microservice-demo
 spec:
   ports:
-  - name: 8080-8080
-    port: 8080
-    protocol: TCP
-    targetPort: 8080
+    - name: 8080-8080
+      port: 8080
+      protocol: TCP
+      targetPort: 8080
   selector:
     app: microservice-demo
   type: ClusterIP

@@ -18,9 +18,36 @@ public class TestController {
     @GetMapping
     public ResponseEntity<String> testHttpGet() {
         log.info("testHttpGet");
-        String hostName=System.getenv().getOrDefault("HOSTNAME","unknown");
-        return new ResponseEntity<>("Hello from "+ hostName + new Date(), HttpStatus.OK);
+        String hostName = System.getenv().getOrDefault("HOSTNAME", "unknown");
+        return new ResponseEntity<>("Hello from " + hostName + new Date(), HttpStatus.OK);
+
+
+    }
+
+    public static void main(String[] args) {
+        System.out.println(mask("123456789"));
+    }
+
+    private static String mask(String creditCard) {
+        System.out.println("creditCard len: " + creditCard.length());
+        boolean isNumeric = creditCard.matches("-?\\d+(\\.\\d+)?");
+
+        if (!isNumeric) {
+            throw new IllegalArgumentException("");
+        }
+        if (creditCard.length() < 6) return creditCard;
+        String maskedCreditCard = "";
+        char characterArr[] = creditCard.toCharArray();
+        for (int index = 0; index < creditCard.length(); index++) {
+            if (index == 0 || (index >= creditCard.length() - 4 && index < creditCard.length())) {
+                maskedCreditCard = maskedCreditCard + creditCard.charAt(index);
+                continue;
+            }
+            maskedCreditCard = maskedCreditCard + '*';
+        }
+        return maskedCreditCard;
 
 
     }
 }
+
