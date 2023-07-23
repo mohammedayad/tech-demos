@@ -58,6 +58,9 @@ public class PrefixMatchingControllerIntegrationTest {
         ResponseEntity<String> responseEntity2 = restTemplate.getForEntity("/api/prefix-matching/v1/longestPrefix/KAWeqDO", String.class);
         assertThat(responseEntity2.getStatusCode(), is(HttpStatus.OK));
         assertThat(responseEntity2.getBody(), is("KAWeqDO"));
+        ResponseEntity<String> responseEntity3 = restTemplate.getForEntity("/api/prefix-matching/v1/longestPrefix/abce", String.class);
+        assertThat(responseEntity3.getStatusCode(), is(HttpStatus.OK));
+        assertThat(responseEntity3.getBody(), is("ab"));
     }
 
 
@@ -69,5 +72,8 @@ public class PrefixMatchingControllerIntegrationTest {
         ResponseEntity<String> responseEntity = restTemplate.getForEntity("/api/prefix-matching/v1/longestPrefix/EEXC8ffffff", String.class);
         assertThat(responseEntity.getStatusCode(), is(HttpStatus.BAD_REQUEST));
         assertThat(responseEntity.getBody(), is("No Prefix Matching has been found"));
+        ResponseEntity<String> responseEntity1 = restTemplate.getForEntity("/api/prefix-matching/v1/longestPrefix/a", String.class);
+        assertThat(responseEntity1.getStatusCode(), is(HttpStatus.BAD_REQUEST));
+        assertThat(responseEntity1.getBody(), is("No Prefix Matching has been found"));
     }
 }
