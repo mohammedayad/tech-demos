@@ -1,7 +1,11 @@
 package com.ayad.stockservice.domain.service.ifc;
 
+import com.ayad.stockservice.common.exception.StockNotFoundException;
+import com.ayad.stockservice.domain.model.dtos.StockDto;
 import com.ayad.stockservice.domain.model.entities.Stock;
 import org.springframework.data.domain.Page;
+
+import java.math.BigDecimal;
 
 public interface StockService {
 
@@ -14,7 +18,7 @@ public interface StockService {
      * @throws IllegalArgumentException If the page number is less than zero.
      * @throws IllegalArgumentException If the size is less than one.
      */
-    Page<Stock> getAllStocks(int page, int size);
+    Page<StockDto> getAllStocks(int page, int size);
 
 
     /**
@@ -25,7 +29,13 @@ public interface StockService {
      *              - current_price (Decimal): The current price of the stock (required, maximum precision: 10, scale: 2).
      * @return The created stock record. The stock object will include the generated ID if the creation is successful.
      */
-    Stock createStock(Stock stock);
+    StockDto createStock(StockDto stock);
 
-    Stock getStockById(long id);
+    StockDto getStockById(long id) throws StockNotFoundException;
+
+    StockDto updateStockPrice(long id, BigDecimal newPrice) throws StockNotFoundException;
+
+    void deleteStockById(long id) throws StockNotFoundException;
+
+
 }
