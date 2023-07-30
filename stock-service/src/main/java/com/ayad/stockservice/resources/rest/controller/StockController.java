@@ -3,8 +3,9 @@ package com.ayad.stockservice.resources.rest.controller;
 
 import com.ayad.stockservice.domain.model.dtos.StockDto;
 import com.ayad.stockservice.domain.model.dtos.StockPriceDto;
-import com.ayad.stockservice.domain.model.entities.Stock;
 import com.ayad.stockservice.domain.service.ifc.StockService;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
@@ -15,6 +16,7 @@ import javax.validation.Valid;
 
 @RestController
 @RequestMapping("/stock-service/v1/api")
+@Tag(name = "Stocks APIs", description = "API for managing stocks")
 @Slf4j
 public class StockController {
     private final StockService stockService;
@@ -34,6 +36,7 @@ public class StockController {
      * @throws IllegalArgumentException If the size is less than one.
      */
     @GetMapping("/stocks")
+    @Operation(summary = "Get all stocks", description = "Retrieves a paginated list of all stocks.")
     public ResponseEntity<Page<StockDto>> getAllStocks(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         log.info("getAllStocks page no {} and the total size is {}", page, size);
         return new ResponseEntity<>(stockService.getAllStocks(page, size), HttpStatus.OK);
@@ -52,6 +55,7 @@ public class StockController {
      * If there is an internal server error during the stock creation process, it will respond with HTTP status code 500 (Internal Server Error).
      */
     @PostMapping("/stocks")
+    @Operation(summary = "Create a new stock record", description = "Create a new stock record in the database.")
     public ResponseEntity<StockDto> createStock(@Valid @RequestBody StockDto stock) {
         log.info("add new Stock {}", stock);
         return new ResponseEntity<>(stockService.createStock(stock), HttpStatus.CREATED);
@@ -59,12 +63,14 @@ public class StockController {
     }
 
     @GetMapping("/stocks/{id}")
+    @Operation(summary = "Get a single stock", description = "Retrieves a single stock by ID.")
     public ResponseEntity<StockDto> getSingleStock(@PathVariable long id) {
         log.info("retrieve Stock with ID {}", id);
         return new ResponseEntity<>(stockService.getStockById(id), HttpStatus.OK);
     }
 
     @PatchMapping("/stocks/{id}")
+    @Operation(summary = "Update stock price", description = "Update the price of a stock by ID.")
     public ResponseEntity<StockDto> updateStockPrice(@PathVariable long id, @Valid @RequestBody StockPriceDto newPrice) {
         log.info("update Stock price with ID {}", id);
         return new ResponseEntity<>(stockService.updateStockPrice(id, newPrice.getCurrentPrice()), HttpStatus.OK);
@@ -72,6 +78,7 @@ public class StockController {
     }
 
     @DeleteMapping("/stocks/{id}")
+    @Operation(summary = "Delete a stock", description = "Deletes a single stock by ID.")
     public ResponseEntity<Void> deleteStock(@PathVariable long id) {
         log.info("Delete stock with ID {}", id);
         stockService.deleteStockById(id);

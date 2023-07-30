@@ -20,5 +20,6 @@ public class StockDto {
     @NotNull(message = "current Price cannot be blank")
     @DecimalMin("0.01")
     private BigDecimal currentPrice;
+    @JsonProperty(access = JsonProperty.Access.READ_ONLY)
     private Instant lastUpdate;
 }
