@@ -9,15 +9,6 @@ import java.math.BigDecimal;
 
 public interface StockService {
 
-    /**
-     * Retrieves a paginated list of all stocks.
-     *
-     * @param page The page number (zero-based) of the results to retrieve.
-     * @param size The number of stocks per page.
-     * @return A {@link Page} containing the list of stocks for the specified page and size.
-     * @throws IllegalArgumentException If the page number is less than zero.
-     * @throws IllegalArgumentException If the size is less than one.
-     */
     Page<StockDto> getAllStocks(int page, int size);
 
 

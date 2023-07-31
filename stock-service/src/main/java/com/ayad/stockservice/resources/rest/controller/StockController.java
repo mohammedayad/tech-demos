@@ -1,10 +1,15 @@
 package com.ayad.stockservice.resources.rest.controller;
 
 
+import com.ayad.stockservice.domain.model.dtos.ProblemDto;
 import com.ayad.stockservice.domain.model.dtos.StockDto;
 import com.ayad.stockservice.domain.model.dtos.StockPriceDto;
 import com.ayad.stockservice.domain.service.ifc.StockService;
 import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.Schema;
+import io.swagger.v3.oas.annotations.responses.ApiResponse;
+import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.data.domain.Page;
@@ -26,17 +31,17 @@ public class StockController {
     }
 
 
-    /**
-     * Retrieves a paginated list of all stocks.
-     *
-     * @param page The page number (zero-based) of the results to retrieve.
-     * @param size The number of stocks per page.
-     * @return A {@link Page} containing the list of stocks for the specified page and size.
-     * @throws IllegalArgumentException If the page number is less than zero.
-     * @throws IllegalArgumentException If the size is less than one.
-     */
     @GetMapping("/stocks")
     @Operation(summary = "Get all stocks", description = "Retrieves a paginated list of all stocks.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation. Returns a page of stocks"),
+            @ApiResponse(responseCode = "400", description = "Invalid input parameters",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class)))
+    })
     public ResponseEntity<Page<StockDto>> getAllStocks(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size) {
         log.info("getAllStocks page no {} and the total size is {}", page, size);
         return new ResponseEntity<>(stockService.getAllStocks(page, size), HttpStatus.OK);
@@ -44,18 +49,18 @@ public class StockController {
     }
 
 
-    /**
-     * Create a new stock record in the database.
-     *
-     * @param stock The stock object to be created. It should contain the following properties:
-     *              - name (String): The name of the stock (required, maximum length: 50 characters).
-     *              - current_price (Decimal): The current price of the stock (required, maximum precision: 10, scale: 2).
-     * @return A ResponseEntity containing the created stock record along with the HTTP status code 201 (Created) if successful.
-     * If the request body is invalid, it will respond with HTTP status code 400 (Bad Request).
-     * If there is an internal server error during the stock creation process, it will respond with HTTP status code 500 (Internal Server Error).
-     */
+
     @PostMapping("/stocks")
     @Operation(summary = "Create a new stock record", description = "Create a new stock record in the database.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "201", description = "Successful operation. Returns the created stock record"),
+            @ApiResponse(responseCode = "400", description = "Invalid request body",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class)))
+    })
     public ResponseEntity<StockDto> createStock(@Valid @RequestBody StockDto stock) {
         log.info("add new Stock {}", stock);
         return new ResponseEntity<>(stockService.createStock(stock), HttpStatus.CREATED);
@@ -64,6 +69,15 @@ public class StockController {
 
     @GetMapping("/stocks/{id}")
     @Operation(summary = "Get a single stock", description = "Retrieves a single stock by ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation. Returns the requested stock record"),
+            @ApiResponse(responseCode = "404", description = "Stock not found",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class)))
+    })
     public ResponseEntity<StockDto> getSingleStock(@PathVariable long id) {
         log.info("retrieve Stock with ID {}", id);
         return new ResponseEntity<>(stockService.getStockById(id), HttpStatus.OK);
@@ -71,6 +85,18 @@ public class StockController {
 
     @PatchMapping("/stocks/{id}")
     @Operation(summary = "Update stock price", description = "Update the price of a stock by ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Successful operation. Returns the updated stock record"),
+            @ApiResponse(responseCode = "400", description = "Invalid request body",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class))),
+            @ApiResponse(responseCode = "404", description = "Stock not found",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class)))
+    })
     public ResponseEntity<StockDto> updateStockPrice(@PathVariable long id, @Valid @RequestBody StockPriceDto newPrice) {
         log.info("update Stock price with ID {}", id);
         return new ResponseEntity<>(stockService.updateStockPrice(id, newPrice.getCurrentPrice()), HttpStatus.OK);
@@ -79,6 +105,15 @@ public class StockController {
 
     @DeleteMapping("/stocks/{id}")
     @Operation(summary = "Delete a stock", description = "Deletes a single stock by ID.")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Successful operation. No content returned"),
+            @ApiResponse(responseCode = "404", description = "Stock not found",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class))),
+            @ApiResponse(responseCode = "500", description = "Internal server error",
+                    content = @Content(mediaType = "application/json",
+                            schema = @Schema(implementation = ProblemDto.class)))
+    })
     public ResponseEntity<Void> deleteStock(@PathVariable long id) {
         log.info("Delete stock with ID {}", id);
         stockService.deleteStockById(id);
