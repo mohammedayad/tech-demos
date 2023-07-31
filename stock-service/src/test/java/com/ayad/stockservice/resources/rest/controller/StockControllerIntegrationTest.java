@@ -9,8 +9,7 @@ import org.junit.jupiter.api.extension.ExtendWith;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
+import org.springframework.http.*;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
 import java.math.BigDecimal;
@@ -84,6 +83,26 @@ public class StockControllerIntegrationTest {
         StringBuilder url = new StringBuilder("/stock-service/v1/api/stocks/");
         url.append(stockId);
         ResponseEntity<ProblemDto> response = restTemplate.getForEntity(url.toString(), ProblemDto.class);
+        assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
+        assertEquals(response.getBody().getStatus(), HttpStatus.NOT_FOUND.value());
+        assertEquals(response.getBody().getType(), HttpStatus.NOT_FOUND.getReasonPhrase());
+        assertEquals(response.getBody().getTitle(), StockUtility.STOCK_NOT_FOUND_ERROR_TITLE);
+    }
+
+    @Test
+    public void testDeleteStock_StockNotFound() {
+        long nonExistentStockId = 9999L; // Assuming this ID doesn't exist in the database
+        HttpHeaders headers = new HttpHeaders();
+        HttpEntity<Void> requestEntity = new HttpEntity<>(headers);
+        ResponseEntity<ProblemDto> response = restTemplate.exchange(
+                "/stock-service/v1/api/stocks/{id}",
+                HttpMethod.DELETE,
+                requestEntity,
+                ProblemDto.class,
+                nonExistentStockId
+        );
+
+        // Assert that the response status is 404 (Not Found)
         assertEquals(HttpStatus.NOT_FOUND, response.getStatusCode());
         assertEquals(response.getBody().getStatus(), HttpStatus.NOT_FOUND.value());
         assertEquals(response.getBody().getType(), HttpStatus.NOT_FOUND.getReasonPhrase());
