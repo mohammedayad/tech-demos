@@ -51,7 +51,7 @@ On macOS or Linux:
 
 The application includes both unit tests and integration tests to ensure that it works correctly.
     
-# another way to run it using [Docker](https://hub.docker.com/repository/docker/mohammedayad/matching-service/general)
+# Another way to run it using [Docker](https://hub.docker.com/repository/docker/mohammedayad/matching-service/general)
     Pull the Docker image from Docker Hub: docker pull mohammedayad/stock-service:v1
     Run the Docker container: docker run -p 8081:8081 mohammedayad/stock-service:v1
 
