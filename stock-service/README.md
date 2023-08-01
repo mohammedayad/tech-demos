@@ -1,4 +1,4 @@
-# Stock-service
+# stock-service
 The Stock Service is a REST CRUD API that allows clients to manage stocks, service is implemented in Java using the Spring Boot framework (H2 in-memory Database, Liquibase for migration and OpenAPI 3).
 
 # Getting Started
