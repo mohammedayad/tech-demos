@@ -81,7 +81,7 @@ The Stock Service uses exception handling to handle errors that occur during the
 * Java 11 - Programming language
 * Spring Boot - Web framework
 * Maven - Build tool
-* OpenAPI 3 (API First)
+* OpenAPI 3 (Code First)
 * Liquibase
 * H2 Database
 * Junit
