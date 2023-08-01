@@ -2,7 +2,6 @@ package com.ayad.stockservice.domain.service.ifc;
 
 import com.ayad.stockservice.common.exception.StockNotFoundException;
 import com.ayad.stockservice.domain.model.dtos.StockDto;
-import com.ayad.stockservice.domain.model.entities.Stock;
 import org.springframework.data.domain.Page;
 
 import java.math.BigDecimal;
