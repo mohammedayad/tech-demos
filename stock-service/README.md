@@ -1,12 +1,6 @@
 # Stock-service
 The Stock Service is a REST CRUD API that allows clients to manage stocks, service is implemented in Java using the Spring Boot framework (H2 in-memory Database, Liquibase for migration and OpenAPI 3).
 
-# Exception Handling
-The Stock Service uses exception handling to handle errors that occur during the processing of requests. If an error occurs, the service will return an appropriate HTTP status code and an error message in the response body Using Problem Schema.
-* StockNotFoundException: Thrown when the Stock not found. This exception results in an HTTP 404 (NOT FOUND) response.
-* IllegalArgumentException: Thrown when the request has Invalid request body. This exception results in an HTTP 400 (Bad Request) response.
-* Exception: Thrown when any other unhandled exception occurs during the processing of requests. This exception results in an HTTP 500 (Internal Server Error) response, and a generic error message returned in the response body.
-
 # Getting Started
 # Prerequisites
 To run the matching-service, you need to have the following software installed on your system:
@@ -75,6 +69,13 @@ The Stock Service provides the following REST API endpoints:
 * POST /stock-service/v1/api/stocks: Create a new stock record.
 * PATCH /stock-service/v1/api/stocks/{id}: Update the price of a stock by ID.
 * DELETE /stock-service/v1/api/stocks/{id}: Deletes a single stock by ID.
+
+# Exception Handling
+The Stock Service uses exception handling to handle errors that occur during the processing of requests. If an error occurs, the service will return an appropriate HTTP status code and an error message in the response body Using Problem Schema.
+* StockNotFoundException: Thrown when the Stock not found. This exception results in an HTTP 404 (NOT FOUND) response.
+* IllegalArgumentException: Thrown when the request has Invalid request body. This exception results in an HTTP 400 (Bad Request) response.
+* Exception: Thrown when any other unhandled exception occurs during the processing of requests. This exception results in an HTTP 500 (Internal Server Error) response, and a generic error message returned in the response body.
+
 
 # Built With
 * Java 11 - Programming language
