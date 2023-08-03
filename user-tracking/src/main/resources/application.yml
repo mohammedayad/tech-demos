@@ -1,0 +1,14 @@
+server:
+  port: 8080
+#####################################
+####### KAFKA CONFIGURATION #########
+#####################################
+kafka:
+  client-id: user-tracking-service
+  producer:
+    topics:
+      account-info-message: ${USER_TRACKING_TOPIC:user-tracking}
+  consumer:
+    topics:
+      account-info-message: ${USER_TRACKING_TOPIC:user-tracking}
+    group-id: pop3-connector-service
