@@ -1,0 +1,59 @@
+spring:
+  application:
+    name: test-service
+  jpa:
+    show-sql: true
+    database-platform: org.hibernate.dialect.SQLServer2012Dialect
+    properties:
+      hibernate:
+        jdbc:
+          batch_size: 100
+        order_inserts: true
+  datasource:
+    url: jdbc:sqlserver://powerbiacc.database.windows.net:1433;databaseName=PowerBiAcc
+    username: pq_user_consumer
+    password: you-need-to-add-password
+    driver-class-name: com.microsoft.sqlserver.jdbc.SQLServerDriver
+
+  kafka:
+    bootstrap-servers: localhost:9092
+    consumer:
+      group-id: customer-powerbi-integration-consumer-service-group
+      enable-auto-commit: false
+      max-poll-records: 100
+#      ssl:
+#        protocol: TLSv1.2
+#        key-store-location: file-base64://${payconiq.kafka-client.keystore.base64}
+#        key-store-password: ${payconiq.kafka-client.keystore.password}
+#        key-password: ${payconiq.kafka-client.keystore.password}
+#        trust-store-location: file-base64://${payconiq.kafka-client.truststore.base64}
+#        trust-store-password: ${payconiq.kafka-client.truststore.password}
+      properties:
+#        security.protocol: SSL
+        # See https://general.pages.gitlab.payconiq.io/standards/backend/kafka-producers-consumers/
+        reconnect.backoff.max.ms: 900000 # client will try to reconnect to broker during 15m
+        metadata.max.age.ms: 60000 # clients will refresh brokers metadata every 1m
+        session.timeout.ms: 10000 # The timeout used to detect consumer failures (10 seconds).
+        heartbeat.interval.ms: 3000 # The expected time interval (in milliseconds) between heartbeats to the consumer group coordinator (3 seconds).
+
+kafka:
+  topic:
+    name: event.customer-service.users.v2
+    consumer-updates: event.consumer-service.consumer-updates
+  consumer:
+    concurrency: 1
+    backoff-period: 10000
+    max-retry-attempts: 5
+
+logging:
+  level:
+    org.springframework.transaction: TRACE
+    org.springframework.orm.jpa: DEBUG
+
+data-batch-producer:
+  enabled: true
+  consumer:
+    ## temporary value for acc env for test purposes run every 15 minutes
+    cron: 0/10 * * * * ?
+server:
+  port: 8081

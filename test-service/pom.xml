@@ -1,0 +1,330 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>2.7.9</version>
+<!--        <version>3.2.5</version>-->
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+    <groupId>com.example</groupId>
+    <artifactId>test-service</artifactId>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>test-service</name>
+    <description>test-service</description>
+    <properties>
+        <java.version>17</java.version>
+        <openapi-generator.version>6.6.0</openapi-generator.version>
+        <jakarta.annotation-api.version>2.1.1</jakarta.annotation-api.version>
+        <jakarta.validation-api.version>3.0.2</jakarta.validation-api.version>
+        <jakarta.servlet-api.version>6.0.0</jakarta.servlet-api.version>
+        <swagger.version>2.2.15</swagger.version>
+        <jackson-databind-nullable.version>0.2.6</jackson-databind-nullable.version>
+        <spring.version>6.1.3</spring.version>
+        <maven-remote-resources-plugin.version>3.2.0</maven-remote-resources-plugin.version>
+        <!-- Payconiq -->
+        <openapi-generator-templates.version>1.0.0</openapi-generator-templates.version>
+        <pq-token-security.version>0.1.0</pq-token-security.version>
+        <pq-spring-security-oauth2-extension.version>1.2.0</pq-spring-security-oauth2-extension.version>
+        <mssql-jdbc.version>12.2.0.jre11</mssql-jdbc.version>
+        <!--        customer proto-->
+        <customer-service-schema.version>0.1.23</customer-service-schema.version>
+        <consumer-service-api.version>0.0.302</consumer-service-api.version>
+    </properties>
+    <dependencies>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+<!--       start valid lib with spring boot 3 and openapitools generator-->
+<!--        <dependency>-->
+<!--            <groupId>org.springframework</groupId>-->
+<!--            <artifactId>spring-web</artifactId>-->
+<!--            <version>${spring.version}</version>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.swagger.core.v3</groupId>-->
+<!--            <artifactId>swagger-annotations</artifactId>-->
+<!--            <version>${swagger.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>org.openapitools</groupId>-->
+<!--            <artifactId>jackson-databind-nullable</artifactId>-->
+<!--            <version>${jackson-databind-nullable.version}</version>-->
+<!--        </dependency>-->
+<!--&lt;!&ndash;        <dependency>&ndash;&gt;-->
+<!--&lt;!&ndash;            <groupId>jakarta.annotation</groupId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <artifactId>jakarta.annotation-api</artifactId>&ndash;&gt;-->
+<!--&lt;!&ndash;            <version>${jakarta.annotation-api.version}</version>&ndash;&gt;-->
+<!--&lt;!&ndash;        </dependency>&ndash;&gt;-->
+<!--        <dependency>-->
+<!--            <groupId>jakarta.validation</groupId>-->
+<!--            <artifactId>jakarta.validation-api</artifactId>-->
+<!--            <version>${jakarta.validation-api.version}</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>jakarta.servlet</groupId>-->
+<!--            <artifactId>jakarta.servlet-api</artifactId>-->
+<!--            <version>${jakarta.servlet-api.version}</version>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+                <dependency>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-starter-data-jpa</artifactId>
+                </dependency>
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-starter-web</artifactId>-->
+        <!--        </dependency>-->
+
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-devtools</artifactId>-->
+        <!--            <scope>runtime</scope>-->
+        <!--            <optional>true</optional>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>org.springframework.boot</groupId>-->
+        <!--            <artifactId>spring-boot-docker-compose</artifactId>-->
+        <!--            <scope>runtime</scope>-->
+        <!--            <optional>true</optional>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>com.h2database</groupId>-->
+        <!--            <artifactId>h2</artifactId>-->
+        <!--            <scope>runtime</scope>-->
+        <!--        </dependency>-->
+        <!--        <dependency>-->
+        <!--            <groupId>io.micrometer</groupId>-->
+        <!--            <artifactId>micrometer-registry-new-relic</artifactId>-->
+        <!--            <scope>runtime</scope>-->
+        <!--        </dependency>-->
+        <!--       end valid lib with spring boot 3 and openapitools generator-->
+
+        <!--       another valid lib with spring boot 3 and openapitools generator-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-web</artifactId>
+        </dependency>
+<!--        <dependency>-->
+<!--            <groupId>org.springframework.boot</groupId>-->
+<!--            <artifactId>spring-boot-starter-validation</artifactId>-->
+<!--        </dependency>-->
+
+        <!-- Spring Boot Starter Retry for retry mechanism -->
+        <dependency>
+            <groupId>org.springframework.retry</groupId>
+            <artifactId>spring-retry</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- Azure sql server db -->
+        <dependency>
+            <groupId>com.microsoft.sqlserver</groupId>
+            <artifactId>mssql-jdbc</artifactId>
+            <version>${mssql-jdbc.version}</version>
+            <scope>runtime</scope>
+        </dependency>
+
+        <!-- kafka -->
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+
+<!--        <dependency>-->
+<!--            <groupId>org.openapitools</groupId>-->
+<!--            <artifactId>jackson-databind-nullable</artifactId>-->
+<!--            <version>0.2.6</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.swagger.core.v3</groupId>-->
+<!--            <artifactId>swagger-annotations</artifactId>-->
+<!--            <version>2.2.15</version>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+
+        <!-- Payconiq -->
+<!--        <dependency>-->
+<!--            <groupId>com.payconiq.security</groupId>-->
+<!--            <artifactId>token-security-lib</artifactId>-->
+<!--            <version>${pq-token-security.version}</version>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>com.payconiq.shared</groupId>-->
+<!--            <artifactId>spring-security-oauth2-extension</artifactId>-->
+<!--            <version>${pq-spring-security-oauth2-extension.version}</version>-->
+<!--            <optional>true</optional>-->
+<!--        </dependency>-->
+
+        <dependency>
+            <groupId>com.payconiq.customer</groupId>
+            <artifactId>customer-service-schema</artifactId>
+            <version>${customer-service-schema.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.payconiq.consumer</groupId>
+            <artifactId>consumer-service-api</artifactId>
+            <version>${consumer-service-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java</artifactId>
+            <version>3.20.0</version>
+        </dependency>
+        <dependency>
+            <groupId>com.google.protobuf</groupId>
+            <artifactId>protobuf-java-util</artifactId>
+            <version>3.20.0</version>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+<!--            <plugin>-->
+<!--                <groupId>org.apache.maven.plugins</groupId>-->
+<!--                <artifactId>maven-remote-resources-plugin</artifactId>-->
+<!--                <version>${maven-remote-resources-plugin.version}</version>-->
+<!--                <configuration>-->
+<!--                    <resourceBundles>-->
+<!--                        <resourceBundle>com.payconiq.commons:openapi-generator-templates:${openapi-generator-templates.version}</resourceBundle>-->
+<!--                    </resourceBundles>-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    <execution>-->
+<!--                        <phase>initialize</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>process</goal>-->
+<!--                        </goals>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+<!--            <plugin>-->
+<!--                <groupId>org.openapitools</groupId>-->
+<!--                <artifactId>openapi-generator-maven-plugin</artifactId>-->
+<!--                <version>${openapi-generator.version}</version>-->
+<!--                <configuration>-->
+<!--                    <inputSpec>[WORKAROUND FOR PLUGIN CONFIG]</inputSpec>-->
+<!--                    <verbose>false</verbose>-->
+<!--                    <configHelp>false</configHelp>-->
+<!--                    <generatorName>spring</generatorName>-->
+<!--                    <generateApiDocumentation>false</generateApiDocumentation>-->
+<!--                    <generateApis>true</generateApis>-->
+<!--                    <generateModels>true</generateModels>-->
+<!--                    <generateAliasAsModel>true</generateAliasAsModel>-->
+<!--                    <generateApiTests>false</generateApiTests>-->
+<!--                    <configOptions>-->
+<!--                        <useBeanValidation>true</useBeanValidation>-->
+<!--                        <java8>true</java8>-->
+<!--                        <interfaceOnly>true</interfaceOnly>-->
+<!--                        <singleContentTypes>true</singleContentTypes>-->
+<!--                        <dateLibrary>java8</dateLibrary>-->
+<!--                        <useTags>true</useTags>-->
+<!--                       <useSpringBoot3>true</useSpringBoot3>-->
+<!--                       <useJakartaEe>true</useJakartaEe>-->
+<!--                    </configOptions>-->
+<!--&lt;!&ndash;                    <globalProperties>&ndash;&gt;-->
+<!--&lt;!&ndash;                        <skipFormModel>false</skipFormModel>&ndash;&gt;-->
+<!--&lt;!&ndash;                    </globalProperties>&ndash;&gt;-->
+<!--                </configuration>-->
+<!--                <executions>-->
+<!--                    &lt;!&ndash; SERVER - TEST GENERATE API INTERFACES &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>generate-api</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <inputSpec>${project.basedir}/src/main/resources/petstore.yaml</inputSpec>-->
+<!--                            <apiPackage>io.swagger.api</apiPackage>  &lt;!&ndash; must end by api for jar packaging &ndash;&gt;-->
+<!--                            <modelPackage>io.swagger.model</modelPackage> &lt;!&ndash; must end by model for jar packaging &ndash;&gt;-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    &lt;!&ndash; SERVER - TEST GENERATE API INTERFACES TEMPLATE spring-pq-principal&ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>generate-api-principal-template</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <inputSpec>${project.basedir}/src/main/resources/petstore.yaml</inputSpec>-->
+<!--                            <apiPackage>io.swagger.principal.servlet.api</apiPackage>  &lt;!&ndash; must end by api for jar packaging &ndash;&gt;-->
+<!--                            <modelPackage>io.swagger.principal.servlet.model</modelPackage> &lt;!&ndash; must end by model for jar packaging &ndash;&gt;-->
+<!--                            <templateDirectory>-->
+<!--                                ${project.build.directory}/maven-shared-archive-resources/templates/server/spring-pq-principal-->
+<!--                            </templateDirectory>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    &lt;!&ndash; SERVER - TEST GENERATE API INTERFACES TEMPLATE spring-pq-principal - ASYNC &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>generate-api-principal-template-async</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <inputSpec>${project.basedir}/src/main/resources/petstore.yaml</inputSpec>-->
+<!--                            <apiPackage>io.swagger.principal.async.api</apiPackage>  &lt;!&ndash; must end by api for jar packaging &ndash;&gt;-->
+<!--                            <modelPackage>io.swagger.principal.async.model</modelPackage> &lt;!&ndash; must end by model for jar packaging &ndash;&gt;-->
+<!--                            <templateDirectory>-->
+<!--                                ${project.build.directory}/maven-shared-archive-resources/templates/server/spring-pq-principal-->
+<!--                            </templateDirectory>-->
+<!--                            <configOptions>-->
+<!--                                <async>true</async>-->
+<!--                            </configOptions>-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                    &lt;!&ndash; SERVER - TEST GENERATE API INTERFACES TEMPLATE spring-pq-principal - REACTIVE &ndash;&gt;-->
+<!--                    <execution>-->
+<!--                        <id>generate-api-principal-template-reactive</id>-->
+<!--                        <phase>generate-sources</phase>-->
+<!--                        <goals>-->
+<!--                            <goal>generate</goal>-->
+<!--                        </goals>-->
+<!--                        <configuration>-->
+<!--                            <inputSpec>${project.basedir}/src/main/resources/petstore.yaml</inputSpec>-->
+<!--                            <apiPackage>io.swagger.principal.reactive.api</apiPackage>  &lt;!&ndash; must end by api for jar packaging &ndash;&gt;-->
+<!--                            <modelPackage>io.swagger.principal.reactive.model</modelPackage> &lt;!&ndash; must end by model for jar packaging &ndash;&gt;-->
+<!--                            <templateDirectory>-->
+<!--                                ${project.build.directory}/maven-shared-archive-resources/templates/server/spring-pq-principal-->
+<!--                            </templateDirectory>-->
+<!--                            <configOptions>-->
+<!--                                <reactive>true</reactive>-->
+<!--                            </configOptions>-->
+<!--&lt;!&ndash;                            <globalProperties>&ndash;&gt;-->
+<!--&lt;!&ndash;                                <skipFormModel>false</skipFormModel>&ndash;&gt;-->
+<!--&lt;!&ndash;                            </globalProperties>&ndash;&gt;-->
+<!--                        </configuration>-->
+<!--                    </execution>-->
+<!--                </executions>-->
+<!--            </plugin>-->
+        </plugins>
+    </build>
+
+</project>
