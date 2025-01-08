@@ -1,0 +1,125 @@
+spring:
+  application:
+    name: api-gateway
+  cloud:
+    gateway:
+      routes:
+        # Rate-limited route for emailOptIn 2 request/min
+        - id: customer-email-opt-in
+          uri: ${integration-service-url}
+          predicates:
+            - Path=/integration-service/v1/api/test/**
+      default-filters:
+        # Pre-filters
+        - name: AuthenticationError
+        - name: CheckRequestFilterFactory
+        # Post-filters
+        - name: ResponseEncryption
+  cache:
+    type: hazelcast
+ratelimit:
+  max-allowed-rate-per-sec: 1
+  max-allowed-email-opt-in-per-minute: 2
+  max-allowed-contact-searches-per-minute: 5
+
+
+#bucket4j:
+#  enabled: true
+#  filter-config-caching-enabled: true
+#  filter-config-cache-name: filterConfigCache
+#  filters:
+#    # General ratelimit for all requests
+#    - id: filter1
+#      cache-name: buckets
+#      url: .*
+#      filter-order: 952
+#      http-response-body: |
+#        { "code": "TOO_MANY_REQUESTS", "message": "Too many requests" }
+#      rate-limits:
+#        - bandwidths:
+#            - capacity: 1
+#              time: 1
+#              unit: minutes
+#    - id: filter2
+#      cache-name: buckets
+#      filter-method: servlet
+#      filter-order: 952
+#      url: /integration-service/v1/api/test/(.*)
+#      rate-limits:
+#        - bandwidths:
+#            - capacity: 1
+#              time: 1
+#              unit: minutes
+#  cache-to-use: jcache
+
+#bucket4j:
+#  enabled: true
+#  filter-config-caching-enabled: true
+#  filter-config-cache-name: filterConfigCache
+#  filters:
+#    - id: filter1
+#      major-version: 1
+#      cache-name: buckets
+#      filter-order: -200
+#      url: .*
+#      rate-limits:
+#        - bandwidths:
+#            - capacity: 1
+#              time: 1
+#              unit: minutes
+
+
+bucket4j:
+  enabled: true
+  filter-config-caching-enabled: true
+  filter-config-cache-name: filterConfigCache
+  filters:
+    - id: filter1
+      major-version: 1
+      cache-name: buckets
+      filter-method: gateway
+      filter-order: 952
+      http-content-type: application/json;charset=UTF-8
+      url: .*
+      #    metrics:
+      #      tags:
+      #      - key: USERNAME
+      #        expression: "@securityService.username() != null ? @securityService.username() : 'anonym'"
+      #      - key: URL
+      #        expression: getRequestURI()
+      rate-limits:
+        - cache-key: "@RateLimiterHelperService.getKeyForEmailOptIn(#root)" # rate limit on form data parameter "key"
+          execute-condition: "@RateLimiterHelperService.executeForPost(#root)"
+          bandwidths:
+            - capacity: 2
+              time: 1
+              unit: minutes
+
+
+
+integration-service-url: http://localhost:8081
+logging:
+  level:
+    org.springframework.cloud.gateway: DEBUG
+    org.springframework.cloud.gateway.filter: DEBUG
+    org.springframework.web.reactive.function.client: DEBUG
+    org.springframework.http.server.reactive: DEBUG
+    org.springframework.web.client.RestTemplate: DEBUG
+    org.apache.http: DEBUG
+    reactor.netty.http.client: DEBUG
+    reactor.netty: DEBUG
+
+management:
+  tracing:
+    enabled: true
+    sampling:
+      probability: 1.0
+    propagation:
+      consume: [ b3_multi, w3c ]
+      produce: [ b3_multi, w3c ]
+    baggage:
+        remote-fields: # to propagate incoming headers
+          - X-Custom-Header
+        correlation: # to add incoming headers to MDC context
+          fields:
+            - X-Custom-Header

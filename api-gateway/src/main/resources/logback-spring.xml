@@ -1,0 +1,106 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration scan="false">
+
+<!--  <include resource="org/springframework/boot/logging/logback/defaults.xml"/>-->
+<!--  <include resource="org/springframework/boot/logging/logback/console-appender.xml"/>-->
+
+  <!-- add properties from git-commit-id-maven-plugin -->
+<!--  <property resource="git.properties"/>-->
+
+<!--  <springProperty scope="context" name="env" source="spring.profiles.active"/>-->
+<!--  <springProperty scope="context" name="name" source="spring.application.name"/>-->
+<!--  <springProperty scope="context" name="maxFileSize" source="payconiq.logging.traceability.max-file-size"/>-->
+<!--  <springProperty scope="context" name="maxHistory" source="payconiq.logging.traceability.max-history"/>-->
+<!--  <springProperty scope="context" name="totalSizeCap" source="payconiq.logging.traceability.total-size-cap"/>-->
+<!--  <springProperty scope="context" name="compress" source="payconiq.logging.traceability.compress"/>-->
+
+<!--  <springProfile name="!dev">-->
+<!--    <springProfile name="!test">-->
+
+<!--      <include resource="file-appender.xml"/>-->
+
+<!--      &lt;!&ndash; TODO take care of this appender &ndash;&gt;-->
+<!--      <appender name="TRACEABILITY" class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+<!--        <encoder class="net.logstash.logback.encoder.LogstashEncoder">-->
+<!--          <timeZone>UTC</timeZone>-->
+<!--          <fieldNames>-->
+<!--            <level>[ignore]</level>-->
+<!--            <version>[ignore]</version>-->
+<!--            <thread>[ignore]</thread>-->
+<!--            <logger>[ignore]</logger>-->
+<!--            <version>[ignore]</version>-->
+<!--            <levelValue>[ignore]</levelValue>-->
+<!--          </fieldNames>-->
+<!--          <includeContext>false</includeContext>-->
+<!--          <customFields>{"HOSTNAME":"${HOSTNAME}", "name": "${name}"}</customFields>-->
+
+<!--          <includeMdcKeyName>protocolVersion</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>routeUrl</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>serviceId</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>path</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>method</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>strategy</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>x-srp-protocol-version</includeMdcKeyName>-->
+
+<!--          <includeMdcKeyName>client-id</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>client-version</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>x-userid</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>x-hardwareid</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>x-correlation-id</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>cf-connecting-ip</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>cf-ray</includeMdcKeyName>-->
+
+<!--          <includeMdcKeyName>tokenScope</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>srpKeyIndex</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>traceId</includeMdcKeyName>-->
+<!--          <includeMdcKeyName>spanId</includeMdcKeyName>-->
+<!--        </encoder>-->
+<!--        <file>/var/log/payconiq-trace/app/${name}.json.rolling.log</file>-->
+<!--        <rollingPolicy class="ch.qos.logback.core.rolling.SizeAndTimeBasedRollingPolicy">-->
+<!--          &lt;!&ndash; rollover hourly &ndash;&gt;-->
+<!--          &lt;!&ndash; by default each file should be at most 500MB, keep 24 hours worth of history, but at most 15GB &ndash;&gt;-->
+<!--          <if condition='property("compress").contains("true")'>-->
+<!--            <then>-->
+<!--              <fileNamePattern>/var/log/payconiq-trace/app/${name}-%d{yyyy-MM-dd_HH}.json.rolling.log.%i.gz</fileNamePattern>-->
+<!--            </then>-->
+<!--            <else>-->
+<!--              <fileNamePattern>/var/log/payconiq-trace/app/${name}-%d{yyyy-MM-dd_HH}.json.rolling.log.%i</fileNamePattern>-->
+<!--            </else>-->
+<!--          </if>-->
+<!--          <maxFileSize>${maxFileSize:-500MB}</maxFileSize>-->
+<!--          <maxHistory>${maxHistory:-24}</maxHistory>-->
+<!--          <totalSizeCap>${totalSizeCap:-15GB}</totalSizeCap>-->
+<!--        </rollingPolicy>-->
+<!--      </appender>-->
+
+<!--      <logger name="com.payconiq.gateway.service.TraceabilityLogger" additivity="false">-->
+<!--        <level value="INFO"/>-->
+<!--        <appender-ref ref="TRACEABILITY"/>-->
+<!--      </logger>-->
+
+<!--    </springProfile>-->
+<!--  </springProfile>-->
+
+<!--  <springProfile name="!test">-->
+<!--    <springProfile name="!dev">-->
+<!--      <root level="INFO">-->
+<!--        <appender-ref ref="FILE"/>-->
+<!--      </root>-->
+<!--    </springProfile>-->
+<!--  </springProfile>-->
+
+        <appender name="Console" class="ch.qos.logback.core.ConsoleAppender">
+          <encoder>
+            <pattern>
+              %d{dd-MM-yyyy HH:mm:ss.SSS} %magenta([%thread]) %green([T:%X{traceId:-},S:%X{spanId:-}]) %highlight(%-5level) %logger{36} - %msg%n
+            </pattern>
+          </encoder>
+        </appender>
+
+<!--  <springProfile name="dev, test">-->
+    <root level="DEBUG">
+      <appender-ref ref="Console"/>
+    </root>
+<!--  </springProfile>-->
+
+</configuration>
