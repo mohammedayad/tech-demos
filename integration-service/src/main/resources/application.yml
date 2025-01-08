@@ -1,0 +1,35 @@
+server:
+  port: 8081
+
+spring:
+  application:
+    name: integration-service
+#  security:
+#    user:
+#      name: user
+#      password: password
+  # Liquibase properties for H2 database and liquibase
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/integration_service_db
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: none
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+
+tk-extraction:
+  url: https://staging.textkernel.nl/sourcebox/extract.do?useJsonErrorMsg=true
+  account: sourcebox_test
+  username: mohammed
+  password: Y3RpKA&@hM[$
+
+
+async-executor:
+  core-pool-size: 7
+  max-pool-size: 42
+  queue-capacity: 11
+
