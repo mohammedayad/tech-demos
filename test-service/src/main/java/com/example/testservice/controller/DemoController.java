@@ -39,5 +39,10 @@ public class DemoController {
         throw new RuntimeException("failed");
     }
 
+    @GetMapping("/test")
+    public ResponseEntity<String> test() {
+        return ResponseEntity.ok("success");
+    }
+
 }
 
