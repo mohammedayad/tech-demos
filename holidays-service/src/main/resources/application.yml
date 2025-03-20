@@ -1,0 +1,27 @@
+spring:
+  application:
+    name: holidays-service
+
+holiday-api-client:
+  url: ${HOLIDAY_API_CLIENT_URL:https://date.nager.at/api/v3/PublicHolidays/{year}/{country_code}}
+  year: ${HOLIDAY_API_CLIENT_YEAR:2025}
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-holidays-service-ui.html
+    operations-sorter: method
+
+async-executor:
+  core-pool-size: 7  # Number of core threads
+  max-pool-size: 42      # Maximum allowed threads
+  queue-capacity: 11    # Queue size for pending tasks
+  keep-alive-time: 60    # Time (seconds) idle threads wait before terminating
+  thread-name-prefix: "Async-Calls-"
+
+
+# Sets logging level for the app
+logging:
+  level:
+    com.ayad.holidaysservice: debug

@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  holidays-service:
+    build: .    # Builds the Docker image from the current directory using the Dockerfile
+    container_name: holidays-service
+    ports:
+      - "8080:8080"  # Maps the container's port 8080 to the host's port 8080
+    environment:
+      - HOLIDAY_API_CLIENT_URL=https://date.nager.at/api/v3/PublicHolidays/{year}/{country_code}
+      - HOLIDAY_API_CLIENT_YEAR=2025
+    networks:
+      - holidays-network
+
+networks:
+  holidays-network:
+    driver: bridge
