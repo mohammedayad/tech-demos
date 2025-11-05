@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  city-sorter:
+    build: .    # Builds the Docker image from the current directory using the Dockerfile
+    ports:
+      - "8080:8080"  # Maps the container's port 8080 to the host's port 8080
+    volumes:
+      - ./cities-storage:/app/cities-storage  # Mounts the local `cities-storage` folder into the container
+      - ./output:/app/output    # Mounts the local `output` folder into the container for storing results
+    environment:
+      - CITIES_STORAGE_FOLDER=/app/cities-storage   # Environment variable for the city storage folder
+      - CITY_SORTER_OUTPUT_FILE=/app/output/city-sorter-output.txt  # Path for the output fil

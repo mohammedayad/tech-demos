@@ -1,0 +1,20 @@
+spring:
+  application:
+    name: city-sorter
+
+
+async-executor:
+  core-pool-size: 7  # Number of core threads
+  max-pool-size: 42      # Maximum allowed threads
+  queue-capacity: 11    # Queue size for pending tasks
+  keep-alive-time: 60    # Time (seconds) idle threads wait before terminating
+  thread-name-prefix: "Async-Sorter-"
+
+# Sets logging level for the app
+logging:
+  level:
+    com.ayad.citysorter: debug
+
+city-sorter:
+  cities-storage-folder: ${CITIES_STORAGE_FOLDER:classpath:cities-storage} # Folder for city data storage
+  cities-storage-output-file-name: ${CITY_SORTER_OUTPUT_FILE:city-sorter-output.txt} # Output file for sorted cities
