@@ -1,0 +1,254 @@
+{
+	"info": {
+		"_postman_id": "374eee00-b379-49dc-b4e4-a45959a66527",
+		"name": "delivery-service",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "1297224"
+	},
+	"item": [
+		{
+			"name": "create new in-progress-Delivery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"vehicleId\": \"AHV-589\",\n   \"address\": \"Example street 15A\",\n   \"startedAt\": \"2023-10-09T12:45:34.678Z\",\n   \"status\": \"IN_PROGRESS\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/deliveries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"deliveries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "business-summary",
+			"protocolProfileBehavior": {
+				"disableBodyPruning": true
+			},
+			"request": {
+				"method": "GET",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/deliveries/business-summary",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"deliveries",
+						"business-summary"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "generate-deliveries-invoice",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"deliveryIds\": [\n    //   \"7167fc04-0625-49fc-98a9-8785a4a32b60\",\n    //   \"7167fc04-0625-49fc-98a9-8785a4a32b61\",\n      \"60eea72a-cce0-427e-b9ae-cee172acf40a\",\n      \"3a4fdf1e-a68b-4d28-99bc-aa467227d531\"\n   ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/deliveries/invoice",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"deliveries",
+						"invoice"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "invoice-mock-api",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"deliveryId\": \"7167fc04-0625-49fc-98a9-8785a4a32b60\",\n   \"address\": \"Example street 15A\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8000/v1/invoices",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8000",
+					"path": [
+						"v1",
+						"invoices"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new delivery-invalid-request",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n//    \"vehicleId\": \"AHV-589\",\n   \"address\": \"Example street 15A\",\n   \"startedAt\": \"2023-10-09T12:45:34.678Z\",\n   \"status\": \"IN_PROGRESS\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/deliveries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"deliveries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new in-progress-Delivery-with-finishedAt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"vehicleId\": \"AHV-590\",\n   \"address\": \"Example street 15A\",\n   \"startedAt\": \"2023-10-09T12:45:34.678Z\",\n   \"status\": \"IN_PROGRESS\",\n   \"finishedAt\": \"2023-10-09T13:45:34.678Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/deliveries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"deliveries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new delivered-Delivery-without-finishedAt",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"vehicleId\": \"AHV-590\",\n   \"address\": \"Example street 15A\",\n   \"startedAt\": \"2023-10-09T12:45:34.678Z\",\n   \"status\": \"DELIVERED\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/deliveries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"deliveries"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "create new delivered-Delivery",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n   \"vehicleId\": \"AHV-590\",\n   \"address\": \"Example street 15A\",\n   \"startedAt\": \"2023-10-09T12:45:34.678Z\",\n   \"status\": \"DELIVERED\",\n   \"finishedAt\": \"2023-10-09T13:45:34.678Z\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/api/v1/deliveries",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"api",
+						"v1",
+						"deliveries"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

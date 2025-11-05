@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: backend-assignment
+  # Liquibase properties for H2 database and liquibase
+  datasource:
+    driver-class-name: org.h2.Driver
+    url: jdbc:h2:~/delivery_service_db
+    username: test
+    password: test
+  jpa:
+    hibernate:
+      ddl-auto: none
+    show-sql: true
+  liquibase:
+    enabled: true
+    change-log: classpath:/db/changelog/db.changelog-master.xml
+  h2:
+    console:
+      enabled: true
+
+logging:
+  level:
+    com.ahold.technl.sandbox: trace
+    org.hibernate.SQL: DEBUG
+    org.hibernate.type.descriptor.sql.BasicBinder: TRACE
+    logging.level.org.hibernate.SQL: DEBUG
+    logging.level.org.hibernate.type.descriptor.sql: TRACE
+
+springdoc:
+  api-docs:
+    path: /api-docs
+  swagger-ui:
+    path: /swagger-delivery-service-ui.html
+    operations-sorter: method
+
+app:
+  invoice-service.url: ${INVOICE_API_BASE_URL:http://mock-api:8000}
+  timezone: Europe/Amsterdam
