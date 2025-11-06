@@ -77,3 +77,12 @@ kubectl set image deployment/myapp-deployment myapp-container=new-image:tag
 kubectl set image deployment/microservice-demo myspring=app/myspring:v2 
 kubectl rollout history deployment microservice-demo --history of specific deployment
 kubectl rollout undo deployment microservice-demo --rollback to the previouse version of specific deployment
+
+Git commands
+---------------------------------------------------------------------------------
+git status
+git add .
+git restore --staged .  // to unstage all files
+git diff --cached --name-only  // to see the staged files
+git commit -m "your commit message"
+git push origin your-branch-name
