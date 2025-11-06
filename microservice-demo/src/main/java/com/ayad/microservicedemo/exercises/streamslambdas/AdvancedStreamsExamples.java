@@ -62,11 +62,11 @@ public class AdvancedStreamsExamples {
         //using collect
         List<String> names3 = products.stream().collect(ArrayList::new, (list, product) -> list.add(product.getName()), (list1, list2) -> list1.addAll(list2));
         List<String> names4 = products.stream().collect(ArrayList::new, (list, product) -> list.add(product.getName()), List::addAll);
-        System.out.println(names4);
+        System.out.println("collect: " +names4);
 
         //Collectors class list of category and products names
         Map<Category, BigDecimal> map = products.stream().collect(Collectors.toMap(Product::getCategory, Product::getPrice, BigDecimal::add));
-        System.out.println(map);
+        System.out.println("Collectors: " +map);
 
         // using Grouping
         Map<Category, List<Product>> categoryListMap = products.stream().collect(Collectors.groupingBy(Product::getCategory));
