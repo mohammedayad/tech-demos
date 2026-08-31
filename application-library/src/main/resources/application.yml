@@ -1,0 +1,15 @@
+spring:
+    application:
+        name: application-library
+    # Liquibase properties for H2 database and liquibase
+    datasource:
+        driver-class-name: org.h2.Driver
+        url: jdbc:h2:~/application_library_db
+        username: test
+        password: test
+    jpa:
+        hibernate:
+            ddl-auto: none
+    liquibase:
+        enabled: true
+        change-log: classpath:/db/changelog/db.changelog-master.xml
