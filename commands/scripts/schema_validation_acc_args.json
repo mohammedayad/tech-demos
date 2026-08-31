@@ -1,0 +1,9 @@
+{
+  "--DOMAIN": "payments",
+  "--DB_NAME": "paymentRefundServiceAcc",
+  "--COLLECTION_NAME": "refunds",
+  "--SCHEMA_S3_BUCKET_NAME": "payconiq-mongodb-archive-assets-acc",
+  "--GLUE_CONNECTION_NAME": "glue-mongo-atlas-conn",
+  "--SAMPLE_SIZE": "5000"
+}
+

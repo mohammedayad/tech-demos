@@ -1,0 +1,5 @@
+//db.getCollection("shedLock").find({})
+let collections1 = db.getCollectionNames()
+print("\nChecking in camtProcessingServiceProd:")
+print("camtFile: " + (collections1.includes("camtFile") ? "EXISTS" : "REMOVED"))
+print("shedLock: " + (collections1.includes("shedLock") ? "EXISTS" : "REMOVED"))

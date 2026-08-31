@@ -1,0 +1,5 @@
+//db.getCollection("camtFile").countDocuments()
+let collections1 = db.getCollectionNames()
+print("\nChecking in camtProcessingServiceEXT:")
+print("camtFile: " + (collections1.includes("camtFile") ? "EXISTS" : "REMOVED"))
+print("shedlock: " + (collections1.includes("shedLock") ? "EXISTS" : "REMOVED"))

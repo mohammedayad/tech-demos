@@ -1,0 +1,5 @@
+//db.getCollection("transaction").find({})
+//db.getCollection("transaction").find({payOutCountry: "BPC"})
+db.getCollection("transaction").find({payOutCountry: {$ne: "BPC"}})
+//db.getCollection("transaction").find({payOutCountry: null})
+//db.getCollection("transaction").find({payOutCountry: {$exists: false}})
