@@ -1,0 +1,9 @@
+{
+  "--DOMAIN": "payment",                          
+  "--DB_NAME": "paymentRefundServiceProd",
+  "--COLLECTION_NAME": "refunds",             
+  "--SAMPLE_SIZE": "50",                                      
+  "--ARCHIVE_S3_BUCKET_NAME": "payconiq-archive-prod",       
+  "--SCHEMA_S3_BUCKET_NAME": "payconiq-prod-mongodb-migration-assets",
+  "--GLUE_CONNECTION_NAME": "glue-mongo-atlas-prod-connection"
+}

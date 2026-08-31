@@ -1,0 +1,294 @@
+{
+  "info": {
+    "_postman_id": "9d984136-9729-4c07-a95e-c6498781e9cd",
+    "name": "Checkout Rate Limiting",
+    "description": "Testing flow:\n\n1. Run `Create dynamic payment` to obtain new payment id.\n    \n2. To interact with checkout flow\n    \n    1. EITHER Run either of `Get checkout payment`, `Get checkout payment merchant logo` or `Get checkout payment status` requests to access checkout backend. (With `Get checkout payment status` you would need to manually close returned stream afterwards)\n        \n    2. OR Run `Get checkout web app page` to retrieve web app page and force it server to call backend in the process\n        \n\nTesting scenarios:\n\n1. Below CF limits:\n    \n    1. Create new payment\n        \n    2. Run 15 `Get checkout payment` requests in 1 minute\n        \n    3. Verify that all returned 200\n        \n    4. Verify lack of logs on CF side\n        \n2. Hitting CF log limit\n    \n    1. Create new payment\n        \n    2. Run 30 `Get checkout payment` requests in 1 minute\n        \n    3. Verify that all returned 200\n        \n    4. Verify log on CF side indicating that limit of 20 requests per minute was violated\n        \n3. Hitting CF block limit\n    \n    1. Create new payment\n        \n    2. Run 45 `Get checkout payment` requests in 1 minute\n        \n    3. Verify that <=40 returned 200 and others returned 429.\n        \n    4. Verify log on CF side indicating that limit of 20 and limit of 40 requests per minute were both violated\n        \n4. Mixed requests\n    \n    1. Create new payment\n        \n    2. Run 10 `Get checkout payment` + 10 `Get checkout payment merchant logo` + 10 `Get checkout payment status` requests in 1 minute\n        \n    3. Verify that all returned 200\n        \n    4. Verify log on CF side indicating that limit of 20 requests per minute was violated\n        \n5. Different users should NOT trigger rate limit for FE server\n    \n    1. In parallel from 2+ users in the same minute:\n        \n        1. Create new payment\n            \n        2. Run 15 `Get checkout web app page` requests in 1 minute\n            \n    2. Verify lack of error logs on checkout web app server\n        \n    3. Verify lack of logs on CF side",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+    "_exporter_id": "13710393"
+  },
+  "item": [
+    {
+      "name": "Create dynamic payment",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "// Generate a unique reference per run to avoid duplicates",
+              "const ts = Date.now();",
+              "const body = JSON.parse(pm.request.body.raw);",
+              "body.reference = `POSTMAN-REF-${ts}`;",
+              "pm.request.body.update({",
+              "  mode: 'raw',",
+              "  raw: JSON.stringify(body),",
+              "  options: {",
+              "    raw: {",
+              "      language: 'json'",
+              "    }",
+              "  }",
+              "});",
+              "pm.environment.set('lastReference', body.reference);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        },
+        {
+          "listen": "test",
+          "script": {
+            "exec": [
+              "pm.test('Status 201 - payment created', () => {",
+              "    pm.response.to.have.status(201);",
+              "});",
+              "",
+              "const json = pm.response.json();",
+              "// Persist for subsequent requests",
+              "pm.environment.set('paymentId', json.paymentId);"
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "auth": {
+          "type": "bearer",
+          "bearer": [
+            {
+              "key": "token",
+              "value": "{{apiKey}}",
+              "type": "string"
+            }
+          ]
+        },
+        "method": "POST",
+        "header": [],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"amount\": 1000,\n  \"currency\": \"EUR\",\n  \"description\": \"Test payment from Postman\",\n  \"reference\": \"POSTMAN-REF-001\",\n  \"callbackUrl\": \"https://merchant.example.com/webhook\",\n  \"returnUrl\": \"https://merchant.example.com/return\"\n}",
+          "options": {
+            "raw": {
+              "language": "json"
+            }
+          }
+        },
+        "url": {
+          "raw": "{{basePaymentUrl}}/payments",
+          "host": [
+            "{{basePaymentUrl}}"
+          ],
+          "path": [
+            "payments"
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get checkout payment",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "   // Derive checkout token from payment ID using the acc salt",
+              "   const accSaltB64 = pm.variables.get('saltB64');",
+              "   const paymentId = pm.variables.get('paymentId').toLowerCase(); ",
+              "   const saltBytes = Uint8Array.from(atob(accSaltB64), c => c.charCodeAt(0)); ",
+              "   const idBytes   = new TextEncoder().encode(paymentId);",
+              "   const combined = new Uint8Array(saltBytes.length + idBytes.length);",
+              "   combined.set(saltBytes, 0);",
+              "   combined.set(idBytes, saltBytes.length); ",
+              "   crypto.subtle.digest('SHA-256', combined).then(hashBuffer => { ",
+              "       const token = Array.from(new Uint8Array(hashBuffer))",
+              "           .map(b => b.toString(16).padStart(2, '0'))",
+              "           .join(''); ",
+              "       pm.variables.set('token', token);",
+              "   });                    "
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseCheckoutUrl}}/checkouts/payments/{{paymentId}}?token={{token}}",
+          "host": [
+            "{{baseCheckoutUrl}}"
+          ],
+          "path": [
+            "checkouts",
+            "payments",
+            "{{paymentId}}"
+          ],
+          "query": [
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get checkout web app page",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "   // Derive checkout token from payment ID using the acc salt",
+              "   const accSaltB64 = pm.variables.get('saltB64');",
+              "   const paymentId = pm.variables.get('paymentId').toLowerCase(); ",
+              "   const saltBytes = Uint8Array.from(atob(accSaltB64), c => c.charCodeAt(0)); ",
+              "   const idBytes   = new TextEncoder().encode(paymentId);",
+              "   const combined = new Uint8Array(saltBytes.length + idBytes.length);",
+              "   combined.set(saltBytes, 0);",
+              "   combined.set(idBytes, saltBytes.length); ",
+              "   crypto.subtle.digest('SHA-256', combined).then(hashBuffer => { ",
+              "       const token = Array.from(new Uint8Array(hashBuffer))",
+              "           .map(b => b.toString(16).padStart(2, '0'))",
+              "           .join(''); ",
+              "       pm.variables.set('token', token);",
+              "   });                    "
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseWebAppUrl}}/{{paymentId}}?token={{token}}",
+          "host": [
+            "{{baseWebAppUrl}}"
+          ],
+          "path": [
+            "{{paymentId}}"
+          ],
+          "query": [
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get checkout payment  merchant logo",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "   // Derive checkout token from payment ID using the acc salt",
+              "   const accSaltB64 = pm.variables.get('saltB64');",
+              "   const paymentId = pm.variables.get('paymentId').toLowerCase(); ",
+              "   const saltBytes = Uint8Array.from(atob(accSaltB64), c => c.charCodeAt(0)); ",
+              "   const idBytes   = new TextEncoder().encode(paymentId);",
+              "   const combined = new Uint8Array(saltBytes.length + idBytes.length);",
+              "   combined.set(saltBytes, 0);",
+              "   combined.set(idBytes, saltBytes.length); ",
+              "   crypto.subtle.digest('SHA-256', combined).then(hashBuffer => { ",
+              "       const token = Array.from(new Uint8Array(hashBuffer))",
+              "           .map(b => b.toString(16).padStart(2, '0'))",
+              "           .join(''); ",
+              "       pm.variables.set('token', token);",
+              "   });                    "
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseCheckoutUrl}}/checkouts/payments/{{paymentId}}/merchant-logo?token={{token}}",
+          "host": [
+            "{{baseCheckoutUrl}}"
+          ],
+          "path": [
+            "checkouts",
+            "payments",
+            "{{paymentId}}",
+            "merchant-logo"
+          ],
+          "query": [
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    },
+    {
+      "name": "Get checkout payment status",
+      "event": [
+        {
+          "listen": "prerequest",
+          "script": {
+            "exec": [
+              "   // Derive checkout token from payment ID using the acc salt",
+              "   const accSaltB64 = pm.variables.get('saltB64');",
+              "   const paymentId = pm.variables.get('paymentId').toLowerCase(); ",
+              "   const saltBytes = Uint8Array.from(atob(accSaltB64), c => c.charCodeAt(0)); ",
+              "   const idBytes   = new TextEncoder().encode(paymentId);",
+              "   const combined = new Uint8Array(saltBytes.length + idBytes.length);",
+              "   combined.set(saltBytes, 0);",
+              "   combined.set(idBytes, saltBytes.length); ",
+              "   crypto.subtle.digest('SHA-256', combined).then(hashBuffer => { ",
+              "       const token = Array.from(new Uint8Array(hashBuffer))",
+              "           .map(b => b.toString(16).padStart(2, '0'))",
+              "           .join(''); ",
+              "       pm.variables.set('token', token);",
+              "   });                    "
+            ],
+            "type": "text/javascript",
+            "packages": {},
+            "requests": {}
+          }
+        }
+      ],
+      "request": {
+        "method": "GET",
+        "header": [],
+        "url": {
+          "raw": "{{baseCheckoutUrl}}/checkouts/payments/{{paymentId}}/status?token={{token}}",
+          "host": [
+            "{{baseCheckoutUrl}}"
+          ],
+          "path": [
+            "checkouts",
+            "payments",
+            "{{paymentId}}",
+            "status"
+          ],
+          "query": [
+            {
+              "key": "token",
+              "value": "{{token}}"
+            }
+          ]
+        }
+      },
+      "response": []
+    }
+  ]
+}
