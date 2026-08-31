@@ -1,0 +1,180 @@
+spring:
+  application:
+    name: jax-rs-demo
+
+
+jwt:
+  private-key: |
+    -----BEGIN PRIVATE KEY-----
+    MIIEvgIBADANBgkqhkiG9w0BAQEFAASCBKgwggSkAgEAAoIBAQDvNGGB3wIrT6UD
+    6xazfbPKQzzChxMJNtJcf/A8KrJzvdppKujy6BU3GS3A1IMK/BHSAXwEXKuBPw+7
+    jZkD5GhrhpB30LkR3RAuhbfN9oyBj5zZWfA7izS4/nshPKW7B08mQGt78X3SAc/r
+    5Ty0AUh5Bwj7NSbPRBps50Ah/WIQ7xVOl2ddb4FBE61r2yfY9b9tzYgNMM71sqC5
+    HcBbtHB7rQ28k/PjTTZHm1EKYSjFqzf0CLxvRqOmp3x4wPAgG4wdBPJ2jZFcl3lk
+    vW8f66ZvBn+IEVF28tOfFQKBaIIEfhnUvvgXdLBszwpvQ1dzgEBFoybUklxJZfTn
+    88bDftk3AgMBAAECggEALTJphh98CnD3DgF6fZmvwfToYx0glKoeH0oxOz0aENJ7
+    lUl9UIBXmdyRD5FX3Vh5iYOsSiq0YSxoLZj4o4qhzEdVvr3aaiyp5RBxBWKjc8uN
+    6GedA7Mu2BGFdGdALVGZO/IKHRYpHugmwDzFNoHTjsKsiMKnPZxxncgoDwQQZoBY
+    q3q14aY5ZI5HWa63u1Y2CCOA/uNP5RAaGWgjUc9vO2sOwWhvt2QaefXq4SAcQ9sW
+    GUTYUzU5bHR4sTc3vYgKKMz3CDAbfWH4ArZtELbm/EdEXHJfQU5P8M385WVPqkS0
+    N5zwXol5624KX/1gHazkPbM8DmbH19p9aj7z/SRveQKBgQD98btqebkYlXwH1AfH
+    w4mW2qwJ0Yi+2cuc/YPww7UFiKR5J2qC/2mMWyzAm+vy47jRTBPOM0ygyFy8rUcF
+    STTaI0NpveDvCDlRKan+J81mNTmcSN+3SBS8TeKE1ANLtjIHlYeVYWw319r+CXu5
+    MQcnnr5sHOyFnbN0VTusT6v6WwKBgQDxJBpKUzPa1XvSfykpa/vPoU1BkaGYu4B9
+    x1al+qLXSBQM9HEs61XjOqxHJJzANbAfaGhWp7Hjk0UfenAed2Tkho+HQBqFO1fn
+    1uIT2lQMrtk3b245IKx9gP7v+SOH+ZHK/96X35xW0u7s6US2HadDD806h0u9Bb6C
+    C+EC50F7VQKBgB+Sck6mm5Cm5SjD/8OiV/Tdcw41ct7njR0Tl9fTPSpW9rvpXqCy
+    yJierU21FPy5uzyqTLwSPLCwuHbsxCuwElYclEENTm3pg9bHa08h+7N9YpA/rzDG
+    UW2n8UW6Zj5/hHDU8mpsFlxLBfsXir5XjiAq6FngrrdeB/WqsySVMziJAoGBAL+f
+    b+DmU0uv4BC7CgunithJFupm/uIvBgFtmbaWADdRSNWung0TChJi+qoiNwoq38Vl
+    o5xQ8HSnAAPuuRAM0rkjEQVqdGixar6KLOeX1LirbWO3AgEVrNyi2HP8KDcSpL+L
+    KujHQiZgwoqzJ+4MjHEnKnA7OX2BBg2zwOAcwxVtAoGBAOB4GECQ+saSZM913vZ+
+    1wVMMajP3gMWNL5bB0fKjq+kTJgM1c9wYT5jFCRwEyMXrOIbn6dTbt+1EAJ0WZlt
+    T9zbMckfg1whPAJRz48b9zUThi81tucFryUE19xbbIWuNSpX7q7O+Uo+zlNpdGaX
+    xXgF/OuQOts851pPQDPu3N2z
+    -----END PRIVATE KEY-----
+
+encryption:
+  aes-key: hMJKH/SZsSDPL6eSEnRFLw==
+  email-opt-in-key: zbJ1lSv8N8hnVU6xhVPq/g==
+
+jws:
+  sign:
+    kid: demo-jws
+    private-key: |
+      -----BEGIN PRIVATE KEY-----
+      MIGTAgEAMBMGByqGSM49AgEGCCqGSM49AwEHBHkwdwIBAQQgzSZD4t54gxKzkzWg
+      hUmPMeNdwzbwkOcgzuxTQofwp5SgCgYIKoZIzj0DAQehRANCAASZBnhF8zUaNpy2
+      G+/S72QrgIwVd+Vi6Q3mtu3eJHcdK8MVtqmJos1SajUBmthcg6R0J8N54Y+Hecqc
+      MH6Y2PpV
+      -----END PRIVATE KEY-----
+  # For testing purposes we are using the same private/public key-pair
+  # on Payconiq side (prod code) and MAS side (emulated in tests)
+  validation:
+    security:
+      provider-cert-map:
+        MAS: http://localhost:${server.port}/mas-public-jks.json
+        Payconiq: http://localhost:${server.port}/mas-public-jks.json
+      trust-store:
+        location: classpath:/ca.jks
+        password: changeit
+    expiration-cutoff-seconds: 30
+    cache:
+        ## 12 hours hard cache expiration
+      expires-after-write-sec: 43200
+        ## 15 minutes refresh interval
+      refresh-interval-sec: 900
+    fetcher:
+        ## Number of threads in a fetcher thread pool
+      thread-count: 3
+      http-client:
+        read-timeout: 3000
+        connection-timeout: 1000
+        connection-request-timeout: 20000
+        proxy:
+          enabled: false
+
+
+# Properties to emulate MAS jws signature
+# Private key is stored in truststore
+# Corresponded public key stored in public JSON file
+mas.jws.signature:
+  kid: demo-jws
+  # truststore to keep MAS private key
+  trust-store:
+    location: classpath:/ca.jks
+    password: changeit
+
+payconiq:
+  oauth2:
+    extension:
+      jwt:
+        jws-algorithm: RS256
+        kid: test.signing.kid.rsa
+        private-key: |
+          -----BEGIN RSA PRIVATE KEY-----
+          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
+          -----END RSA PRIVATE KEY-----
+        public-keys:
+          - kid: test.signing.kid.rsa
+            alg: RS256
+            value: |
+              -----BEGIN PUBLIC KEY-----
+              MIICIjANBgkqhkiG9w0BAQEFAAOCAg8AMIICCgKCAgEAuk1pCQiPu3J9t89psOk3
+              6nPhuSs+rM5JZL2wLvgq0mk5Q6o0KYaZnvc0In3UW/fUc5K17KLB7m2VgV2eiZ3a
+              aoUbgw4CzO0QkAsP/1HB5AOt8G+eZu3nl5Fn9XuYHxsrzR8nZSTripmW19YxUDKW
+              VEmXmJhNe8G7FHiRwP9Yg7uDx4hbgEkX/LHt2pIzVVC5HfepZA8yKab1Ao60FFFp
+              AJpJgIQYfWnmBXJKmw9S4Jr6qyGcUh0zMyqSTPilKb971yu/t9msVbQphdAa7TZp
+              ZeKX4P0OdViz92Ofcje7jVimrw8Fi8UOvdbUrtMePPn9yc9D11zPUiO3r9RMLruO
+              48cMJAMkpljKKI5IQhckEr+PCp0P6FCzGZ4X7nONiLfqfirAmztNgZvvjIw7qvoW
+              sLEHNr6mewQAHABxZ04LDeWY5GQ9KsTNftsLlPjOWCmyoZj9SJCqPO3aIBw+vAwU
+              k8MJgzFFRqJvWOcUxT5pIQq4kIzfimhxLn4zm1B8qo+rSLzPzJgb/7OhbNin5NDM
+              xxwI9YlP57taNgIXD2q2iHOag4E0zzvil2jzG3PgUgSNPYgmklVzQlkvST9/0nCL
+              CKuON+Kr6VWLx5IRxaM6INgG+yG9ifuczynhrW+klVTdNsxPANkX9tVAmIRf1lBM
+              DKHnVuknZEBO/J4MRgG5N5sCAwEAAQ==
+              -----END PUBLIC KEY-----
+          - kid: payconiq # public key for jwt.private-key
+            alg: RS256
+            value: |
+              -----BEGIN PUBLIC KEY-----
+              MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEA7zRhgd8CK0+lA+sWs32z
+              ykM8wocTCTbSXH/wPCqyc73aaSro8ugVNxktwNSDCvwR0gF8BFyrgT8Pu42ZA+Ro
+              a4aQd9C5Ed0QLoW3zfaMgY+c2VnwO4s0uP57ITyluwdPJkBre/F90gHP6+U8tAFI
+              eQcI+zUmz0QabOdAIf1iEO8VTpdnXW+BQROta9sn2PW/bc2IDTDO9bKguR3AW7Rw
+              e60NvJPz4002R5tRCmEoxas39Ai8b0ajpqd8eMDwIBuMHQTydo2RXJd5ZL1vH+um
+              bwZ/iBFRdvLTnxUCgWiCBH4Z1L74F3SwbM8Kb0NXc4BARaMm1JJcSWX05/PGw37Z
+              NwIDAQAB
+              -----END PUBLIC KEY-----
+              
+
+unsecured-paths: >
+  /actuator/**,
+  /generate-token

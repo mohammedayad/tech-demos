@@ -1,0 +1,593 @@
+<project xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://maven.apache.org/POM/4.0.0"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+    <modelVersion>4.0.0</modelVersion>
+
+    <parent>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-parent</artifactId>
+        <version>3.4.2</version>
+        <!-- when migrating to a newer version, try spring-boot-properties-migrator -->
+    </parent>
+
+    <groupId>com.ayad</groupId>
+    <artifactId>jax-rs-demo</artifactId>
+    <packaging>jar</packaging>
+    <version>0.0.1-SNAPSHOT</version>
+    <name>jax-rs-demo</name>
+
+    <properties>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <java.version>17</java.version>
+
+        <!-- Internal dependency versions -->
+        <customer-service-api.version>0.1.2</customer-service-api.version>
+        <customer-service-schema.version>0.1.33</customer-service-schema.version>
+        <p2p-registry-service-api.version>0.0.66</p2p-registry-service-api.version>
+        <sct-service-api.version>1.8.2</sct-service-api.version>
+        <consumer-service-api.version>0.1.0</consumer-service-api.version>
+        <notification-service-protobuf-schema.version>0.0.5</notification-service-protobuf-schema.version>
+        <consumer-identification-service-schema.version>0.0.4</consumer-identification-service-schema.version>
+        <payment-service-protobuf-schema.version>0.0.17</payment-service-protobuf-schema.version>
+        <refund-payment-service-protobuf-schema.version>0.0.3</refund-payment-service-protobuf-schema.version>
+        <base64-protocol-resolver.version>0.0.1</base64-protocol-resolver.version>
+        <spring-security-oauth2-extension.version>1.2.0</spring-security-oauth2-extension.version>
+        <commons-util.version>0.0.1</commons-util.version>
+        <commons-security.version>2.3.0</commons-security.version>
+        <jws-signature-validation.version>0.1.1</jws-signature-validation.version>
+
+        <!-- Dependency versions -->
+        <spring-boot.version>${project.parent.version}</spring-boot.version>
+        <spring-cloud-version>2024.0.0</spring-cloud-version><!-- should correspond to Spring Boot version -->
+
+        <joda-time.version>2.10.7</joda-time.version>
+        <testcontainers-mongodb-initializer.version>1.1.6</testcontainers-mongodb-initializer.version>
+        <commons-lang.version>3.5</commons-lang.version>
+        <libphonenumber.version>8.12.24</libphonenumber.version>
+        <logstash-logback-encoder.version>7.4</logstash-logback-encoder.version>
+        <shedlock.version>4.37.0</shedlock.version>
+        <newrelic.version>5.11.0</newrelic.version>
+        <opencsv.version>5.7.1</opencsv.version>
+        <snappy-java.version>1.1.10.4</snappy-java.version> <!-- upgrade due to security issues -->
+        <snakeyaml.version>2.0</snakeyaml.version> <!-- upgrade due to security issues -->
+
+        <!-- Test dependencies -->
+        <wiremock.version>2.2.1</wiremock.version>
+        <elasticmq.version>0.15.4</elasticmq.version>
+
+        <!-- Plugin versions -->
+        <jacoco-maven-plugin.version>0.8.10</jacoco-maven-plugin.version>
+        <owasp-dependency-check-plugin.version>8.2.1</owasp-dependency-check-plugin.version>
+        <maven-surefire-plugin.version>3.1.0</maven-surefire-plugin.version>
+        <maven-failsafe-plugin.version>3.1.0</maven-failsafe-plugin.version>
+        <failsafe.version>1.1.0</failsafe.version>
+        <maven-surefire-report-plugin.version>3.1.0</maven-surefire-report-plugin.version>
+        <maven-site-plugin.version>4.0.0-M8</maven-site-plugin.version>
+        <maven-project-info-reports-plugin.version>3.4.3</maven-project-info-reports-plugin.version>
+        <jose4j.version>0.9.4</jose4j.version>
+        <commons-text.version>1.10.0</commons-text.version>
+        <commons-validator.version>1.7</commons-validator.version>
+        <commons-collections4.version>4.4</commons-collections4.version>
+        <bcprov-jdk15on.version>1.70</bcprov-jdk15on.version>
+        <commons-io.version>2.11.0</commons-io.version>
+        <clamav-client.version>2.1.2</clamav-client.version>
+    </properties>
+
+
+    <scm>
+        <connection>scm:git:https://gitlab.payconiq.io/DEV/consumer/customer-service.git</connection>
+        <tag>HEAD</tag>
+    </scm>
+
+    <distributionManagement>
+        <repository>
+            <id>central</id>
+            <url>https://artifactory.payconiq.io/artifactory/libs-release</url>
+        </repository>
+        <snapshotRepository>
+            <id>snapshots</id>
+            <url>https://artifactory.payconiq.io/artifactory/libs-snapshot</url>
+        </snapshotRepository>
+    </distributionManagement>
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-dependencies</artifactId>
+                <version>${spring-boot.version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-dependencies</artifactId>
+                <version>${spring-cloud-version}</version>
+                <type>pom</type>
+                <scope>import</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.payconiq.consumer</groupId>
+            <artifactId>p2p-registry-service-api</artifactId>
+            <version>${p2p-registry-service-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.commons</groupId>
+            <artifactId>base64-protocol-resolver</artifactId>
+            <version>${base64-protocol-resolver.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.sct</groupId>
+            <artifactId>sct-service-api</artifactId>
+            <version>${sct-service-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.shared</groupId>
+            <artifactId>spring-security-oauth2-extension</artifactId>
+            <version>${spring-security-oauth2-extension.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.customer</groupId>
+            <artifactId>customer-service-api</artifactId>
+            <version>${customer-service-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.customer</groupId>
+            <artifactId>customer-service-schema</artifactId>
+            <version>${customer-service-schema.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.consumer</groupId>
+            <artifactId>consumer-service-api</artifactId>
+            <version>${consumer-service-api.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq</groupId>
+            <artifactId>notification-service-protobuf-schema</artifactId>
+            <version>${notification-service-protobuf-schema.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.consumer</groupId>
+            <artifactId>consumer-identification-service-schema</artifactId>
+            <version>${consumer-identification-service-schema.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq</groupId>
+            <artifactId>payment-service-protobuf-schema</artifactId>
+            <version>${payment-service-protobuf-schema.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.payment</groupId>
+            <artifactId>payment-refund-service-protobuf-schema</artifactId>
+            <version>${refund-payment-service-protobuf-schema.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.commons</groupId>
+            <artifactId>commons-util</artifactId>
+            <version>${commons-util.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.commons</groupId>
+            <artifactId>commons-security</artifactId>
+            <version>${commons-security.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.commons</groupId>
+            <artifactId>jws-signature-validation</artifactId>
+            <version>${jws-signature-validation.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.cloud</groupId>
+            <artifactId>spring-cloud-starter-vault-config</artifactId>
+            <exclusions>
+                <exclusion>
+                    <artifactId>bcprov-jdk15on</artifactId>
+                    <groupId>org.bouncycastle</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-jersey</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-mongodb</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-security</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-actuator</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-configuration-processor</artifactId>
+            <optional>true</optional>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-aop</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework</groupId>
+            <artifactId>spring-webmvc</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-tracing-bridge-brave</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>io.micrometer</groupId>
+            <artifactId>micrometer-registry-prometheus</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.bitbucket.b_c</groupId>
+            <artifactId>jose4j</artifactId>
+            <version>${jose4j.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+
+        <!-- override version for dependency coming from opencsv -->
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-text</artifactId>
+            <version>${commons-text.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.glassfish.jersey.media</groupId>
+            <artifactId>jersey-media-multipart</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-actuator-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-autoconfigure</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.xerial.snappy</groupId>
+            <artifactId>snappy-java</artifactId>
+            <version>${snappy-java.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeyaml.version}</version>
+        </dependency>
+
+        <!-- https://mvnrepository.com/artifact/joda-time/joda-time -->
+        <dependency>
+            <groupId>joda-time</groupId>
+            <artifactId>joda-time</artifactId>
+            <version>${joda-time.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>commons-validator</groupId>
+            <artifactId>commons-validator</artifactId>
+            <version>${commons-validator.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-collections4</artifactId>
+            <version>${commons-collections4.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.bouncycastle</groupId>
+            <artifactId>bcprov-jdk15on</artifactId>
+            <version>${bcprov-jdk15on.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>${commons-io.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.googlecode.libphonenumber</groupId>
+            <artifactId>libphonenumber</artifactId>
+            <version>${libphonenumber.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>xyz.capybara</groupId>
+            <artifactId>clamav-client</artifactId>
+            <version>${clamav-client.version}</version>
+            <optional>true</optional>
+        </dependency>
+
+        <dependency>
+            <groupId>net.logstash.logback</groupId>
+            <artifactId>logstash-logback-encoder</artifactId>
+            <version>${logstash-logback-encoder.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <dependency>
+            <groupId>net.javacrumbs.shedlock</groupId>
+            <artifactId>shedlock-spring</artifactId>
+            <version>${shedlock.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>net.javacrumbs.shedlock</groupId>
+            <artifactId>shedlock-provider-mongo</artifactId>
+            <version>${shedlock.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.newrelic.agent.java</groupId>
+            <artifactId>newrelic-api</artifactId>
+            <version>${newrelic.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>net.jodah</groupId>
+            <artifactId>failsafe</artifactId>
+            <version>${failsafe.version}</version>
+        </dependency>
+
+        <dependency>
+            <groupId>com.opencsv</groupId>
+            <artifactId>opencsv</artifactId>
+            <version>${opencsv.version}</version>
+        </dependency>
+
+        <!-- testing -->
+        <dependency>
+            <groupId>org.junit.vintage</groupId>
+            <artifactId>junit-vintage-engine</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.kafka</groupId>
+            <artifactId>spring-kafka-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.awaitility</groupId>
+            <artifactId>awaitility</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.rest-assured</groupId>
+            <artifactId>rest-assured</artifactId>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-jwt</artifactId>
+            <version>1.1.1.RELEASE</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>com.github.tomakehurst</groupId>
+            <artifactId>wiremock</artifactId>
+            <version>${wiremock.version}</version>
+            <scope>test</scope>
+            <exclusions>
+                <!-- don't put jetty on the classpath, to prevent spring-boot from using it -->
+                <exclusion>
+                    <artifactId>jetty-server</artifactId>
+                    <groupId>org.eclipse.jetty</groupId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+        <dependency>
+            <groupId>com.payconiq.commons</groupId>
+            <artifactId>testcontainers-mongodb-initializer</artifactId>
+            <version>${testcontainers-mongodb-initializer.version}</version>
+        </dependency>
+
+<!--        for JWT token generation-->
+        <!-- https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api -->
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt-api</artifactId>-->
+<!--            <version>0.11.5</version>-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt-impl</artifactId>-->
+<!--            <version>0.11.5</version>-->
+<!--            <scope>runtime</scope> &lt;!&ndash; Required at runtime &ndash;&gt;-->
+<!--        </dependency>-->
+<!--        <dependency>-->
+<!--            <groupId>io.jsonwebtoken</groupId>-->
+<!--            <artifactId>jjwt-jackson</artifactId> &lt;!&ndash; For JSON processing &ndash;&gt;-->
+<!--            <version>0.11.5</version>-->
+<!--            <scope>runtime</scope>-->
+<!--        </dependency>-->
+
+    </dependencies>
+
+    <build>
+        <finalName>${project.artifactId}</finalName>
+        <plugins>
+            <!-- Generates git.properties file -->
+            <plugin>
+                <groupId>io.github.git-commit-id</groupId>
+                <artifactId>git-commit-id-maven-plugin</artifactId>
+                <!-- version managed by Spring Boot -->
+                <configuration>
+                    <verbose>true</verbose>
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                </configuration>
+                <executions>
+                    <execution>
+                        <id>get-the-git-infos</id>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                        <phase>initialize</phase>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-maven-plugin</artifactId>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>${maven-surefire-plugin.version}</version>
+                <configuration>
+                    <useSystemClassLoader>false</useSystemClassLoader>
+                    <!--suppress MavenModelInspection -->
+                    <argLine>--illegal-access=permit ${jacoco.agent.args}</argLine>
+                    <reportFormat>plain</reportFormat>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-failsafe-plugin</artifactId>
+                <version>${maven-failsafe-plugin.version}</version>
+                <configuration>
+                    <argLine>${jacoco.agent.args}</argLine>
+                </configuration>
+            </plugin>
+            <plugin>
+                <groupId>org.jacoco</groupId>
+                <artifactId>jacoco-maven-plugin</artifactId>
+                <version>${jacoco-maven-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>coverage-agent</id>
+                        <goals>
+                            <goal>prepare-agent</goal>
+                        </goals>
+                        <configuration>
+                            <propertyName>jacoco.agent.args</propertyName>
+                        </configuration>
+                    </execution>
+                    <execution>
+                        <id>coverage-report</id>
+                        <phase>post-integration-test</phase>
+                        <goals>
+                            <goal>report</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-site-plugin</artifactId>
+                <version>${maven-site-plugin.version}</version>
+            </plugin>
+        </plugins>
+
+        <pluginManagement>
+            <plugins>
+                <plugin>
+                    <groupId>org.owasp</groupId>
+                    <artifactId>dependency-check-maven</artifactId>
+                    <version>${owasp-dependency-check-plugin.version}</version>
+                    <configuration>
+                        <!-- Prevent sporadic failures when issues with downloading NVD/CVE data occur -->
+                        <failOnError>false</failOnError>
+                        <cveValidForHours>24</cveValidForHours>
+                    </configuration>
+                    <executions>
+                        <execution>
+                            <goals>
+                                <goal>check</goal>
+                            </goals>
+                        </execution>
+                    </executions>
+                </plugin>
+                <plugin>
+                    <groupId>org.codehaus.mojo</groupId>
+                    <artifactId>exec-maven-plugin</artifactId>
+                    <version>1.6.0</version>
+                    <configuration>
+                        <mainClass>com.payconiq.customer.infrastructure.util.ClearOptInForSendGridUsersApplication</mainClass>
+                    </configuration>
+                </plugin>
+            </plugins>
+        </pluginManagement>
+    </build>
+
+    <reporting>
+        <plugins>
+            <!-- configure the reports to be included in the output of 'mvn site' -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-project-info-reports-plugin</artifactId>
+                <version>${maven-project-info-reports-plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <reports>
+                            <report>dependencies</report>
+                            <report>dependency-info</report>
+                            <report>dependency-management</report>
+                            <report>distribution-management</report>
+                            <report>index</report>
+                            <report>plugin-management</report>
+                            <report>plugins</report>
+                            <!-- Not included reports: ci-management, issue-management, licenses, mailing-lists, modules, scm, summary, team -->
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+            <!-- configure the test reports generated as a part of 'mvn site' execution -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-report-plugin</artifactId>
+                <version>${maven-surefire-report-plugin.version}</version>
+                <reportSets>
+                    <reportSet>
+                        <id>unit-tests</id>
+                        <reports>
+                            <report>report-only</report>
+                        </reports>
+                    </reportSet>
+                    <reportSet>
+                        <id>integration-tests</id>
+                        <reports>
+                            <report>failsafe-report-only</report>
+                        </reports>
+                    </reportSet>
+                </reportSets>
+            </plugin>
+        </plugins>
+    </reporting>
+</project>
+
