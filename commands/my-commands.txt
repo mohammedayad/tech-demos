@@ -86,3 +86,238 @@ git restore --staged .  // to unstage all files
 git diff --cached --name-only  // to see the staged files
 git commit -m "your commit message"
 git push origin your-branch-name
+
+git branch -vv  // This tells us what branch git pull is actually pulling from.
+
+// to get changes from specifc branch or master you should rebase or merge
+git fetch origin # Make sure you have the latest remote changes
+# Rebase onto master
+git rebase origin/master
+or specific branch
+git rebase origin/BA-3548
+// or
+git merge origin/BA-3548
+git log --oneline --graph --decorate -10 /// Check the history commits and check which commit I now points to (latest commit)
+
+git rebase --abort -- to stop rebasing and return to old state
+
+Mac Java install
+---------------------------------------------------------------------------------
+brew install openjdk@21  // install java version using brew then it can be installed 
+sudo ln -sfn /opt/homebrew/opt/openjdk@21/libexec/openjdk.jdk /Library/Java/JavaVirtualMachines/openjdk-21.jdk   // add java to java_home
+/usr/libexec/java_home -V  // list java versions inside java_home the output will be as below
+
+25.0.2 (arm64) "Homebrew" - "OpenJDK 25.0.2" /opt/homebrew/Cellar/openjdk/25.0.2/libexec/openjdk.jdk/Contents/Home
+21.0.11 (arm64) "Homebrew" - "OpenJDK 21.0.11" /opt/homebrew/Cellar/openjdk@21/21.0.11/libexec/openjdk.jdk/Contents/Home
+17.0.9 (x86_64) "OpenLogic-OpenJDK" - "OpenLogic-OpenJDK 17" /Library/Java/JavaVirtualMachines/openlogic-openjdk-17.jdk/Contents/Home
+
+mvn -v  // list used maven version and which java point to it as below
+
+Apache Maven 3.9.15 (98b2cdbfdb5f1ac8781f537ea9acccaed7922349)
+Maven home: /opt/homebrew/Cellar/maven/3.9.15/libexec
+Java version: 17.0.9, vendor: OpenLogic, runtime: /Library/Java/JavaVirtualMachines/openlogic-openjdk-17.jdk/Contents/Home
+Default locale: en_NL, platform encoding: UTF-8
+OS name: "mac os x", version: "26.2", arch: "x86_64", family: "mac"
+
+export JAVA_HOME=$(/usr/libexec/java_home -v 21) // point maven to the used java output like the below
+
+Apache Maven 3.9.15 (98b2cdbfdb5f1ac8781f537ea9acccaed7922349)
+Maven home: /opt/homebrew/Cellar/maven/3.9.15/libexec
+Java version: 21.0.11, vendor: Homebrew, runtime: /opt/homebrew/Cellar/openjdk@21/21.0.11/libexec/openjdk.jdk/Contents/Home
+Default locale: en_NL, platform encoding: UTF-8
+OS name: "mac os x", version: "26.2", arch: "aarch64", family: "mac"
+
+AWS
+---------------------------------------------------------------------------------
+1- brew install awscli // install AWS CLI
+2- Set Environment Variables in termianal
+export AWS_PROFILE=DevAccess@NonProd
+export AWS_REGION=eu-central-1
+export CLUSTER_NAME=k8s-nonprod
+
+3- Configure AWS SSO Profile
+open -e ~/.aws/config // Edit AWS CLI config file:
+
+4- Copy and save the following configuration:
+[profile DevAccess@NonProd]
+sso_start_url = https://d-99671d3cdd.awsapps.com/start
+sso_region = eu-central-1
+sso_account_id = 454952201618
+sso_role_name = DevAccess@NonProd
+[default]
+sso_start_url = https://d-99671d3cdd.awsapps.com/start
+sso_region = eu-central-1
+
+5- Authenticate with AWS SSO
+aws configure sso
+Press Enter for all prompts (values should be pre-filled from the previous config).
+A browser window will open—approve the sign-in request and complete qutorisation!
+
+
+6- Configure kubectl for EKS
+
+aws eks update-kubeconfig --name k8s-nonprod 
+
+
+7- Verify Access
+kubectl get ns 
+
+
+AWS web console:
+https://d-99671d3cdd.awsapps.com/start/#/console?account_id=454952201618&role_name=DevAccess%40NonProd
+https://d-99671d3cdd.awsapps.com/start/#/console?account_id=433121006156&role_name=AWS-Production-Account
+
+
+https://eu-central-1.console.aws.amazon.com/s3/buckets/payconiq-transactions-export-test?region=eu-central-1&tab=objects
+https://eu-central-1.console.aws.amazon.com/s3/buckets/teamsenv-garuda-team-bucket?region=eu-central-1&tab=objects
+
+-------
+Configure AWS CLI (IMPORTANT)
+
+aws configure
+
+You’ll be asked for:
+
+AWS Access Key ID:     <your key>
+AWS Secret Access Key: <your secret>
+Default region:        eu-central-1
+Default output:        json
+------
+aws configure sso -- also you can configure using sso
+
+-------
+
+
+--- AWS commands ----
+
+aws --version
+aws configure list-profiles -- list profiles which hold the configurationed you enetered before
+aws sso login --profile AWS-Production-Account-433121006156  -- login to specific profile
+aws s3 ls s3://ing-proxy-export-prod --profile AWS-Production-Account-433121006156 -- list objects inside s3 bucket
+
+//check who you currently are:
+aws sts get-caller-identity \
+  --profile AWS-Production-Account-433121006156
+
+-- get bucket region
+aws s3api get-bucket-location \
+  --bucket awsie-s3-backup-ginger-backups \
+  --profile AWS-Production-Account-433121006156
+
+-- you can use AssumeRole to access diffrent third part s3 buckets
+
+aws sts assume-role \
+  --role-arn arn:aws:iam::371420774418:role/Payconiq \
+  --role-session-name pq-ginger-test \
+  --profile AWS-Production-Account-433121006156
+
+
+-- Check whether the bucket appears in your account
+aws s3 ls --profile AWS-Production-Account-433121006156 | grep awsie-s3-backup-ginger-backups
+
+Count ALL versions (real storage impact) in S3
+aws s3api list-object-versions \
+  --bucket ing-proxy-export-prod \
+  --prefix BPC \
+  --profile AWS-Production-Account-433121006156 \
+  --query "length(Versions[])"
+
+Count ONLY current objects (no versions)
+aws s3 ls s3://ing-proxy-export-prod/BPC --recursive --profile AWS-Production-Account-433121006156 | wc -l
+
+Count delete markers (objects marked as deleted)
+aws s3api list-object-versions \
+  --bucket ing-proxy-export-prod \
+  --prefix BPC \
+  --profile AWS-Production-Account-433121006156 \
+  --query "length(DeleteMarkers[])"
+
+Count ALL versions without prdefix
+aws s3api list-object-versions \
+  --bucket ing-proxy-export-prod \
+  --profile AWS-Production-Account-433121006156 \
+  --query "length(Versions[])"
+
+
+AWS Glue job that is being used to validate a MongoDB collection's schema. This is very likely related to the .ddl files you've been asking about.
+Start the AWS Glue job
+aws glue start-job-run \
+  --job-name "acc-mongodb-schema-validator" \
+  --arguments file://schema_validation_acc_args.json  --profile PQIDevArchive@nonprod-pq-archive-943208837103
+
+then AWS returns a JobRunId
+{
+    "JobRunId": "jr_da344be79017126eef4e51b6e71ae59c733e8e9d39363c9240fcddf9a53a94da"
+}
+
+Check whether the job finished this can return "SUCCEEDED" or "FAILED"
+
+aws glue get-job-run \
+  --job-name "acc-mongodb-schema-validator" \
+  --run-id "jr_da344be79017126eef4e51b6e71ae59c733e8e9d39363c9240fcddf9a53a94da" \
+  --query "JobRun.JobRunState" \
+  --profile PQIDevArchive@nonprod-pq-archive-943208837103
+
+---------
+
+jdbc:sqlserver://powerbiacc.database.windows.net:1433;databaseName=PowerBiAcc
+pq_recon_report_integration
+2NUWf9kAOa2TGq509AH7
+----gitops--
+// check helmrelease
+kubectl -n team-ba describe helmrelease reconciliation-report-integration-service
+
+// update imeage
+
+kubectlnonprod set image deployment/reconciliation-report-integration-service \
+reconciliation-report-integration-service=registry.acc.payconiq.io/reconciliation-report-integration-service:fcf391e45fbc0cd0ab0305ee56901eba3c78c2be.573036 \
+-n team-ba
+
+// Watch the rollout
+kubectlnonprod rollout status deployment/reconciliation-report-integration-service \
+-n team-ba --timeout=5m
+
+// Verify the deployment image
+kubectlnonprod get deployment reconciliation-report-integration-service \
+-n team-ba \
+-o=jsonpath='{.spec.template.spec.containers[0].image}{"\n"}'
+
+
+------ H2 DB test-------
+url: http://localhost:8080/h2-console
+
+lsof | grep application_library_db.mv.db -- get process
+kill -9 37609 -- kill process
+
+You can clear Liquibase checksums.
+DELETE FROM DATABASECHANGELOG;
+DROP ALL OBJECTS;
+mvn liquibase:clearCheckSums
+
+check DB local:
+ls -la ~/ | grep application_library_db
+find ~ -name "*application_library_db*"
+
+You should see something like:
+application_library_db.mv.db
+application_library_db.lock.db
+
+Then delete them:
+rm ~/application_library_db.mv.db
+and optionally:
+rm ~/application_library_db.lock.db
+rm ~/application_library_db.trace.db
+-----------------
+Mongo DB 
+----
+b.getCollection("refunds").find({})
+db.refunds.getIndexes()
+db.refunds.dropIndex("ttl_bpc_refunds_24_months")
+
+
+
+
+
+
+
+
